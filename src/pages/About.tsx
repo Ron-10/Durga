@@ -88,62 +88,68 @@ const About = () => {
           {...fadeInUp}
           className="mb-16"
         >
-          <h2 className="text-3xl font-bold text-center mb-8">Our Journey</h2>
-          <div className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-blue-200"></div>
+          <h2 className="text-3xl font-bold text-center mb-12">Our Journey</h2>
+          <div className="relative max-w-4xl mx-auto px-4">
+            {/* Timeline line */}
+            <div className="absolute left-1/2 transform -translate-x-[1px] h-full w-0.5 bg-blue-200"></div>
+            
             {[
               {
                 year: '1998',
                 title: 'Foundation',
-                description: 'Established with 50 students and a vision for excellence'
+                description: 'Established with 50 students and a vision for excellence',
+                align: 'right'
               },
               {
                 year: '2005',
                 title: 'Expansion',
-                description: 'Added new facilities and expanded academic programs'
+                description: 'Added new facilities and expanded academic programs',
+                align: 'left'
               },
               {
                 year: '2010',
                 title: 'Recognition',
-                description: 'Received multiple awards for academic excellence'
+                description: 'Received multiple awards for academic excellence',
+                align: 'right'
               },
               {
                 year: '2015',
                 title: 'Innovation',
-                description: 'Implemented modern teaching methodologies and technology'
+                description: 'Implemented modern teaching methodologies and technology',
+                align: 'left'
               },
               {
                 year: '2023',
                 title: 'Today',
-                description: 'Serving over 1,200 students with state-of-the-art facilities'
+                description: 'Serving over 1,200 students with state-of-the-art facilities',
+                align: 'right'
               }
             ].map((milestone, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                initial={{ opacity: 0, x: milestone.align === 'left' ? -50 : 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className={`flex items-center mb-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="relative flex mb-16 last:mb-0"
               >
-                <div className="w-1/2 pr-8 text-right">
-                  {index % 2 === 0 && (
-                    <div>
-                      <h3 className="text-xl font-bold text-blue-600">{milestone.year}</h3>
-                      <h4 className="text-lg font-semibold">{milestone.title}</h4>
-                      <p className="text-gray-600">{milestone.description}</p>
-                    </div>
-                  )}
-                </div>
-                <div className="w-4 h-4 bg-blue-600 rounded-full z-10"></div>
-                <div className="w-1/2 pl-8">
-                  {index % 2 !== 0 && (
-                    <div>
-                      <h3 className="text-xl font-bold text-blue-600">{milestone.year}</h3>
-                      <h4 className="text-lg font-semibold">{milestone.title}</h4>
-                      <p className="text-gray-600">{milestone.description}</p>
-                    </div>
-                  )}
-                </div>
+                {milestone.align === 'left' && (
+                  <div className="w-[45%] pr-12 text-right">
+                    <div className="text-blue-600 text-xl font-bold mb-1">{milestone.year}</div>
+                    <h4 className="text-lg font-semibold mb-2">{milestone.title}</h4>
+                    <p className="text-gray-600 text-sm">{milestone.description}</p>
+                  </div>
+                )}
+                
+                <div className="absolute left-1/2 top-2 transform -translate-x-1/2 w-2.5 h-2.5 bg-blue-600 rounded-full border-2 border-white z-10"></div>
+                
+                {milestone.align === 'right' && (
+                  <div className="w-[45%] ml-auto pl-12">
+                    <div className="text-blue-600 text-xl font-bold mb-1">{milestone.year}</div>
+                    <h4 className="text-lg font-semibold mb-2">{milestone.title}</h4>
+                    <p className="text-gray-600 text-sm">{milestone.description}</p>
+                  </div>
+                )}
               </motion.div>
             ))}
           </div>
@@ -160,32 +166,32 @@ const About = () => {
               {
                 icon: Award,
                 title: 'Excellence',
-                description: 'Striving for the highest standards in everything we do',
-                color: 'from-blue-500 to-blue-600'
+                description: 'Striving for the highest standards in everything we do'
               },
               {
                 icon: Users,
                 title: 'Community',
-                description: 'Fostering a supportive and inclusive learning environment',
-                color: 'from-green-500 to-green-600'
+                description: 'Fostering a supportive and inclusive learning environment'
               },
               {
                 icon: Target,
                 title: 'Innovation',
-                description: 'Embracing new ideas and approaches to education',
-                color: 'from-purple-500 to-purple-600'
+                description: 'Embracing new ideas and approaches to education'
               },
             ].map((value, index) => (
               <motion.div
                 key={index}
                 whileHover={{ y: -10 }}
-                className="group relative overflow-hidden rounded-lg shadow-lg"
+                className="relative overflow-hidden rounded-xl shadow-lg group bg-white hover: transition-all duration-300"
               >
-                <div className={`absolute inset-0 bg-gradient-to-r ${value.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                <div className="relative p-6 bg-white">
-                  <value.icon className="w-12 h-12 text-[#007BFF] mx-auto mb-4 group-hover:text-white transition-colors duration-300" />
-                  <h3 className="text-xl font-bold mb-2 text-center group-hover:text-white transition-colors duration-300">{value.title}</h3>
-                  <p className="text-gray-600 text-center group-hover:text-white/90 transition-colors duration-300">{value.description}</p>
+                <div className="p-8">
+                  <value.icon className="w-12 h-12 mx-auto mb-4 text-blue-500 group-hover:text-gray-700 transition-colors duration-300" />
+                  <h3 className="text-xl font-bold mb-3 text-center text-gray-800">
+                    {value.title}
+                  </h3>
+                  <p className="text-gray-600 text-center">
+                    {value.description}
+                  </p>
                 </div>
               </motion.div>
             ))}
