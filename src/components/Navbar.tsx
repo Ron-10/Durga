@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, ChevronDown, Download, LogIn } from 'lucide-react';
+import { Menu, X, ChevronDown, Download, LogIn, BookOpen, Calendar, Image, GraduationCap, Trophy, Users, FileText } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -36,11 +36,28 @@ const Navbar = () => {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { 
+      name: 'Academics',
+      href: '#',
+      dropdown: [
+        { name: 'Academic Programs', href: '/academics', icon: GraduationCap },
+        { name: 'Results', href: '/results', icon: Trophy },
+        { name: 'Staff', href: '/staff', icon: Users }
+      ]
+    },
+    { 
       name: 'Admissions', 
       href: '/admissions',
     },
+    { 
+      name: 'Explore',
+      href: '#',
+      dropdown: [
+        { name: 'Facilities', href: '/facilities', icon: BookOpen },
+        { name: 'Events', href: '/events', icon: Calendar },
+        { name: 'Gallery', href: '/gallery', icon: Image }
+      ]
+    },
     { name: 'Notices', href: '/notices' },
-    { name: 'Gallery', href: '/gallery' },
     { 
       name: 'Portals', 
       href: '#',
