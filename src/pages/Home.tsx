@@ -23,10 +23,10 @@ import AboutPreview from '../components/AboutPreview';
 import GalleryPreview from '../components/Gallery';
 import ContactPreview from '../components/Contact';
 import CalendarWidget from '../components/CalendarWidget';
-import EmergencyBanner from '../components/EmergencyBanner';
 import VirtualTour from '../components/VirtualTour';
 import SocialFeed from '../components/SocialFeed';
 import Newsletter from '../components/Newsletter';
+import EmergencyBanner from '../components/EmergencyBanner';
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
