@@ -52,8 +52,13 @@ const Notices = () => {
         >
           <div className="absolute inset-0 bg-black/50"></div>
         </div>
-        <div className="relative h-full flex items-center justify-center">
-          <h1 className="text-4xl font-bold text-white">School Notices</h1>
+        <div className="relative h-full flex items-center justify-center text-center">
+          <div>
+            <h1 className="text-4xl font-bold text-white">School Notices</h1>
+            <p className="mt-2 text-lg text-gray-200 max-w-3xl mx-auto">
+              Stay informed with the latest announcements, updates, and important information from the school administration.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -89,7 +94,7 @@ const Notices = () => {
           {notices.map((notice) => (
             <div
               key={notice.id}
-              className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"
+              className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 border-l-4 border-[#007BFF]"
             >
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                 <div className="flex items-center mb-2 md:mb-0">
@@ -119,11 +124,14 @@ const Notices = () => {
                   {notice.category}
                 </span>
               </div>
-              <p className="text-gray-600">{notice.content}</p>
+              <p className="text-gray-700 leading-relaxed">{notice.content}</p>
               <div className="mt-4">
-                <button className="text-[#007BFF] hover:text-[#0056b3] font-medium transition-colors duration-200">
+                <a href={`/notices/${notice.id}`} className="text-[#007BFF] hover:text-[#0056b3] font-medium transition-colors duration-200 inline-flex items-center">
                   Read More
-                </button>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
               </div>
             </div>
           ))}

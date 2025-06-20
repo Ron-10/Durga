@@ -135,7 +135,7 @@ const FloatingNavbar = () => {
               <Link to="/" className="flex items-center space-x-3">
                 <div className="relative">
                   <img src="/logo.png" alt="DAES Logo" className="h-12 w-auto drop-shadow-lg" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-20 blur-sm"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-20 "></div>
                 </div>
                 <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-sm">
                   DAES

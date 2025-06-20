@@ -459,7 +459,7 @@ const Home = () => {
       </section>
 
       {/* About Us Section */}
-      <section className="py-10 bg-white relative overflow-hidden">
+      <section className="py-10  relative overflow-hidden">
         <AnimatedBackground pattern="dots" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
           <AboutPreview />
@@ -467,7 +467,7 @@ const Home = () => {
       </section>
 
       {/* Quick Stats Section */}
-      <section className="py-10 bg-white relative overflow-hidden">
+      <section className="py-10  relative overflow-hidden">
         <AnimatedBackground pattern="dots" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
           {/* Section Header */}
@@ -678,7 +678,7 @@ const Home = () => {
       </motion.section>
 
       {/* Enhanced Virtual Tour Section */}
-      <section className="py-10 bg-white relative overflow-hidden">
+      <section className="py-10  relative overflow-hidden">
         <AnimatedBackground pattern="waves" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
           <motion.div
@@ -1026,26 +1026,6 @@ const Home = () => {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Enhanced Social Media Feed Section */}
-      <section className="py-10 bg-white">
-        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-              Stay Connected
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Join our community and stay updated with the latest news and events.
-            </p>
-          </motion.div>
         </div>
       </section>
 

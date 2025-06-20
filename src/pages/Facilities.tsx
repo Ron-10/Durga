@@ -4,50 +4,50 @@ import { BookOpen, LampDesk as Desktop, Dumbbell, FlaskRound as Flask, Library, 
 const facilities = [
   {
     icon: Library,
-    title: 'Library',
-    description: 'Modern library with extensive collection of books, journals, and digital resources.',
+    title: 'Modern Library & Resource Center',
+    description: 'Our extensive library offers a vast collection of books, academic journals, and digital resources to support research and reading for all age groups.',
     image: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
   },
   {
     icon: Desktop,
-    title: 'Computer Lab',
-    description: 'State-of-the-art computer labs with modern hardware and software facilities.',
+    title: 'State-of-the-Art Computer Labs',
+    description: 'Equipped with the latest hardware and software, our computer labs provide students with the necessary tools to excel in a digital world.',
     image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
   },
   {
     icon: Flask,
-    title: 'Science Labs',
-    description: 'Well-equipped physics, chemistry, and biology laboratories.',
+    title: 'Advanced Science Laboratories',
+    description: 'We have well-equipped and spacious physics, chemistry, and biology labs that provide students with hands-on learning experiences.',
     image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
   },
   {
     icon: Dumbbell,
-    title: 'Sports Facilities',
-    description: 'Multiple sports courts, playground, and indoor sports facilities.',
+    title: 'Comprehensive Sports Facilities',
+    description: 'Our campus features multiple sports courts, a large playground, and indoor facilities to promote physical fitness and sportsmanship.',
     image: 'https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
   },
   {
     icon: Bus,
-    title: 'Transportation',
-    description: 'Safe and comfortable transportation service covering major routes.',
+    title: 'Safe & Secure Transportation',
+    description: 'We offer a reliable and comfortable transportation service with a fleet of buses covering all major routes in the city.',
     image: 'https://images.unsplash.com/photo-1557223562-6c77ef16210f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
   },
   {
     icon: Utensils,
-    title: 'Cafeteria',
-    description: 'Hygienic cafeteria serving nutritious meals and refreshments.',
+    title: 'Hygienic School Cafeteria',
+    description: 'Our on-campus cafeteria serves a variety of fresh, nutritious, and hygienically prepared meals and refreshments.',
     image: 'https://images.unsplash.com/photo-1544427920-c49ccfb85579?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1771&q=80',
   },
   {
     icon: FirstAid,
-    title: 'Medical Room',
-    description: 'Well-equipped medical room with qualified medical staff.',
+    title: 'On-Campus Medical Room',
+    description: 'A well-equipped medical room with a qualified nurse is available to provide first aid and attend to any medical needs.',
     image: 'https://images.unsplash.com/photo-1538108149393-fbbd81895907?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1828&q=80',
   },
   {
     icon: BookOpen,
-    title: 'Smart Classrooms',
-    description: 'Modern classrooms equipped with interactive learning technology.',
+    title: 'Interactive Smart Classrooms',
+    description: 'Our classrooms are equipped with interactive whiteboards and audio-visual aids to make learning more engaging and effective.',
     image: 'https://images.unsplash.com/photo-1517164850305-99a3e65bb47e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80',
   },
 ];
@@ -65,8 +65,13 @@ const Facilities = () => {
         >
           <div className="absolute inset-0 bg-black/50"></div>
         </div>
-        <div className="relative h-full flex items-center justify-center">
-          <h1 className="text-4xl font-bold text-white">Our Facilities</h1>
+        <div className="relative h-full flex items-center justify-center text-center">
+          <div>
+            <h1 className="text-4xl font-bold text-white">Our Facilities</h1>
+            <p className="mt-2 text-lg text-gray-200 max-w-3xl mx-auto">
+              Discover our state-of-the-art facilities, designed to provide a safe, comfortable, and stimulating environment for learning and growth.
+            </p>
+          </div>
         </div>
       </div>
 

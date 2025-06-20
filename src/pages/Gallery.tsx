@@ -59,68 +59,47 @@ const Gallery = () => {
         >
           <div className="absolute inset-0 bg-black/50"></div>
         </div>
-        <div className="relative h-full flex items-center justify-center">
-          <h1 className="text-4xl font-bold text-white">Photo Gallery</h1>
+        <div className="relative h-full flex items-center justify-center text-center">
+          <div>
+            <h1 className="text-4xl font-bold text-white">Photo Gallery</h1>
+            <p className="mt-2 text-lg text-gray-200 max-w-3xl mx-auto">
+              A glimpse into our vibrant school life. Explore moments from our events, academic achievements, and cultural celebrations.
+            </p>
+          </div>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Filter Section */}
-        <div className="mb-8">
+        <div className="mb-12">
           <div className="bg-white p-4 rounded-lg shadow-md">
-            <div className="flex items-center space-x-4">
-              <Filter className="w-5 h-5 text-[#007BFF]" />
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 flex-grow">
-                <input
-                  type="text"
-                  placeholder="Search images..."
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:ring-[#007BFF] focus:border-[#007BFF]"
-                />
-                <select className="px-4 py-2 border border-gray-300 rounded-md focus:ring-[#007BFF] focus:border-[#007BFF]">
-                  <option value="">All Categories</option>
-                  <option value="academic">Academic</option>
-                  <option value="sports">Sports</option>
-                  <option value="cultural">Cultural</option>
-                  <option value="events">Events</option>
-                  <option value="art">Art</option>
-                </select>
-                <select className="px-4 py-2 border border-gray-300 rounded-md focus:ring-[#007BFF] focus:border-[#007BFF]">
-                  <option value="">All Years</option>
-                  <option value="2024">2024</option>
-                  <option value="2023">2023</option>
-                  <option value="2022">2022</option>
-                </select>
-                <button className="px-4 py-2 bg-[#007BFF] text-white rounded-md hover:bg-[#0056b3] transition-colors duration-200">
-                  Apply Filters
-                </button>
-              </div>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <button className="px-4 py-2 bg-blue-600 text-white rounded-md">All</button>
+              <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Academic</button>
+              <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Sports</button>
+              <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Cultural</button>
+              <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Events</button>
+              <button className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Art</button>
             </div>
           </div>
         </div>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {images.map((image) => (
             <div
               key={image.id}
-              className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+              className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer"
             >
               <img
                 src={image.url}
                 alt={image.title}
-                className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-300"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-white text-lg font-semibold mb-2">{image.title}</h3>
-                  <div className="flex items-center space-x-2">
-                    <span className="px-2 py-1 bg-white/20 text-white rounded-full text-sm">
-                      {image.category}
-                    </span>
-                    <span className="px-2 py-1 bg-white/20 text-white rounded-full text-sm">
-                      {image.year}
-                    </span>
-                  </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-4">
+                <div>
+                  <h3 className="text-white text-md font-semibold">{image.title}</h3>
+                  <span className="text-xs text-gray-300">{image.category} - {image.year}</span>
                 </div>
               </div>
             </div>

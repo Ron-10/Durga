@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Award, Users, Clock, Calendar, GraduationCap } from 'lucide-react';
+import { BookOpen, Award, Users, Clock, Calendar, GraduationCap, Atom, Palette, Music, Dribbble } from 'lucide-react';
 
 const Academics = () => {
   return (
@@ -14,8 +14,13 @@ const Academics = () => {
         >
           <div className="absolute inset-0 bg-black/50"></div>
         </div>
-        <div className="relative h-full flex items-center justify-center">
-          <h1 className="text-4xl font-bold text-white">Academics</h1>
+        <div className="relative h-full flex items-center justify-center text-center">
+          <div>
+            <h1 className="text-4xl font-bold text-white">Academics</h1>
+            <p className="mt-2 text-lg text-gray-200 max-w-2xl mx-auto">
+              Explore our comprehensive academic programs, innovative curriculum, and the dedicated faculty that drive our mission of educational excellence.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -28,23 +33,23 @@ const Academics = () => {
               {
                 title: 'Primary Level',
                 grades: 'Grades 1-5',
-                description: 'Foundation years focusing on core subjects and personality development.',
-                subjects: ['English', 'Mathematics', 'Science', 'Social Studies', 'Languages'],
+                description: 'Our foundational years focus on nurturing curiosity and building core competencies in literacy and numeracy. We create a supportive environment for holistic development.',
+                subjects: ['English', 'Mathematics', 'Science', 'Social Studies', 'Languages', 'Arts & Crafts'],
               },
               {
                 title: 'Middle Level',
                 grades: 'Grades 6-8',
-                description: 'Intermediate education with expanded subject choices and activities.',
-                subjects: ['Advanced Mathematics', 'General Science', 'Computer Science', 'Literature', 'Arts'],
+                description: 'We offer an intermediate education that encourages critical thinking and exploration, with a broader range of subjects and co-curricular activities to foster diverse interests.',
+                subjects: ['Advanced Mathematics', 'Integrated Science', 'Computer Science', 'Literature', 'History', 'Geography'],
               },
               {
                 title: 'Secondary Level',
                 grades: 'Grades 9-10',
-                description: 'Preparation for board examinations with specialized subject tracks.',
-                subjects: ['Physics', 'Chemistry', 'Biology', 'Advanced Mathematics', 'Computer Science'],
+                description: 'Our curriculum is designed for in-depth knowledge and preparation for board examinations, with specialized subject tracks to help students pursue their academic goals.',
+                subjects: ['Physics', 'Chemistry', 'Biology', 'Advanced Mathematics', 'Computer Science', 'Economics'],
               },
             ].map((program, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md">
+              <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
                 <GraduationCap className="w-12 h-12 text-[#007BFF] mb-4" />
                 <h3 className="text-xl font-bold mb-2">{program.title}</h3>
                 <p className="text-[#007BFF] font-medium mb-4">{program.grades}</p>
@@ -65,40 +70,89 @@ const Academics = () => {
 
         {/* Curriculum Highlights */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold text-center mb-12">Curriculum Highlights</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">Curriculum & Pedagogy</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white p-8 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold mb-6">Teaching Methodology</h3>
+              <h3 className="text-xl font-bold mb-6">Our Teaching Methodology</h3>
               <ul className="space-y-4">
                 {[
-                  'Interactive learning environment',
-                  'Project-based learning approach',
-                  'Regular assessments and feedback',
-                  'Individual attention to students',
-                  'Integration of technology in teaching',
+                  'Student-centric, interactive learning environment',
+                  'Emphasis on project-based and experiential learning',
+                  'Continuous and comprehensive assessments with constructive feedback',
+                  'Personalized attention to cater to individual learning styles',
+                  'Seamless integration of modern technology in the classroom',
                 ].map((method, index) => (
-                  <li key={index} className="flex items-center text-gray-700">
-                    <BookOpen className="w-5 h-5 text-[#007BFF] mr-3" />
-                    {method}
+                  <li key={index} className="flex items-start text-gray-700">
+                    <BookOpen className="w-5 h-5 text-[#007BFF] mr-3 mt-1 flex-shrink-0" />
+                    <span>{method}</span>
                   </li>
                 ))}
               </ul>
             </div>
             <div className="bg-white p-8 rounded-lg shadow-md">
-              <h3 className="text-xl font-bold mb-6">Assessment System</h3>
+              <h3 className="text-xl font-bold mb-6">Assessment & Evaluation</h3>
               <ul className="space-y-4">
                 {[
-                  'Continuous evaluation process',
-                  'Term-end examinations',
-                  'Project work evaluation',
-                  'Performance tracking system',
-                  'Parent-teacher meetings',
+                  'A continuous and comprehensive evaluation (CCE) process',
+                  'Formative assessments including quizzes, and assignments',
+                  'Summative assessments through term-end examinations',
+                  'Practical and project work evaluation for hands-on skills',
+                  'Regular parent-teacher meetings to discuss student progress',
                 ].map((item, index) => (
-                  <li key={index} className="flex items-center text-gray-700">
-                    <Award className="w-5 h-5 text-[#007BFF] mr-3" />
-                    {item}
+                  <li key={index} className="flex items-start text-gray-700">
+                    <Award className="w-5 h-5 text-[#007BFF] mr-3 mt-1 flex-shrink-0" />
+                    <span>{item}</span>
                   </li>
                 ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Academic Departments */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-center mb-12">Our Academic Departments</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { name: 'Science', icon: Atom, color: 'blue' },
+              { name: 'Mathematics', icon: GraduationCap, color: 'green' },
+              { name: 'Humanities', icon: Users, color: 'purple' },
+              { name: 'Arts & Music', icon: Palette, color: 'red' },
+            ].map((dept) => (
+              <div key={dept.name} className="bg-white rounded-lg shadow-md p-8 text-center hover:shadow-xl transition-shadow">
+                <dept.icon className={`w-16 h-16 text-${dept.color}-500 mx-auto mb-4`} />
+                <h3 className="text-xl font-bold">{dept.name}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Extracurricular Activities */}
+        <div className="mb-16">
+          <h2 className="text-3xl font-bold text-center mb-12">Extracurricular Activities</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-bold mb-4">Clubs & Societies</h3>
+              <ul>
+                <li>Debate Club</li>
+                <li>Science Club</li>
+                <li>Literary Society</li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-bold mb-4">Sports</h3>
+              <ul>
+                <li>Football</li>
+                <li>Basketball</li>
+                <li>Athletics</li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-bold mb-4">Performing Arts</h3>
+              <ul>
+                <li>Drama</li>
+                <li>Music</li>
+                <li>Dance</li>
               </ul>
             </div>
           </div>
