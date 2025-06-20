@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Menu, X, ChevronDown, Download, LogIn, BookOpen, Calendar, Image, GraduationCap, Trophy, Users, FileText } from 'lucide-react';
+import { Menu, X, ChevronDown, Download, LogIn, BookOpen, Calendar, Image, GraduationCap, Trophy, Users, FileText, Home, Info, School, Contact, Sun, Moon } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -9,6 +9,12 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const [darkMode, setDarkMode] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') === 'dark' || window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,6 +23,16 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [darkMode]);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -33,11 +49,12 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
+    { name: 'Home', href: '/', icon: Home },
+    { name: 'About', href: '/about', icon: Info },
     { 
       name: 'Academics',
       href: '#',
+      icon: School,
       dropdown: [
         { name: 'Academic Programs', href: '/academics', icon: GraduationCap },
         { name: 'Results', href: '/results', icon: Trophy },
@@ -47,131 +64,164 @@ const Navbar = () => {
     { 
       name: 'Admissions', 
       href: '/admissions',
+      icon: LogIn,
     },
     { 
       name: 'Explore',
       href: '#',
+      icon: BookOpen,
       dropdown: [
         { name: 'Facilities', href: '/facilities', icon: BookOpen },
         { name: 'Events', href: '/events', icon: Calendar },
         { name: 'Gallery', href: '/gallery', icon: Image }
       ]
     },
-    { name: 'Notices', href: '/notices' },
+    { name: 'Notices', href: '/notices', icon: FileText },
     { 
       name: 'Portals', 
       href: '#',
+      icon: LogIn,
       dropdown: [
         { name: 'Student Portal', href: '/student-portal', icon: LogIn },
         { name: 'Parent Portal', href: '/parent-portal', icon: LogIn }
       ]
     },
-    { name: 'Contact', href: '/contact' },
+    { name: 'Contact', href: '/contact', icon: Contact },
   ];
-
-  const handleMouseEnter = (name: string) => {
-    setActiveDropdown(name);
-  };
-
-  const handleMouseLeave = () => {
-    setActiveDropdown(null);
-  };
-
-  const toggleDropdown = (name: string) => {
-    setActiveDropdown(activeDropdown === name ? null : name);
-  };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
   return (
     <motion.nav 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="fixed w-full z-50 transition-all duration-300 bg-transparent"
+      className={`fixed w-full z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'bg-gradient-to-r from-purple-900/95 via-blue-900/95 to-indigo-900/95 backdrop-blur-md shadow-2xl' 
+          : 'bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-indigo-600/20 backdrop-blur-sm'
+      }`}
     >
       <div className="container mx-auto px-4 flex justify-center">
-        <div className="flex justify-between items-center h-16 w-full max-w-6xl">
+        <div className="flex justify-between items-center h-20 w-full max-w-6xl">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            <Link to="/" className="flex items-center space-x-2">
-              <img src="/logo.png" alt="DAES Logo" className="h-10 w-auto" />
-              <span className="text-xl font-bold text-white hover:text-blue-200 transition-colors duration-300">DAES</span>
+            <Link to="/" className="flex items-center space-x-3">
+              <div className="relative">
+                <img src="/logo.png" alt="DAES Logo" className="h-12 w-auto drop-shadow-lg" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-20 blur-sm"></div>
+              </div>
+              <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-sm">
+                DAES
+              </span>
             </Link>
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center">
-            {navLinks.map((item, index) => (
-              <motion.div 
-                key={item.name} 
-                className="relative group"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-              >
-                <Link
-                  to={item.href}
-                  className={`transition-all duration-300 font-medium px-4 py-2 text-sm relative ${
-                    location.pathname === item.href 
-                      ? 'text-[#007BFF]' 
-                      : 'text-white hover:text-blue-200'
-                  }`}
+          {/* Desktop Dropdown Menu */}
+          <div className="hidden md:block relative" ref={dropdownRef}>
+            <motion.button
+              onClick={() => setActiveDropdown(activeDropdown === 'menu' ? null : 'menu')}
+              className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-white/20 text-white hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300 shadow-lg hover:shadow-xl"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Menu className="w-5 h-5" />
+              <span className="font-medium">Menu</span>
+              <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${activeDropdown === 'menu' ? 'rotate-180' : ''}`} />
+            </motion.button>
+
+            <AnimatePresence>
+              {activeDropdown === 'menu' && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-full right-0 mt-2 w-64 bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-md rounded-2xl shadow-2xl border border-white/10 overflow-hidden"
                 >
-                  {item.name}
-                  {item.dropdown && (
-                    <ChevronDown className="inline-block ml-1 w-3 h-3 transform group-hover:rotate-180 transition-transform duration-300" />
-                  )}
-                  <motion.span
-                    className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-200"
-                    whileHover={{ width: "100%" }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </Link>
-                {item.dropdown && (
-                  <motion.div 
-                    className="absolute top-full left-0 w-44 bg-black/80 backdrop-blur-sm rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0"
-                    initial={{ opacity: 0, y: 10 }}
-                    whileHover={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <div className="py-1">
-                      {item.dropdown.map((child) => (
-                        <motion.div
-                          key={child.name}
-                          whileHover={{ x: 5 }}
-                          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  <div className="p-2">
+                    {navLinks.map((item, index) => (
+                      <motion.div
+                        key={item.name}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.2, delay: index * 0.05 }}
+                      >
+                        <Link
+                          to={item.href}
+                          className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-white hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 transition-all duration-300 group ${
+                            location.pathname === item.href ? 'bg-gradient-to-r from-blue-500/30 to-purple-500/30' : ''
+                          }`}
+                          onClick={() => setActiveDropdown(null)}
                         >
-                          <Link
-                            to={child.href}
-                            className="flex items-center px-4 py-2 text-sm text-white hover:text-blue-200 hover:bg-white/10 transition-colors duration-300"
+                          <item.icon className="w-5 h-5 text-blue-400 group-hover:text-blue-300 transition-colors" />
+                          <span className="font-medium">{item.name}</span>
+                          {item.dropdown && (
+                            <ChevronDown className="w-4 h-4 ml-auto text-gray-400 group-hover:text-gray-300 transition-colors" />
+                          )}
+                        </Link>
+                        
+                        {item.dropdown && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="ml-8 mt-1 space-y-1"
                           >
-                            <child.icon className="w-4 h-4 mr-2" />
-                            {child.name}
-                          </Link>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </motion.div>
-            ))}
+                            {item.dropdown.map((child, childIndex) => (
+                              <motion.div
+                                key={child.name}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ duration: 0.2, delay: childIndex * 0.03 }}
+                              >
+                                <Link
+                                  to={child.href}
+                                  className="flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 group"
+                                  onClick={() => setActiveDropdown(null)}
+                                >
+                                  <child.icon className="w-4 h-4 text-blue-400 group-hover:text-blue-300 transition-colors" />
+                                  <span className="text-sm">{child.name}</span>
+                                </Link>
+                              </motion.div>
+                            ))}
+                          </motion.div>
+                        )}
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Mobile Menu Button */}
           <motion.button
             onClick={toggleMenu}
-            className="md:hidden text-white hover:text-blue-200 transition-colors duration-300"
+            className="md:hidden text-white hover:text-blue-300 transition-colors duration-300 p-2 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-white/20"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
           >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
           </motion.button>
+
+          {/* Dark Mode Toggle Button */}
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={toggleDarkMode}
+              className="ml-2 p-2 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white hover:bg-blue-600/30 transition-colors duration-300"
+              aria-label="Toggle dark mode"
+            >
+              {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
       </div>
 
@@ -183,10 +233,10 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-black/80 backdrop-blur-sm shadow-lg"
+            className="md:hidden bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-md shadow-2xl border-t border-white/10"
           >
             <div className="container mx-auto px-4 flex justify-center">
-              <div className="py-2 space-y-1 w-full max-w-6xl">
+              <div className="py-4 space-y-2 w-full max-w-6xl">
                 {navLinks.map((item, index) => (
                   <motion.div 
                     key={item.name}
@@ -196,12 +246,13 @@ const Navbar = () => {
                   >
                     <Link
                       to={item.href}
-                      className={`block px-4 py-2 text-sm text-white hover:text-blue-200 hover:bg-white/10 transition-colors duration-300 font-medium ${
-                        location.pathname === item.href ? 'text-[#007BFF] bg-white/10' : ''
+                      className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-white hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 transition-all duration-300 font-medium ${
+                        location.pathname === item.href ? 'bg-gradient-to-r from-blue-500/30 to-purple-500/30' : ''
                       }`}
                       onClick={() => setIsOpen(false)}
                     >
-                      {item.name}
+                      <item.icon className="w-5 h-5 text-blue-400" />
+                      <span>{item.name}</span>
                     </Link>
                     {item.dropdown && (
                       <motion.div
@@ -209,7 +260,7 @@ const Navbar = () => {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="pl-4"
+                        className="ml-8 mt-1 space-y-1"
                       >
                         {item.dropdown.map((child, childIndex) => (
                           <motion.div
@@ -220,11 +271,11 @@ const Navbar = () => {
                           >
                             <Link
                               to={child.href}
-                              className="flex items-center px-4 py-2 text-sm text-white hover:text-blue-200 hover:bg-white/10 transition-colors duration-300"
+                              className="flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300"
                               onClick={() => setIsOpen(false)}
                             >
-                              <child.icon className="w-4 h-4 mr-2" />
-                              {child.name}
+                              <child.icon className="w-4 h-4 text-blue-400" />
+                              <span className="text-sm">{child.name}</span>
                             </Link>
                           </motion.div>
                         ))}

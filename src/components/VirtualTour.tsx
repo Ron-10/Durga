@@ -34,12 +34,9 @@ const VirtualTour = () => {
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4 md:px-6 lg:px-8 lg:max-w-7xl">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Take a Virtual Tour</h2>
+        
           <div className="w-20 h-1 bg-[#007BFF] mx-auto mb-4"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Experience our campus from anywhere. Explore our facilities and get a feel for the
-            learning environment we provide.
-          </p>
+        
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

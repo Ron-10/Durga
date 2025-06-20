@@ -78,7 +78,7 @@ const About = () => {
             </div>
             <p className="text-gray-600">
               To be a leading educational institution that nurtures creative thinking, promotes
-              academic excellence, and develops responsible global citizens.
+              academic excellence, and develops responsible citizens.
             </p>
           </motion.div>
         </motion.div>

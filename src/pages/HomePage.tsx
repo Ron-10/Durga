@@ -40,9 +40,9 @@ const HomePage: React.FC = () => {
     },
     {
       icon: Users,
-      title: "Diverse Community",
-      description: "Students from 45+ countries creating a rich multicultural learning environment",
-      stats: "45+ Nationalities",
+      title: "Strong Community",
+      description: "A nurturing environment that fosters growth and development for all students",
+      stats: "1000+ Students",
       color: "from-green-500 to-green-600"
     },
     {
@@ -91,7 +91,7 @@ const HomePage: React.FC = () => {
   const quickFacts = [
     { label: "Founded", value: "1998", icon: Calendar },
     { label: "Campus Size", value: "25 Acres", icon: MapPin },
-    { label: "Students Enrolled", value: "1,200+", icon: Users },
+    { label: "Students Enrolled", value: "1,000+", icon: Users },
     { label: "Faculty Members", value: "85", icon: BookOpen },
     { label: "Average Class Size", value: "18", icon: GraduationCap },
     { label: "Graduation Rate", value: "99.2%", icon: Award }
@@ -123,7 +123,7 @@ const HomePage: React.FC = () => {
 
   const testimonialHighlights = [
     {
-      quote: "This school transformed my daughter's love for learning. The teachers don't just teach subjects; they inspire curiosity and critical thinking.",
+      quote: "The supportive and inclusive environment here taught me as much about life as any textbook could. It's truly a wonderful community.",
       author: "Maria Rodriguez",
       role: "Parent of Class of 2023",
       rating: 5
@@ -186,7 +186,7 @@ const HomePage: React.FC = () => {
               Why We're Different
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              We don't just educate students; we nurture future leaders, innovators, and compassionate global citizens 
+              We don't just educate students; we nurture future leaders, innovators, and compassionate citizens 
               through our unique approach to holistic education.
             </p>
           </motion.div>

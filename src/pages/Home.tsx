@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import { 
@@ -28,34 +28,45 @@ import {
   Phone,
   Mail,
   ExternalLink,
-  GraduationCap
+  GraduationCap,
+  ArrowUp,
+  Check
 } from 'lucide-react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import Hero from '../components/Hero';
-import QuickNotice from '../components/QuickNotice';
 import AboutPreview from '../components/AboutPreview';
 import GalleryPreview from '../components/Gallery';
 import ContactPreview from '../components/Contact';
 import CalendarWidget from '../components/CalendarWidget';
 import VirtualTour from '../components/VirtualTour';
 import SocialFeed from '../components/SocialFeed';
-import Newsletter from '../components/Newsletter';
+// import Newsletter from '../components/Newsletter';
 import EmergencyBanner from '../components/EmergencyBanner';
+import AnimatedBackground from '../components/AnimatedBackground';
 
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [showScrollTop, setShowScrollTop] = useState(false);
   const { scrollYProgress } = useScroll();
   const scale = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
 
   useEffect(() => {
     setIsVisible(true);
-    const timer = setInterval(() => setCurrentTime(new Date()), 1000);
-    return () => clearInterval(timer);
+    
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const stats = [
     { 
@@ -67,10 +78,10 @@ const Home = () => {
       color: 'from-blue-500 to-blue-600'
     },
     { 
-      number: '1,200+', 
-      label: 'Global Students', 
+      number: '500+', 
+      label: 'Students', 
       icon: Users,
-      description: 'Nurturing young minds from 45+ countries',
+      description: 'Nurturing young minds for academic success',
       achievement: '98% student satisfaction rate',
       color: 'from-green-500 to-green-600'
     },
@@ -96,7 +107,7 @@ const Home = () => {
     {
       icon: '/icons/graduation-cap.svg',
       title: 'Innovative Curriculum',
-      description: 'Cutting-edge programs integrating STEAM, critical thinking, and global perspectives',
+      description: 'Cutting-edge programs integrating STEAM, critical thinking, and local perspectives',
       highlights: ['Project-based learning', 'Real-world applications', 'Industry partnerships'],
       color: 'from-blue-500 to-cyan-500'
     },
@@ -135,7 +146,7 @@ const Home = () => {
     {
       name: 'Michael Chen',
       role: 'Alumni, Class of 2020',
-      text: 'This school didn\'t just prepare me for university; it prepared me for life. The critical thinking skills, global perspective, and ethical foundation I gained here continue to guide my success at Harvard.',
+      text: 'This school didn\'t just prepare me for university; it prepared me for life. The critical thinking skills and ethical foundation I gained here continue to guide my success at Harvard.',
       rating: 5,
       image: 'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
       achievement: 'Harvard University Scholar'
@@ -159,7 +170,7 @@ const Home = () => {
     {
       name: 'Emma Williams',
       role: 'Alumni & Rhodes Scholar',
-      text: 'The values-based education and global perspective I received here shaped my worldview. The school\'s commitment to developing ethical leaders is evident in everything they do.',
+      text: 'The values-based education I received here shaped my worldview. The school\'s commitment to developing ethical leaders is evident in everything they do.',
       rating: 5,
       image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
       achievement: 'Rhodes Scholar at Oxford'
@@ -178,7 +189,7 @@ const Home = () => {
       text: 'The integration of technology and creativity in our learning is incredible. From AI projects to digital art, we\'re always exploring the intersection of innovation and imagination.',
       rating: 5,
       image: 'https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
-      achievement: 'International Art Competition Winner'
+      achievement: 'National Art Competition Winner'
     },
     {
       name: 'James Wilson',
@@ -194,7 +205,7 @@ const Home = () => {
     {
       date: 'May 15, 2024',
       title: 'Annual Sports Championship',
-      description: 'Inter-house competition featuring athletics, swimming, and team sports with international standards',
+      description: 'Inter-house competition featuring athletics, swimming, and team sports with national standards',
       time: '9:00 AM - 5:00 PM',
       location: 'Sports Complex',
       category: 'Sports',
@@ -213,7 +224,7 @@ const Home = () => {
     },
     {
       date: 'June 20, 2024',
-      title: 'Global Cultural Festival',
+      title: 'Annual Cultural Festival',
       description: 'Celebrating our diverse community with performances, cuisine, and cultural exhibitions',
       time: '6:00 PM - 10:00 PM',
       location: 'Main Campus',
@@ -235,9 +246,9 @@ const Home = () => {
 
   const newsItems = [
     {
-      title: 'School Achieves International Accreditation Excellence',
+      title: 'School Achieves National Accreditation Excellence',
       date: 'April 10, 2024',
-      excerpt: 'Our institution has been recognized with the highest international education standards, ranking #1 in the district for the third consecutive year.',
+      excerpt: 'Our institution has been recognized with the highest education standards, ranking #1 in the district for the third consecutive year.',
       category: 'Achievement',
       readTime: '3 min read',
       featured: true,
@@ -262,9 +273,9 @@ const Home = () => {
       image: 'https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop'
     },
     {
-      title: 'Students Win International Robotics Championship',
+      title: 'Students Win National Robotics Championship',
       date: 'February 28, 2024',
-      excerpt: 'Our robotics team secured first place at the Global Youth Robotics Competition, competing against 200+ teams worldwide.',
+      excerpt: 'Our robotics team secured first place at the National Youth Robotics Competition, competing against 200+ teams nationwide.',
       category: 'Achievement',
       readTime: '3 min read',
       featured: false,
@@ -292,22 +303,22 @@ const Home = () => {
       image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=500&h=300&fit=crop',
       description: 'Cutting-edge science, technology, engineering, and mathematics programs with real-world applications',
       programs: ['Robotics', 'AI Research', 'Biotechnology', 'Engineering Design', 'Data Science'],
-      achievements: 'International Science Fair Winners'
+      achievements: 'National Science Fair Winners'
     },
     {
-      title: 'Global Leadership',
+      title: 'Leadership Development',
       image: 'https://images.pexels.com/photos/1181533/pexels-photo-1181533.jpeg?auto=compress&cs=tinysrgb&w=500&h=300&fit=crop',
-      description: 'Developing ethical leaders through service learning, Model UN, and community engagement',
-      programs: ['Model UN', 'Debate Team', 'Community Service', 'Student Government', 'Peer Mentoring'],
-      achievements: 'UN Youth Ambassador Program'
+      description: 'Developing ethical leaders through service learning and community engagement',
+      programs: ['Debate Team', 'Community Service', 'Student Government', 'Peer Mentoring'],
+      achievements: 'National Leadership Awards'
     }
   ];
 
   const quickStats = [
-    { label: 'Countries Represented', value: '45+', icon: Globe },
-    { label: 'Languages Spoken', value: '30+', icon: BookOpen },
-    { label: 'University Partnerships', value: '50+', icon: GraduationCap },
-    { label: 'Alumni Network', value: '5,000+', icon: Users }
+    { label: 'Academic Excellence', value: '95%', icon: Award },
+    { label: 'Sports Championships', value: '15+', icon: Trophy },
+    { label: 'Arts Recognition', value: '10+', icon: Star },
+    { label: 'Community Service', value: '20+', icon: Heart }
   ];
 
   return (
@@ -318,37 +329,162 @@ const Home = () => {
       {/* Enhanced Hero Section */}
       <div className="relative">
         <Hero />
-        
-        {/* Live Stats Ticker */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.6 }}
-          className="absolute bottom-4 left-1/2 transform -translate-x-1/2 hidden lg:block"
-        >
-          <div className="bg-white/95 backdrop-blur-sm rounded-full px-6 py-3 shadow-lg">
-            <div className="flex items-center space-x-6 text-sm">
-              <div className="flex items-center">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse mr-2"></div>
-                <span className="text-gray-600">Live: {currentTime.toLocaleTimeString()}</span>
-              </div>
-              <div className="text-gray-400">|</div>
-              <div className="text-gray-600">
-                <span className="font-semibold text-blue-600">1,247</span> students online
-              </div>
-              <div className="text-gray-400">|</div>
-              <div className="text-gray-600">
-                <span className="font-semibold text-green-600">98%</span> attendance today
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
 
-      {/* Quick Notice Section with Enhanced Design */}
-      <section className="py-16 bg-gradient-to-r from-blue-50 to-indigo-50">
-        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl">
-          <QuickNotice />
+      {/* Welcome to Durga Aawashiya English School Section */}
+      <section className="py-10 bg-white relative overflow-hidden">
+        <AnimatedBackground pattern="dots" />
+        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold mb-4">
+                <GraduationCap className="w-4 h-4 mr-2" />
+                Established 1998
+              </div>
+              
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+                Welcome to{' '}
+                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  Durga Aawashiya English School
+                </span>
+              </h2>
+              
+              <p className="text-xl text-gray-600 leading-relaxed">
+                We are committed to providing exceptional education that nurtures the whole child - academically, socially, emotionally, and physically. Our innovative approach combines traditional values with modern teaching methodologies.
+              </p>
+              
+              <div className="space-y-4">
+                <div className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <Check className="w-4 h-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-1">Holistic Development</h4>
+                    <p className="text-gray-600">Comprehensive education focusing on academic excellence and character building</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <Users className="w-4 h-4 text-green-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-1">Expert Faculty</h4>
+                    <p className="text-gray-600">Experienced educators dedicated to inspiring and mentoring every student</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-4">
+                  <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <Zap className="w-4 h-4 text-purple-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900 mb-1">Modern Facilities</h4>
+                    <p className="text-gray-600">State-of-the-art infrastructure designed to enhance learning and creativity</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold hover:shadow-lg transition-all duration-300"
+                >
+                  Learn More About Us
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </motion.button>
+                
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex items-center justify-center px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-full font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300"
+                >
+                  Take a Virtual Tour
+                  <Camera className="w-4 h-4 ml-2" />
+                </motion.button>
+              </div>
+            </motion.div>
+            
+            {/* Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img 
+                  src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                  alt="School Building"
+                  className="w-full h-96 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                
+                {/* Floating Stats */}
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4">
+                    <div className="grid grid-cols-3 gap-4 text-center">
+                      <div>
+                        <div className="text-2xl font-bold text-blue-600">25+</div>
+                        <div className="text-sm text-gray-600">Years</div>
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold text-green-600">500+</div>
+                        <div className="text-sm text-gray-600">Students</div>
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold text-purple-600">85</div>
+                        <div className="text-sm text-gray-600">Teachers</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Decorative Elements */}
+              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20"></div>
+              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-20"></div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Us Section */}
+      <section className="py-10 bg-white relative overflow-hidden">
+        <AnimatedBackground pattern="dots" />
+        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
+          <AboutPreview />
+        </div>
+      </section>
+
+      {/* Quick Stats Section */}
+      <section className="py-10 bg-white relative overflow-hidden">
+        <AnimatedBackground pattern="dots" />
+        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              Our Achievements at a Glance
+            </h3>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Discover the numbers that reflect our commitment to excellence and student success
+            </p>
+          </motion.div>
           
           {/* Quick Stats */}
           <motion.div
@@ -356,40 +492,139 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6"
+            className="grid grid-cols-2 md:grid-cols-4 gap-6"
           >
             {quickStats.map((stat, index) => (
-              <div key={index} className="text-center group">
-                <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 group-hover:scale-105">
-                  <stat.icon className="w-8 h-8 text-blue-600 mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                  <div className="text-2xl font-bold text-gray-900 mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-600">{stat.label}</div>
+              <motion.div 
+                key={index} 
+                className="text-center group"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5, scale: 1.05 }}
+              >
+                <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 group-hover:scale-105 relative overflow-hidden">
+                  {/* Hover Effect Background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  <stat.icon className="w-8 h-8 text-blue-600 mx-auto mb-3 group-hover:scale-110 transition-transform relative z-10" />
+                  <div className="text-2xl font-bold text-gray-900 mb-1 relative z-10">{stat.value}</div>
+                  <div className="text-sm text-gray-600 relative z-10">{stat.label}</div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </motion.div>
         </div>
       </section>
 
+      {/* Interactive Learning Experience Section */}
+      <motion.section 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+        className="py-10 bg-white relative overflow-hidden"
+      >
+        <AnimatedBackground pattern="grid" />
+        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold mb-6">
+              <Zap className="w-4 h-4 mr-2" />
+              Innovative Learning
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Interactive Learning Experience
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Discover our cutting-edge facilities and innovative programs that make learning engaging and effective.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: Globe,
+                title: "Global Connections",
+                description: "Connect with students worldwide through our international exchange programs",
+                color: "from-blue-500 to-cyan-500"
+              },
+              {
+                icon: Zap,
+                title: "Technology Integration",
+                description: "State-of-the-art technology in every classroom for enhanced learning",
+                color: "from-purple-500 to-pink-500"
+              },
+              {
+                icon: Heart,
+                title: "Wellness Programs",
+                description: "Comprehensive health and wellness initiatives for student development",
+                color: "from-green-500 to-teal-500"
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10, scale: 1.05 }}
+                className="group"
+              >
+                <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 p-8 h-full relative overflow-hidden">
+                  {/* Animated Background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
+                  
+                  <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                    <feature.icon className="w-8 h-8 text-white" />
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+                    {feature.title}
+                  </h3>
+                  
+                  <p className="text-gray-600 leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
       {/* Enhanced School at a Glance Section */}
       <motion.section 
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        whileInView={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="py-20 bg-white"
+        viewport={{ once: true }}
+        className="py-10 bg-white relative overflow-hidden"
       >
-        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl">
+        <AnimatedBackground pattern="grid" />
+        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
             className="text-center mb-16"
           >
+            <div className="inline-flex items-center px-4 py-2 bg-purple-100 text-purple-800 rounded-full text-sm font-semibold mb-6">
+              <Trophy className="w-4 h-4 mr-2" />
+              Excellence in Numbers
+            </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Excellence in Numbers
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Our commitment to educational excellence is reflected in these achievements and the success of our global community.
+              Our commitment to educational excellence is reflected in these achievements and the success of our community.
             </p>
           </motion.div>
 
@@ -398,8 +633,10 @@ const Home = () => {
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -10, scale: 1.05 }}
                 className="group"
               >
                 <div className="relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 p-8 h-full overflow-hidden group-hover:scale-105">
@@ -441,23 +678,53 @@ const Home = () => {
       </motion.section>
 
       {/* Enhanced Virtual Tour Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl">
+      <section className="py-10 bg-white relative overflow-hidden">
+        <AnimatedBackground pattern="waves" />
+        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-semibold mb-6">
+              <Camera className="w-4 h-4 mr-2" />
+              Explore Our Campus
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+              Take a Virtual Tour
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Experience our world-class facilities and vibrant campus life from anywhere in the world.
+            </p>
+          </motion.div>
           <VirtualTour />
         </div>
       </section>
 
       {/* Enhanced News, Events & Calendar Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl">
-          <div className="text-center mb-16">
+      <section className="py-10 bg-white relative overflow-hidden">
+        <AnimatedBackground pattern="dots" />
+        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center px-4 py-2 bg-orange-100 text-orange-800 rounded-full text-sm font-semibold mb-6">
+              <Calendar className="w-4 h-4 mr-2" />
+              Stay Updated
+            </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
               Stay Connected & Informed
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Discover the latest news, upcoming events, and important dates in our vibrant school community.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* Enhanced News & Events Slider */}
@@ -611,16 +878,27 @@ const Home = () => {
       </section>
 
       {/* Enhanced Why Choose Us Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl">
-          <div className="text-center mb-16">
+      <section className="py-10 bg-white relative overflow-hidden">
+        <AnimatedBackground pattern="waves" />
+        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center px-4 py-2 bg-indigo-100 text-indigo-800 rounded-full text-sm font-semibold mb-6">
+              <Star className="w-4 h-4 mr-2" />
+              What Sets Us Apart
+            </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               What Sets Us Apart
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Discover the unique advantages that make our educational approach transformative and our community exceptional.
             </p>
-          </div>
+          </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
@@ -673,16 +951,27 @@ const Home = () => {
       </section>
 
       {/* Enhanced Student Life Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl">
-          <div className="text-center mb-16">
+      <section className="py-10 bg-white relative overflow-hidden">
+        <AnimatedBackground pattern="grid" />
+        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center px-4 py-2 bg-pink-100 text-pink-800 rounded-full text-sm font-semibold mb-6">
+              <Heart className="w-4 h-4 mr-2" />
+              Student Life
+            </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
               Vibrant Student Life
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Beyond academics, our students thrive in a rich ecosystem of activities, competitions, and opportunities for personal growth.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {studentLife.map((activity, index) => (
@@ -740,31 +1029,48 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Enhanced About Preview Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
-        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl">
-          <AboutPreview />
-        </div>
-      </section>
-
       {/* Enhanced Social Media Feed Section */}
-      <section className="py-20 bg-white">
+      <section className="py-10 bg-white">
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl">
-          <SocialFeed />
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+              Stay Connected
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Join our community and stay updated with the latest news and events.
+            </p>
+          </motion.div>
         </div>
       </section>
 
       {/* Enhanced Testimonials Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl">
-          <div className="text-center mb-16">
+      <section className="py-10 bg-white relative overflow-hidden">
+        <AnimatedBackground pattern="waves" />
+        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <div className="inline-flex items-center px-4 py-2 bg-yellow-100 text-yellow-800 rounded-full text-sm font-semibold mb-6">
+              <Star className="w-4 h-4 mr-2" />
+              Voices of Success
+            </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Voices of Success
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Hear from our community members about their transformative experiences and remarkable achievements.
             </p>
-          </div>
+          </motion.div>
           
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
@@ -831,12 +1137,16 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Enhanced Newsletter Section */}
-      <section className="py-20 bg-gradient-to-r from-blue-600 to-purple-700">
-        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl">
-          <Newsletter />
-        </div>
-      </section>
+      {/* Floating Action Button */}
+      <motion.button
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: showScrollTop ? 1 : 0, scale: showScrollTop ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        onClick={scrollToTop}
+        className="fixed bottom-8 right-8 z-50 w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center group"
+      >
+        <ArrowUp className="w-6 h-6 group-hover:-translate-y-1 transition-transform" />
+      </motion.button>
     </div>
   );
 };

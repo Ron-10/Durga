@@ -415,9 +415,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Social Media Feed Section */}
-      <SocialFeed />
-
       {/* What People Say Section */}
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl">
@@ -463,6 +460,27 @@ const Home = () => {
 
       {/* Newsletter Section */}
       <Newsletter />
+
+      {/* Remove Social Media Feed Section */}
+      {/* Social Media Feed Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+              Stay Connected
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Join our community and stay updated with the latest news and events.
+            </p>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 };

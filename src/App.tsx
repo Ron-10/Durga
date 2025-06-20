@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import Navbar from './components/Navbar';
+import FloatingNavbar from './components/FloatingNavbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
@@ -21,6 +21,7 @@ const Academics = lazy(() => import('./pages/Academics'));
 const StudentPortal = lazy(() => import('./pages/StudentPortal'));
 const ParentPortal = lazy(() => import('./pages/ParentPortal'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+const FloatingDockDemo = lazy(() => import('./pages/FloatingDockDemo'));
 
 function App() {
   const { scaleX } = useSmoothScroll();
@@ -34,7 +35,7 @@ function App() {
           style={{ scaleX }}
         />
         
-        <Navbar />
+        <FloatingNavbar />
         <main className="flex-grow">
           <Suspense fallback={<div className="flex justify-center items-center min-h-[200px]">Loading...</div>}>
             <Routes>
@@ -52,6 +53,7 @@ function App() {
               <Route path="/student-portal" element={<StudentPortal />} />
               <Route path="/parent-portal" element={<ParentPortal />} />
               <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/floating-dock-demo" element={<FloatingDockDemo />} />
             </Routes>
           </Suspense>
         </main>
