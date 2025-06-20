@@ -21,7 +21,6 @@ const Academics = lazy(() => import('./pages/Academics'));
 const StudentPortal = lazy(() => import('./pages/StudentPortal'));
 const ParentPortal = lazy(() => import('./pages/ParentPortal'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
-const FloatingDockDemo = lazy(() => import('./pages/FloatingDockDemo'));
 
 function App() {
   const { scaleX } = useSmoothScroll();
@@ -53,7 +52,6 @@ function App() {
               <Route path="/student-portal" element={<StudentPortal />} />
               <Route path="/parent-portal" element={<ParentPortal />} />
               <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="/floating-dock-demo" element={<FloatingDockDemo />} />
             </Routes>
           </Suspense>
         </main>
