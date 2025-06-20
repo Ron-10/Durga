@@ -103,15 +103,15 @@ const Admissions = () => {
           <div className="relative">
             <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"></div>
             <div className="relative flex justify-between items-start">
-              {[
-                {
-                  icon: FileText,
+            {[
+              {
+                icon: FileText,
                   title: '1. Online Application',
                   description: 'Complete and submit the online application form with all required details and documents.',
                   gradient: 'from-blue-500 to-cyan-500'
-                },
-                {
-                  icon: GraduationCap,
+              },
+              {
+                icon: GraduationCap,
                   title: '2. Entrance Assessment',
                   description: 'Eligible candidates will be scheduled for an entrance test to evaluate their academic readiness.',
                   gradient: 'from-purple-500 to-pink-500'
@@ -127,8 +127,8 @@ const Admissions = () => {
                   title: '4. Offer of Admission',
                   description: 'Successful candidates will receive an official offer of admission and further instructions.',
                   gradient: 'from-orange-500 to-red-500'
-                },
-              ].map((step, index) => (
+              },
+            ].map((step, index) => (
                 <motion.div 
                   key={index} 
                   initial={{ opacity: 0, y: 50 }}
@@ -143,14 +143,14 @@ const Admissions = () => {
                   >
                     <div className={`w-20 h-20 mx-auto rounded-2xl bg-gradient-to-r ${step.gradient} flex items-center justify-center shadow-2xl`}>
                       <step.icon className="w-10 h-10 text-white" />
-                    </div>
+              </div>
                   </motion.div>
                   <h3 className="text-xl font-bold mb-4 text-gray-800">{step.title}</h3>
                   <p className="text-gray-600 leading-relaxed">{step.description}</p>
                 </motion.div>
-              ))}
-            </div>
+            ))}
           </div>
+        </div>
         </motion.div>
 
         {/* Key Admission Dates */}
@@ -393,8 +393,8 @@ const Admissions = () => {
                 question="Do you provide transportation?"
                 answer="Yes, we have a fleet of school buses covering all major routes in the city. Please contact the transport department for more details."
               />
-            </div>
           </div>
+        </div>
         </motion.div>
 
         {/* Admission Form */}

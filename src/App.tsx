@@ -18,9 +18,6 @@ const Events = lazy(() => import('./pages/Events'));
 const Results = lazy(() => import('./pages/Results'));
 const Facilities = lazy(() => import('./pages/Facilities'));
 const Academics = lazy(() => import('./pages/Academics'));
-const StudentPortal = lazy(() => import('./pages/StudentPortal'));
-const ParentPortal = lazy(() => import('./pages/ParentPortal'));
-const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 
 function App() {
   const { scaleX } = useSmoothScroll();
@@ -49,9 +46,7 @@ function App() {
               <Route path="/results" element={<Results />} />
               <Route path="/facilities" element={<Facilities />} />
               <Route path="/academics" element={<Academics />} />
-              <Route path="/student-portal" element={<StudentPortal />} />
-              <Route path="/parent-portal" element={<ParentPortal />} />
-              <Route path="/admin" element={<AdminDashboard />} />
+              
             </Routes>
           </Suspense>
         </main>
