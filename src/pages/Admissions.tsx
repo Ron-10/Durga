@@ -101,32 +101,33 @@ const Admissions = () => {
         >
           <h2 className="text-4xl font-bold text-center mb-16 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">Our Admission Process</h2>
           <div className="relative">
-            <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"></div>
-            <div className="relative flex justify-between items-start">
+            {/* Progress line: always visible, adapts to layout */}
+            {/* Progress line removed */}
+            <div className="relative flex flex-col md:flex-row justify-between items-stretch md:items-start z-10">
             {[
               {
                 icon: FileText,
-                  title: '1. Online Application',
-                  description: 'Complete and submit the online application form with all required details and documents.',
-                  gradient: 'from-blue-500 to-cyan-500'
+                title: '1. Online Application',
+                description: 'Complete and submit the online application form with all required details and documents.',
+                gradient: 'from-blue-500 to-cyan-500'
               },
               {
                 icon: GraduationCap,
-                  title: '2. Entrance Assessment',
-                  description: 'Eligible candidates will be scheduled for an entrance test to evaluate their academic readiness.',
-                  gradient: 'from-purple-500 to-pink-500'
-                },
-                {
-                  icon: Users,
-                  title: '3. Family Interaction',
-                  description: `A personal interaction with the student and their parents to understand their alignment with our school's values.`,
-                  gradient: 'from-green-500 to-emerald-500'
-                },
-                {
-                  icon: FileText,
-                  title: '4. Offer of Admission',
-                  description: 'Successful candidates will receive an official offer of admission and further instructions.',
-                  gradient: 'from-orange-500 to-red-500'
+                title: '2. Entrance Assessment',
+                description: 'Eligible candidates will be scheduled for an entrance test to evaluate their academic readiness.',
+                gradient: 'from-purple-500 to-pink-500'
+              },
+              {
+                icon: Users,
+                title: '3. Family Interaction',
+                description: `A personal interaction with the student and their parents to understand their alignment with our school's values.`,
+                gradient: 'from-green-500 to-emerald-500'
+              },
+              {
+                icon: FileText,
+                title: '4. Offer of Admission',
+                description: 'Successful candidates will receive an official offer of admission and further instructions.',
+                gradient: 'from-orange-500 to-red-500'
               },
             ].map((step, index) => (
                 <motion.div 
@@ -135,22 +136,22 @@ const Admissions = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
-                  className="w-1/4 px-4 text-center"
+                  className="w-full md:w-1/4 px-4 mb-16 md:mb-0 text-center flex flex-col items-center"
                 >
                   <motion.div 
                     whileHover={{ scale: 1.05, y: -5 }}
-                    className="relative mb-6"
+                    className="relative mb-6 z-10"
                   >
                     <div className={`w-20 h-20 mx-auto rounded-2xl bg-gradient-to-r ${step.gradient} flex items-center justify-center shadow-2xl`}>
                       <step.icon className="w-10 h-10 text-white" />
-              </div>
+                    </div>
                   </motion.div>
-                  <h3 className="text-xl font-bold mb-4 text-gray-800">{step.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{step.description}</p>
+                  <h3 className="text-xl font-bold mb-4 text-gray-800 z-10">{step.title}</h3>
+                  <p className="text-gray-600 leading-relaxed z-10">{step.description}</p>
                 </motion.div>
             ))}
+            </div>
           </div>
-        </div>
         </motion.div>
 
         {/* Key Admission Dates */}
@@ -194,69 +195,6 @@ const Admissions = () => {
                   </motion.li>
                 ))}
               </ul>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Fee Structure */}
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">Fee Structure</h2>
-          <div className="backdrop-blur-lg bg-white/20 rounded-3xl shadow-2xl border border-white/30 overflow-hidden">
-            <div className="p-10">
-              <div className="flex items-center mb-8">
-                <div className="p-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl mr-6">
-                  <DollarSign className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Academic Year 2024-25</h3>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div className="space-y-6">
-                  <h4 className="text-2xl font-bold text-gray-800 mb-6">One-Time Fees</h4>
-                  {[
-                    { item: 'Admission Fee', amount: 'Rs. 25,000' },
-                    { item: 'Security Deposit', amount: 'Rs. 10,000' },
-                    { item: 'Development Fee', amount: 'Rs. 15,000' },
-                  ].map((fee, index) => (
-                    <motion.div 
-                      key={index}
-                      initial={{ opacity: 0, x: -50 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      className="flex justify-between items-center p-4 bg-white/50 rounded-xl hover:bg-white/70 transition-all duration-300"
-                    >
-                      <span className="font-semibold text-gray-800">{fee.item}</span>
-                      <span className="font-bold text-green-600 text-lg">{fee.amount}</span>
-                    </motion.div>
-                  ))}
-                </div>
-                <div className="space-y-6">
-                  <h4 className="text-2xl font-bold text-gray-800 mb-6">Annual Fees</h4>
-                  {[
-                    { item: 'Tuition Fee', amount: 'Rs. 120,000' },
-                    { item: 'Computer Lab', amount: 'Rs. 8,000' },
-                    { item: 'Library Fee', amount: 'Rs. 5,000' },
-                  ].map((fee, index) => (
-                    <motion.div 
-                      key={index}
-                      initial={{ opacity: 0, x: 50 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.6, delay: index * 0.1 }}
-                      className="flex justify-between items-center p-4 bg-white/50 rounded-xl hover:bg-white/70 transition-all duration-300"
-                    >
-                      <span className="font-semibold text-gray-800">{fee.item}</span>
-                      <span className="font-bold text-blue-600 text-lg">{fee.amount}</span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
         </motion.div>

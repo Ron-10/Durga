@@ -19,12 +19,6 @@ const quickLinks = [
     color: 'text-green-500'
   },
   {
-    title: 'Fee Structure',
-    icon: FileText,
-    href: '/downloads/fee-structure',
-    color: 'text-blue-500'
-  },
-  {
     title: 'Academic Calendar',
     icon: Calendar,
     href: '/academic-calendar',
