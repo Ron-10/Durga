@@ -51,6 +51,12 @@ const QuickAccessPanel = () => {
     <div className="bg-gray-50 py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
+          <div className="flex justify-center mb-6">
+            <div className="relative">
+              <img src="/icons/logo.png" alt="DAES Logo" className="h-16 w-auto drop-shadow-lg" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-20 blur-sm"></div>
+            </div>
+          </div>
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             Quick Access
           </h2>

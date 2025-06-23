@@ -17,7 +17,7 @@ const Footer = () => {
           {/* School Info */}
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <img src="/logo.png" alt="DAES Logo" className="h-12 w-auto" />
+              <img src="/icons/logobg.png" alt="DAES Logo" className="h-12 w-auto" />
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">DAES</span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
@@ -97,13 +97,13 @@ const Footer = () => {
         </div>
 
         {/* Newsletter Section */}
-        <div className="mt-12 pt-8 border-t border-gray-700">
-          <div className="max-w-md">
+        <div className="mt-12 pt-8 border-t border-gray-700 flex justify-center">
+          <div className="max-w-md w-full text-center">
             <h3 className="text-xl font-bold mb-4 text-blue-400">Stay Connected</h3>
             <p className="text-gray-300 mb-4">
               Subscribe to our newsletter for updates and news.
             </p>
-            <form className="flex">
+            <form className="flex justify-center">
               <input
                 type="email"
                 placeholder="Enter your email"

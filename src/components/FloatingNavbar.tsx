@@ -10,20 +10,17 @@ import {
   IconSchool,
   IconCalendar,
   IconPhone,
-  IconUsers,
 } from '@tabler/icons-react';
 
 const FloatingNavbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const location = useLocation();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      // Your scroll logic here
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -33,7 +30,7 @@ const FloatingNavbar = () => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setActiveDropdown(null);
+        setOpenDropdown(null);
       }
     };
 
@@ -61,6 +58,9 @@ const FloatingNavbar = () => {
       href: '/admissions',
       icon: LogIn,
     },
+    
+    { name: 'Notices', href: '/notices', icon: FileText },
+    { name: 'Contact', href: '/contact', icon: Contact },
     { 
       name: 'Explore',
       href: '#',
@@ -71,41 +71,15 @@ const FloatingNavbar = () => {
         { name: 'Gallery', href: '/gallery', icon: Image }
       ]
     },
-    { name: 'Notices', href: '/notices', icon: FileText },
-    { name: 'Contact', href: '/contact', icon: Contact },
   ];
 
   const floatingNavLinks = [
-    {
-      title: "Home",
-      icon: <IconHome className="h-full w-full text-white" />,
-      href: "/",
-    },
-    {
-      title: "About",
-      icon: <IconInfoCircle className="h-full w-full text-white" />,
-      href: "/about",
-    },
-    {
-      title: "Academics",
-      icon: <IconBook className="h-full w-full text-white" />,
-      href: "/academics",
-    },
-    {
-      title: "Admissions",
-      icon: <IconSchool className="h-full w-full text-white" />,
-      href: "/admissions",
-    },
-    {
-      title: "Events",
-      icon: <IconCalendar className="h-full w-full text-white" />,
-      href: "/events",
-    },
-    {
-      title: "Contact",
-      icon: <IconPhone className="h-full w-full text-white" />,
-      href: "/contact",
-    },
+    { title: "Home", icon: <IconHome className="h-full w-full" />, href: "/" },
+    { title: "About", icon: <IconInfoCircle className="h-full w-full" />, href: "/about" },
+    { title: "Academics", icon: <IconBook className="h-full w-full" />, href: "/academics" },
+    { title: "Admissions", icon: <IconSchool className="h-full w-full" />, href: "/admissions" },
+    { title: "Events", icon: <IconCalendar className="h-full w-full" />, href: "/events" },
+    { title: "Contact", icon: <IconPhone className="h-full w-full" />, href: "/contact" },
   ];
 
   const toggleMenu = () => {
@@ -119,34 +93,26 @@ const FloatingNavbar = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className={`fixed w-full z-50 transition-all duration-500 ${
-          isScrolled 
-            ? 'bg-gradient-to-r from-purple-900/95 via-blue-900/95 to-indigo-900/95 backdrop-blur-md shadow-2xl' 
-            : 'bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-indigo-600/20 backdrop-blur-sm'
-        }`}
+        className="fixed w-full z-50 transition-all duration-500 bg-white shadow"
       >
         <div className="container mx-auto px-4 flex justify-center">
-          <div className="flex justify-between items-center h-20 w-full max-w-6xl">
+          <div className="flex justify-between items-center h-16 w-full max-w-6xl">
             {/* Logo */}
             <motion.div
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 10 }}
             >
               <Link to="/" className="flex items-center space-x-3">
-                <div className="relative">
-                  <img src="/logo.png" alt="DAES Logo" className="h-12 w-auto drop-shadow-lg" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-20 "></div>
+                <div className="relative p-1.5 rounded-full bg-whi/20 backdrop-blur-sm border border-white/10 flex items-center justify-center overflow-hidden">
+                  <img src="/icons/logo.png" alt="DAES Logo" className="h-14 w-14 rounded-full object-cover scale-125" />
                 </div>
-                <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-sm">
-                  DAES
-                </span>
               </Link>
             </motion.div>
 
             {/* Desktop Dropdown Menu */}
             <div className="hidden md:block relative group" ref={dropdownRef}>
               <motion.button
-                className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-white/20 text-white hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300 shadow-lg hover:shadow-xl"
+                className="flex items-center space-x-2 px-6 py-3 bg-white rounded-full border border-blue-300 text-blue-900 hover:bg-blue-100 transition-all duration-300 shadow-lg hover:shadow-xl"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -154,9 +120,9 @@ const FloatingNavbar = () => {
                 <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" />
               </motion.button>
 
-              <div className="absolute top-full right-0 mt-2 w-72 bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-md rounded-2xl shadow-2xl border border-white/10 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                <div className="p-3">
-                  {navLinks.map((item, index) => (
+              <div className="absolute top-full right-0 mt-2 w-72 bg-white rounded-2xl shadow-xl border border-gray-200/80 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                <div className="p-2">
+                  {navLinks.map((item) => (
                     <div
                       key={item.name}
                       className="group/item relative"
@@ -165,14 +131,12 @@ const FloatingNavbar = () => {
                     >
                       <Link
                         to={item.href}
-                        className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-white hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 transition-all duration-300 ${
-                          location.pathname === item.href ? 'bg-gradient-to-r from-blue-500/30 to-purple-500/30' : ''
-                        }`}
+                        className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-800 hover:bg-blue-50 transition-all duration-300 ${location.pathname === item.href ? 'bg-blue-100 text-blue-700' : ''}`}
                       >
-                        <item.icon className="w-5 h-5 text-blue-400 group-hover/item:text-blue-300 transition-colors" />
-                        <span className="font-medium">{item.name}</span>
+                        <item.icon className="w-5 h-5 text-blue-500" />
+                        <span className="font-medium text-sm">{item.name}</span>
                         {item.dropdown && (
-                          <ChevronDown className="w-4 h-4 ml-auto text-gray-400 group-hover/item:text-gray-300 transition-colors" />
+                          <ChevronDown className="w-4 h-4 ml-auto text-gray-400" />
                         )}
                       </Link>
                       {item.dropdown && (
@@ -183,16 +147,16 @@ const FloatingNavbar = () => {
                               animate={{ opacity: 1, y: 0 }}
                               exit={{ opacity: 0, y: -8 }}
                               transition={{ duration: 0.22, ease: 'easeOut' }}
-                              className="w-full bg-gradient-to-br from-gray-800/95 to-gray-700/95 backdrop-blur-md rounded-b-2xl shadow-2xl border-t border-white/10 transition-all duration-300 z-50"
+                              className="w-full pl-5"
                             >
-                              <div className="p-3">
-                                {item.dropdown.map((child, childIndex) => (
+                              <div className="py-2">
+                                {item.dropdown.map((child) => (
                                   <div key={child.name}>
                                     <Link
                                       to={child.href}
-                                      className="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-300 hover:text-white hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 transition-all duration-300"
+                                      className={`flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-blue-50 transition-all duration-300 ${location.pathname === child.href ? 'bg-blue-100 text-blue-700' : ''}`}
                                     >
-                                      <child.icon className="w-4 h-4 text-blue-400 hover:text-blue-300 transition-colors" />
+                                      <child.icon className="w-4 h-4 text-blue-500" />
                                       <span className="text-sm font-medium">{child.name}</span>
                                     </Link>
                                   </div>
@@ -211,7 +175,7 @@ const FloatingNavbar = () => {
             {/* Mobile Menu Button */}
             <motion.button
               onClick={toggleMenu}
-              className="md:hidden text-white hover:text-blue-300 transition-colors duration-300 p-2 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-white/20"
+              className="md:hidden text-gray-800 hover:text-blue-600 transition-colors duration-300 p-2 rounded-full bg-white/50 border"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -228,28 +192,33 @@ const FloatingNavbar = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="md:hidden bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-md shadow-2xl border-t border-white/10"
+              className="md:hidden bg-white shadow-lg border-t border-gray-100"
             >
               <div className="container mx-auto px-4 flex justify-center">
-                <div className="py-4 space-y-2 w-full max-w-6xl">
+                <div className="py-4 space-y-1 w-full max-w-6xl">
                   {navLinks.map((item, index) => (
                     <motion.div 
                       key={item.name}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
                     >
                       <Link
                         to={item.href}
-                        className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-white hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 transition-all duration-300 font-medium ${
-                          location.pathname === item.href ? 'bg-gradient-to-r from-blue-500/30 to-purple-500/30' : ''
+                        className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-800 hover:bg-blue-50 transition-all duration-300 font-medium ${
+                          location.pathname === item.href ? 'bg-blue-100 text-blue-700' : ''
                         }`}
-                        onClick={() => setIsOpen(false)}
+                        onClick={() => {
+                          if (!item.dropdown) setIsOpen(false);
+                          else {
+                            setOpenDropdown(openDropdown === item.name ? null : item.name);
+                          }
+                        }}
                       >
-                        <item.icon className="w-5 h-5 text-blue-400" />
+                        <item.icon className="w-5 h-5 text-blue-500" />
                         <span>{item.name}</span>
                       </Link>
-                      {item.dropdown && (
+                      {item.dropdown && openDropdown === item.name && (
                         <motion.div
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
@@ -266,10 +235,10 @@ const FloatingNavbar = () => {
                             >
                               <Link
                                 to={child.href}
-                                className="flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300"
+                                className={`flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-600 hover:bg-blue-100 transition-all duration-300 ${location.pathname === child.href ? 'bg-blue-100 text-blue-600' : ''}`}
                                 onClick={() => setIsOpen(false)}
                               >
-                                <child.icon className="w-4 h-4 text-blue-400" />
+                                <child.icon className="w-4 h-4 text-blue-500" />
                                 <span className="text-sm">{child.name}</span>
                               </Link>
                             </motion.div>
@@ -285,15 +254,13 @@ const FloatingNavbar = () => {
         </AnimatePresence>
       </motion.nav>
 
-      {/* Floating Dock - Bottom Center */}
+      {/* Floating Dock Components */}
       <div className="hidden md:block fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
-        <FloatingDock items={floatingNavLinks} />
+        <FloatingDock items={floatingNavLinks.map(link => ({...link, icon: React.cloneElement(link.icon, { className: 'h-full w-full text-white' }) }))} />
       </div>
-
-      {/* Mobile Floating Dock - Bottom Right */}
       <div className="md:hidden fixed bottom-8 right-8 z-50">
         <FloatingDock 
-          items={floatingNavLinks} 
+          items={floatingNavLinks.map(link => ({...link, icon: React.cloneElement(link.icon, { className: 'h-full w-full text-white' }) }))} 
           mobileClassName="translate-y-0"
         />
       </div>

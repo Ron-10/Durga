@@ -34,9 +34,7 @@ const VirtualTour = () => {
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4 md:px-6 lg:px-8 lg:max-w-7xl">
         <div className="text-center mb-12">
-        
           <div className="w-20 h-1 bg-[#007BFF] mx-auto mb-4"></div>
-        
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

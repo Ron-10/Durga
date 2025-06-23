@@ -100,27 +100,19 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`fixed w-full z-50 transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-gradient-to-r from-purple-900/95 via-blue-900/95 to-indigo-900/95 backdrop-blur-md shadow-2xl' 
-          : 'bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-indigo-600/20 backdrop-blur-sm'
-      }`}
+      className="fixed w-full z-50 transition-all duration-500 bg-transparent"
     >
       <div className="container mx-auto px-4 flex justify-center">
-        <div className="flex justify-between items-center h-20 w-full max-w-6xl">
+        <div className="flex justify-between items-center h-32 w-full max-w-6xl">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
             <Link to="/" className="flex items-center space-x-3">
-              <div className="relative">
-                <img src="/logo.png" alt="DAES Logo" className="h-12 w-auto drop-shadow-lg" />
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-20 blur-sm"></div>
+              <div className="relative p-1.5 rounded-full bg-black/20 backdrop-blur-sm border border-white/10">
+                <img src="/icons/logobg.png" alt="DAES Logo" className="h-24 w-24 rounded-full object-cover" />
               </div>
-              <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-indigo-400 bg-clip-text text-transparent drop-shadow-sm">
-                DAES
-              </span>
             </Link>
           </motion.div>
 
@@ -128,13 +120,13 @@ const Navbar = () => {
           <div className="hidden md:block relative" ref={dropdownRef}>
             <motion.button
               onClick={() => setActiveDropdown(activeDropdown === 'menu' ? null : 'menu')}
-              className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm rounded-full border border-white/20 text-white hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300 shadow-lg hover:shadow-xl"
+              className="flex items-center space-x-2 px-6 py-3 bg-white rounded-full border border-white-300 text-gray-900 hover:bg-white-100 transition-all duration-300 shadow-lg hover:shadow-xl"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Menu className="w-5 h-5" />
+              <Menu className="w-5 h-5 text-blue-500" />
               <span className="font-medium">Menu</span>
-              <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${activeDropdown === 'menu' ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-4 h-4 text-blue-500 transition-transform duration-300 ${activeDropdown === 'menu' ? 'rotate-180' : ''}`} />
             </motion.button>
 
             <AnimatePresence>
@@ -144,7 +136,7 @@ const Navbar = () => {
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 10, scale: 0.95 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute top-full right-0 mt-2 w-64 bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-md rounded-2xl shadow-2xl border border-white/10 overflow-hidden"
+                  className="absolute top-full right-0 mt-2 w-64 bg-white backdrop-blur-md rounded-2xl shadow-2xl border border-white/10 overflow-hidden"
                 >
                   <div className="p-2">
                     {navLinks.map((item, index) => (
@@ -156,8 +148,8 @@ const Navbar = () => {
                       >
                         <Link
                           to={item.href}
-                          className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-white hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 transition-all duration-300 group ${
-                            location.pathname === item.href ? 'bg-gradient-to-r from-blue-500/30 to-purple-500/30' : ''
+                          className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-900 hover:bg-white transition-all duration-300 group ${
+                            location.pathname === item.href ? 'bg-white' : ''
                           }`}
                           onClick={() => setActiveDropdown(null)}
                         >
@@ -184,7 +176,7 @@ const Navbar = () => {
                               >
                                 <Link
                                   to={child.href}
-                                  className="flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300 group"
+                                  className="flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-white transition-all duration-300 group"
                                   onClick={() => setActiveDropdown(null)}
                                 >
                                   <child.icon className="w-4 h-4 text-blue-400 group-hover:text-blue-300 transition-colors" />
@@ -233,7 +225,7 @@ const Navbar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-gradient-to-br from-gray-900/95 to-gray-800/95 backdrop-blur-md shadow-2xl border-t border-white/10"
+            className="md:hidden bg-white backdrop-blur-md shadow-2xl border-t border-white/10"
           >
             <div className="container mx-auto px-4 flex justify-center">
               <div className="py-4 space-y-2 w-full max-w-6xl">
@@ -246,8 +238,8 @@ const Navbar = () => {
                   >
                     <Link
                       to={item.href}
-                      className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-white hover:bg-gradient-to-r hover:from-blue-500/20 hover:to-purple-500/20 transition-all duration-300 font-medium ${
-                        location.pathname === item.href ? 'bg-gradient-to-r from-blue-500/30 to-purple-500/30' : ''
+                      className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-900 hover:bg-white transition-all duration-300 font-medium ${
+                        location.pathname === item.href ? 'bg-white' : ''
                       }`}
                       onClick={() => setIsOpen(false)}
                     >
@@ -271,7 +263,7 @@ const Navbar = () => {
                           >
                             <Link
                               to={child.href}
-                              className="flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-300"
+                              className="flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-white transition-all duration-300"
                               onClick={() => setIsOpen(false)}
                             >
                               <child.icon className="w-4 h-4 text-blue-400" />
