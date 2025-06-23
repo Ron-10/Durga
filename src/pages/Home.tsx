@@ -458,6 +458,37 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Principal's Message Section */}
+      <section className="py-16 bg-white relative overflow-hidden">
+        <AnimatedBackground pattern="dots" />
+        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
+          <div className="bg-white rounded-2xl shadow-xl border border-blue-100 p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 w-full">
+            <div className="w-32 h-32 rounded-full overflow-hidden flex-shrink-0 border-4 border-blue-100 shadow-md bg-white">
+              <img
+                src="/public/icons/logo.png"
+                alt="Principal Bhoj Bahadur Karki"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="flex-1">
+              <h3 className="text-2xl md:text-3xl font-extrabold text-gray-800 mb-2 flex items-center">
+                Message from the Principal
+                <span className="ml-3 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-400 rounded-full"></span>
+              </h3>
+              <p className="text-gray-600 mb-6 text-lg md:text-xl text-justify leading-relaxed">
+                Welcome to Durga Aawashiya English School! Our mission is to inspire every student to reach their highest potential through a nurturing, innovative, and inclusive environment. We believe in holistic education that fosters academic excellence, character, and lifelong learning. Thank you for being part of our vibrant community.
+              </p>
+              <div className="mt-4">
+                <span className="block text-xl font-bold text-blue-700" style={{ fontFamily: 'cursive' }}>
+                  Bhoj Bahadur Karki
+                </span>
+                <span className="block text-gray-500 text-sm mt-1">Principal</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* About Us Section */}
       <section className="py-10  relative overflow-hidden">
         <AnimatedBackground pattern="dots" />
@@ -1116,17 +1147,6 @@ const Home = () => {
           </Swiper>
         </div>
       </section>
-
-      {/* Floating Action Button */}
-      <motion.button
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: showScrollTop ? 1 : 0, scale: showScrollTop ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
-        onClick={scrollToTop}
-        className="fixed bottom-8 right-8 z-50 w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 flex items-center justify-center group"
-      >
-        <ArrowUp className="w-6 h-6 group-hover:-translate-y-1 transition-transform" />
-      </motion.button>
     </div>
   );
 };

@@ -7,6 +7,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const [language, setLanguage] = useState<'EN' | 'NE'>('EN');
   const location = useLocation();
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [darkMode, setDarkMode] = useState(() => {
@@ -103,7 +104,7 @@ const Navbar = () => {
       className="fixed w-full z-50 transition-all duration-500 bg-transparent"
     >
       <div className="container mx-auto px-4 flex justify-center">
-        <div className="flex justify-between items-center h-32 w-full max-w-6xl">
+        <div className="flex justify-between items-center h-32 w-full max-w-7xl">
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
@@ -140,53 +141,51 @@ const Navbar = () => {
                 >
                   <div className="p-2">
                     {navLinks.map((item, index) => (
-                      <motion.div
-                        key={item.name}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.2, delay: index * 0.05 }}
-                      >
-                        <Link
-                          to={item.href}
-                          className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-900 hover:bg-white transition-all duration-300 group ${
-                            location.pathname === item.href ? 'bg-white' : ''
-                          }`}
-                          onClick={() => setActiveDropdown(null)}
+                      <React.Fragment key={item.name}>
+                        <motion.div
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.2, delay: index * 0.05 }}
                         >
-                          <item.icon className="w-5 h-5 text-blue-400 group-hover:text-blue-300 transition-colors" />
-                          <span className="font-medium">{item.name}</span>
-                          {item.dropdown && (
-                            <ChevronDown className="w-4 h-4 ml-auto text-gray-400 group-hover:text-gray-300 transition-colors" />
-                          )}
-                        </Link>
-                        
-                        {item.dropdown && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="ml-8 mt-1 space-y-1"
+                          <Link
+                            to={item.href}
+                            className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-900 hover:bg-white transition-all duration-300 group ${location.pathname === item.href ? 'bg-white' : ''}`}
+                            onClick={() => setActiveDropdown(null)}
                           >
-                            {item.dropdown.map((child, childIndex) => (
-                              <motion.div
-                                key={child.name}
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                transition={{ duration: 0.2, delay: childIndex * 0.03 }}
-                              >
-                                <Link
-                                  to={child.href}
-                                  className="flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-white transition-all duration-300 group"
-                                  onClick={() => setActiveDropdown(null)}
+                            <item.icon className="w-5 h-5 text-blue-400 group-hover:text-blue-300 transition-colors" />
+                            <span className="font-medium">{item.name}</span>
+                            {item.dropdown && (
+                              <ChevronDown className="w-4 h-4 ml-auto text-gray-400 group-hover:text-gray-300 transition-colors" />
+                            )}
+                          </Link>
+                          {item.dropdown && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              exit={{ opacity: 0, height: 0 }}
+                              className="ml-8 mt-1 space-y-1"
+                            >
+                              {item.dropdown.map((child, childIndex) => (
+                                <motion.div
+                                  key={child.name}
+                                  initial={{ opacity: 0, x: -10 }}
+                                  animate={{ opacity: 1, x: 0 }}
+                                  transition={{ duration: 0.2, delay: childIndex * 0.03 }}
                                 >
-                                  <child.icon className="w-4 h-4 text-blue-400 group-hover:text-blue-300 transition-colors" />
-                                  <span className="text-sm">{child.name}</span>
-                                </Link>
-                              </motion.div>
-                            ))}
-                          </motion.div>
-                        )}
-                      </motion.div>
+                                  <Link
+                                    to={child.href}
+                                    className="flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-white transition-all duration-300 group"
+                                    onClick={() => setActiveDropdown(null)}
+                                  >
+                                    <child.icon className="w-4 h-4 text-blue-400 group-hover:text-blue-300 transition-colors" />
+                                    <span className="text-sm">{child.name}</span>
+                                  </Link>
+                                </motion.div>
+                              ))}
+                            </motion.div>
+                          )}
+                        </motion.div>
+                      </React.Fragment>
                     ))}
                   </div>
                 </motion.div>
@@ -206,6 +205,13 @@ const Navbar = () => {
 
           {/* Dark Mode Toggle Button */}
           <div className="flex items-center space-x-2">
+            <button
+              onClick={() => setLanguage(language === 'EN' ? 'NE' : 'EN')}
+              className="ml-2 p-2 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-blue-700 hover:bg-blue-100 transition-colors duration-300 font-bold border border-blue-300"
+              aria-label="Toggle language"
+            >
+              {language === 'EN' ? 'EN' : 'ने'}
+            </button>
             <button
               onClick={toggleDarkMode}
               className="ml-2 p-2 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-white hover:bg-blue-600/30 transition-colors duration-300"
@@ -228,52 +234,51 @@ const Navbar = () => {
             className="md:hidden bg-white backdrop-blur-md shadow-2xl border-t border-white/10"
           >
             <div className="container mx-auto px-4 flex justify-center">
-              <div className="py-4 space-y-2 w-full max-w-6xl">
+              <div className="py-4 space-y-2 w-full max-w-7xl">
                 {navLinks.map((item, index) => (
-                  <motion.div 
-                    key={item.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                  >
-                    <Link
-                      to={item.href}
-                      className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-900 hover:bg-white transition-all duration-300 font-medium ${
-                        location.pathname === item.href ? 'bg-white' : ''
-                      }`}
-                      onClick={() => setIsOpen(false)}
+                  <React.Fragment key={item.name}>
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
                     >
-                      <item.icon className="w-5 h-5 text-blue-400" />
-                      <span>{item.name}</span>
-                    </Link>
-                    {item.dropdown && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="ml-8 mt-1 space-y-1"
+                      <Link
+                        to={item.href}
+                        className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-900 hover:bg-white transition-all duration-300 font-medium ${location.pathname === item.href ? 'bg-white' : ''}`}
+                        onClick={() => setIsOpen(false)}
                       >
-                        {item.dropdown.map((child, childIndex) => (
-                          <motion.div
-                            key={child.name}
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.2, delay: childIndex * 0.05 }}
-                          >
-                            <Link
-                              to={child.href}
-                              className="flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-white transition-all duration-300"
-                              onClick={() => setIsOpen(false)}
+                        <item.icon className="w-5 h-5 text-blue-400" />
+                        <span>{item.name}</span>
+                      </Link>
+                      {item.dropdown && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: "auto" }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="ml-8 mt-1 space-y-1"
+                        >
+                          {item.dropdown.map((child, childIndex) => (
+                            <motion.div
+                              key={child.name}
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ duration: 0.2, delay: childIndex * 0.05 }}
                             >
-                              <child.icon className="w-4 h-4 text-blue-400" />
-                              <span className="text-sm">{child.name}</span>
-                            </Link>
-                          </motion.div>
-                        ))}
-                      </motion.div>
-                    )}
-                  </motion.div>
+                              <Link
+                                to={child.href}
+                                className="flex items-center space-x-3 px-4 py-2 rounded-lg text-gray-700 hover:text-gray-900 hover:bg-white transition-all duration-300"
+                                onClick={() => setIsOpen(false)}
+                              >
+                                <child.icon className="w-4 h-4 text-blue-400" />
+                                <span className="text-sm">{child.name}</span>
+                              </Link>
+                            </motion.div>
+                          ))}
+                        </motion.div>
+                      )}
+                    </motion.div>
+                  </React.Fragment>
                 ))}
               </div>
             </div>

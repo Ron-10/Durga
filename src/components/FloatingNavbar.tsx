@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FloatingDock } from './ui/floating-dock';
-import { Menu, X, ChevronDown, Home, Info, School, LogIn, BookOpen, Calendar, Contact, FileText, Users, GraduationCap, Trophy, Image } from 'lucide-react';
+import { Menu, X, ChevronDown, Home, Info, School, LogIn, BookOpen, Calendar, Contact, FileText, Users, GraduationCap, Trophy, Image, ArrowUp } from 'lucide-react';
 import {
   IconHome,
   IconInfoCircle,
@@ -80,11 +80,25 @@ const FloatingNavbar = () => {
     { title: "Admissions", icon: <IconSchool className="h-full w-full" />, href: "/admissions" },
     { title: "Events", icon: <IconCalendar className="h-full w-full" />, href: "/events" },
     { title: "Contact", icon: <IconPhone className="h-full w-full" />, href: "/contact" },
+    { title: "Top", icon: <ArrowUp className="h-full w-full" />, href: "#scroll-to-top" },
   ];
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  // Add scroll-to-top handler
+  useEffect(() => {
+    const handleClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('a[href="#scroll-to-top"]')) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    };
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, []);
 
   return (
     <>
@@ -96,7 +110,7 @@ const FloatingNavbar = () => {
         className="fixed w-full z-50 transition-all duration-500 bg-white shadow"
       >
         <div className="container mx-auto px-4 flex justify-center">
-          <div className="flex justify-between items-center h-16 w-full max-w-6xl">
+          <div className="flex justify-between items-center h-18 w-full max-w-7xl">
             {/* Logo */}
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -195,7 +209,7 @@ const FloatingNavbar = () => {
               className="md:hidden bg-white shadow-lg border-t border-gray-100"
             >
               <div className="container mx-auto px-4 flex justify-center">
-                <div className="py-4 space-y-1 w-full max-w-6xl">
+                <div className="py-4 space-y-1 w-full max-w-7xl">
                   {navLinks.map((item, index) => (
                     <motion.div 
                       key={item.name}
