@@ -80,7 +80,6 @@ const FloatingNavbar = () => {
     { title: "Admissions", icon: <IconSchool className="h-full w-full" />, href: "/admissions" },
     { title: "Events", icon: <IconCalendar className="h-full w-full" />, href: "/events" },
     { title: "Contact", icon: <IconPhone className="h-full w-full" />, href: "/contact" },
-    { title: "Top", icon: <ArrowUp className="h-full w-full" />, href: "#scroll-to-top" },
   ];
 
   const toggleMenu = () => {

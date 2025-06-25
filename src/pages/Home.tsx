@@ -322,8 +322,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Emergency Banner */}
-      <EmergencyBanner />
+      
 
       {/* Enhanced Hero Section */}
       <div className="relative">
@@ -437,7 +436,7 @@ const Home = () => {
       </section>
 
       {/* Welcome to Durga Aawashiya English School Section */}
-      <section className="py-10 bg-white relative overflow-hidden">
+      <section className="py-10  relative overflow-hidden">
         <AnimatedBackground pattern="dots" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
           <AboutPreview />
@@ -583,13 +582,14 @@ const Home = () => {
         </div>
       </motion.section>
 
-      {/* Enhanced School at a Glance Section */}
-      <motion.section 
+    
+        {/* Enhanced School at a Glance Section */}
+      <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
-        className="py-10 bg-white relative overflow-hidden"
+        className="py-16 bg-gradient-to-br from-purple-50 to-pink-50 relative overflow-hidden"
       >
         <AnimatedBackground pattern="grid" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
@@ -605,14 +605,14 @@ const Home = () => {
               Excellence in Numbers
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Excellence in Numbers
+              Our Journey of Excellence
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Our commitment to educational excellence is reflected in these achievements and the success of our community.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
@@ -620,34 +620,32 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -10, scale: 1.05 }}
-                className="group relative rounded-2xl shadow-lg bg-white hover:shadow-2xl hover:scale-105 transition-all duration-500 overflow-hidden"
+                whileHover={{ y: -8, scale: 1.03 }}
+                className="group relative p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col h-full"
               >
-                <div className="relative overflow-hidden">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
-                  
-                  <div className={`w-16 h-16 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <stat.icon className="w-8 h-8 text-white" />
-                  </div>
-                  
-                  <h3 className="text-4xl font-bold text-center mb-3 text-gray-900 group-hover:text-blue-600 transition-colors">
-                    {stat.number}
-                  </h3>
-                  
-                  <p className="text-xl font-semibold text-center text-gray-800 mb-3">
-                    {stat.label}
-                  </p>
-                  
-                  <p className="text-sm text-center text-gray-600 mb-4 leading-relaxed">
-                    {stat.description}
-                  </p>
-                  
-                  <div className="text-center">
-                    <span className={`inline-flex items-center px-3 py-1 bg-gradient-to-r ${stat.color} text-white rounded-full text-xs font-semibold`}>
-                      <Trophy className="w-3 h-3 mr-1" />
-                      {stat.achievement}
-                    </span>
-                  </div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
+
+                <div className={`w-20 h-20 bg-gradient-to-br ${stat.color} rounded-full flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300`}>
+                  <stat.icon className="w-10 h-10 text-white" />
+                </div>
+
+                <h3 className="text-5xl font-extrabold text-blue-900 mb-2 group-hover:text-purple-700 transition-colors">
+                  {stat.number}
+                </h3>
+
+                <p className="text-xl font-semibold text-gray-800 mb-3 flex-grow leading-tight">
+                  {stat.label}
+                </p>
+
+                <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+                  {stat.description}
+                </p>
+
+                <div className="text-center mt-auto">
+                  <span className={`inline-flex items-center px-4 py-2 bg-gradient-to-r ${stat.color} text-white rounded-full text-xs font-semibold`}>
+                    <Trophy className="w-3 h-3 mr-2" />
+                    {stat.achievement}
+                  </span>
                 </div>
               </motion.div>
             ))}
@@ -678,19 +676,15 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch"> {/* Added items-stretch */}
             {/* Enhanced News & Events Slider */}
-            <div className="lg:col-span-8">
-              <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div className="lg:col-span-8 flex flex-col h-full">
+              <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 h-full min-h-[540px] flex flex-col"> {/* Set min-h and h-full */}
                 <div className="flex items-center justify-between p-8 border-b bg-gradient-to-r from-blue-50 to-purple-50">
                   <div>
                     <h3 className="text-2xl font-bold text-gray-800 mb-2">Latest News & Events</h3>
                     <p className="text-gray-600">Stay updated with our school community</p>
                   </div>
-                  <button className="bg-blue-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-blue-700 transition-all duration-300 flex items-center group">
-                    View All
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </button>
                 </div>
 
                 <div className="relative p-8">
@@ -727,21 +721,6 @@ const Home = () => {
                             whileHover={{ y: -5 }}
                             className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl overflow-hidden h-full hover:shadow-lg transition-all duration-300 cursor-pointer group"
                           >
-                            {/* Image for news items */}
-                            {('image' in item) && (
-                              <div className="relative h-48 overflow-hidden">
-                                <img 
-                                  src={item.image} 
-                                  alt={item.title}
-                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                                />
-                                <div className="absolute top-4 left-4">
-                                  <span className="bg-white/90 backdrop-blur-sm text-blue-600 px-3 py-1 rounded-full text-xs font-semibold">
-                                    {item.category}
-                                  </span>
-                                </div>
-                              </div>
-                            )}
                             
                             <div className="p-6">
                               <div className="flex items-center justify-between mb-4">
@@ -822,8 +801,12 @@ const Home = () => {
             </div>
 
             {/* Enhanced Calendar Widget */}
-            <div className="lg:col-span-4">
-              <CalendarWidget />
+            <div className="lg:col-span-4 flex flex-col h-full">
+              <div className="h-full min-h-[540px] flex flex-col">
+                <div className="h-full flex flex-col"> {/* Ensure CalendarWidget fills height */}
+                  <CalendarWidget />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -844,7 +827,7 @@ const Home = () => {
               <Star className="w-4 h-4 mr-2" />
               What Sets Us Apart
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h2 className="text-5xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Why Choose Durga Aawashiya?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -1071,19 +1054,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Scroll to Top Button */}
-      {showScrollTop && (
-        <motion.button
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 20 }}
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 z-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
-          aria-label="Scroll to top"
-        >
-          <ArrowUp className="w-6 h-6" />
-        </motion.button>
-      )}
+      
     </div>
   );
 };
