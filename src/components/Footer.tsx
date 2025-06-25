@@ -21,7 +21,7 @@ const Footer = () => {
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">DAES</span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
-              Providing quality education since 1998. We nurture young minds for academic excellence and character development.
+              Providing quality education since 1994. We nurture young minds for academic excellence and character development.
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((social) => (

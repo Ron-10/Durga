@@ -30,7 +30,8 @@ import {
   ExternalLink,
   GraduationCap,
   ArrowUp,
-  Check
+  Check,
+  ShieldCheck
 } from 'lucide-react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -41,8 +42,6 @@ import AboutPreview from '../components/AboutPreview';
 import GalleryPreview from '../components/Gallery';
 import ContactPreview from '../components/Contact';
 import CalendarWidget from '../components/CalendarWidget';
-import VirtualTour from '../components/VirtualTour';
-import SocialFeed from '../components/SocialFeed';
 // import Newsletter from '../components/Newsletter';
 import EmergencyBanner from '../components/EmergencyBanner';
 import AnimatedBackground from '../components/AnimatedBackground';
@@ -73,7 +72,7 @@ const Home = () => {
       number: '25+', 
       label: 'Years of Excellence', 
       icon: Award,
-      description: 'Providing transformative education since 1998',
+      description: 'Providing transformative education since 1994',
       achievement: 'Consistently ranked in top 5% nationally',
       color: 'from-blue-500 to-blue-600'
     },
@@ -331,174 +330,122 @@ const Home = () => {
         <Hero />
       </div>
 
+      {/* New Welcome and 'What Makes Us Special' Section */}
+      <section className="relative py-16 bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100 overflow-hidden">
+        <AnimatedBackground pattern="waves" />
+        <div className="container mx-auto px-4 md:px-6 lg:max-w-5xl relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mb-10"
+          >
+            <h1 className="text-4xl md:text-5xl font-extrabold text-blue-900 mb-2 flex items-center justify-center gap-2">
+              <span role="img" aria-label="star">🌟</span> Welcome to Durga Aawashiya English School
+            </h1>
+            <div className="text-lg md:text-xl text-blue-700 font-semibold mb-2">Mechinagar-12, Jhapa, Nepal | Established 1994</div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto mb-12"
+          >
+            <div className="bg-white/90 rounded-2xl shadow-xl p-6 md:p-8 text-xl text-gray-700 leading-relaxed border-l-8 border-blue-300">
+              At Durga Aawashiya English School, we believe education is more than books and classrooms — it's about shaping well-rounded individuals ready to thrive in life. Since 1994, we have proudly served the community by nurturing students in an environment that blends academic excellence, strong character development, and human values.
+            </div>
+          </motion.div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={{ visible: { transition: { staggerChildren: 0.18 } }, hidden: {} }}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12"
+          >
+            {/* Academic Excellence */}
+            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-400 hover:shadow-2xl transition-all duration-300">
+              <Award className="w-8 h-8 text-blue-500 mt-1" />
+              <div>
+                <h4 className="font-bold text-lg text-blue-900 mb-1">Academic Excellence</h4>
+                <p className="text-gray-700">We provide a strong foundation in English-medium education, science, mathematics, and technology, helping students build the knowledge and skills they need for the future.</p>
+              </div>
+            </motion.div>
+            {/* Character & Humanism */}
+            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-green-400 hover:shadow-2xl transition-all duration-300">
+              <Heart className="w-8 h-8 text-green-500 mt-1" />
+              <div>
+                <h4 className="font-bold text-lg text-green-900 mb-1">Character & Humanism</h4>
+                <p className="text-gray-700">Our focus goes beyond academics — we instill honesty, respect, responsibility, and compassion, preparing students to contribute positively to society.</p>
+              </div>
+            </motion.div>
+            {/* Sports & Physical Education */}
+            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-yellow-400 hover:shadow-2xl transition-all duration-300">
+              <Trophy className="w-8 h-8 text-yellow-500 mt-1" />
+              <div>
+                <h4 className="font-bold text-lg text-yellow-900 mb-1">Sports & Physical Education</h4>
+                <p className="text-gray-700">From football and cricket to athletics and indoor games, we encourage every child to develop sportsmanship, teamwork, and a healthy lifestyle.</p>
+              </div>
+            </motion.div>
+            {/* Music, Dance, and the Arts */}
+            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-pink-400 hover:shadow-2xl transition-all duration-300">
+              <Music className="w-8 h-8 text-pink-500 mt-1" />
+              <div>
+                <h4 className="font-bold text-lg text-pink-900 mb-1">Music, Dance, and the Arts</h4>
+                <p className="text-gray-700">Our school promotes creativity through regular music classes, dance workshops, and art competitions, helping students express themselves confidently.</p>
+              </div>
+            </motion.div>
+            {/* Co-Curricular & Extra-Curricular Activities */}
+            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-purple-400 hover:shadow-2xl transition-all duration-300">
+              <Star className="w-8 h-8 text-purple-500 mt-1" />
+              <div>
+                <h4 className="font-bold text-lg text-purple-900 mb-1">Co-Curricular & Extra-Curricular Activities</h4>
+                <p className="text-gray-700">We organize debates, quizzes, exhibitions, educational tours, and social service programs that broaden horizons and build leadership skills.</p>
+              </div>
+            </motion.div>
+            {/* Safe and Supportive Environment */}
+            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-cyan-400 hover:shadow-2xl transition-all duration-300">
+              <ShieldCheck className="w-8 h-8 text-cyan-500 mt-1" />
+              <div>
+                <h4 className="font-bold text-lg text-cyan-900 mb-1">Safe and Supportive Environment</h4>
+                <p className="text-gray-700">Our experienced teachers and staff create a nurturing space where every child is valued, supported, and encouraged to grow.</p>
+              </div>
+            </motion.div>
+            {/* Affordable, Quality Education */}
+            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-indigo-400 hover:shadow-2xl transition-all duration-300">
+              <Users className="w-8 h-8 text-indigo-500 mt-1" />
+              <div>
+                <h4 className="font-bold text-lg text-indigo-900 mb-1">Affordable, Quality Education</h4>
+                <p className="text-gray-700">We are committed to offering the best possible education at reasonable fees, making quality learning accessible to families in our community.</p>
+              </div>
+            </motion.div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-center mt-10"
+          >
+            <div className="inline-block px-8 py-5 rounded-2xl bg-gradient-to-r from-green-400 to-blue-500 text-white text-xl font-bold shadow-2xl border-4 border-white/80">
+              🌱 Our Motto<br />
+              <span className="block text-base font-medium mt-2">"Empowering Knowledge, Shaping Character, Inspiring Humanity — Through Education, Sports, Music, and the Arts."</span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Welcome to Durga Aawashiya English School Section */}
       <section className="py-10 bg-white relative overflow-hidden">
-        <AnimatedBackground pattern="dots" />
-        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-              className="space-y-6"
-            >
-              <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold mb-4">
-                <GraduationCap className="w-4 h-4 mr-2" />
-                Established 1998
-              </div>
-              
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
-                Welcome to{' '}
-                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  Durga Aawashiya English School
-                </span>
-              </h2>
-              
-              <p className="text-xl text-gray-600 leading-relaxed">
-                We are committed to providing exceptional education that nurtures the whole child - academically, socially, emotionally, and physically. Our innovative approach combines traditional values with modern teaching methodologies.
-              </p>
-              
-              <div className="space-y-4">
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <Check className="w-4 h-4 text-blue-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Holistic Development</h4>
-                    <p className="text-gray-600">Comprehensive education focusing on academic excellence and character building</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <Users className="w-4 h-4 text-green-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Expert Faculty</h4>
-                    <p className="text-gray-600">Experienced educators dedicated to inspiring and mentoring every student</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-start space-x-4">
-                  <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <Zap className="w-4 h-4 text-purple-600" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-gray-900 mb-1">Modern Facilities</h4>
-                    <p className="text-gray-600">State-of-the-art infrastructure designed to enhance learning and creativity</p>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center justify-center px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-semibold hover:shadow-lg transition-all duration-300"
-                >
-                  Learn More About Us
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </motion.button>
-                
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center justify-center px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-full font-semibold hover:bg-blue-600 hover:text-white transition-all duration-300"
-                >
-                  Take a Virtual Tour
-                  <Camera className="w-4 h-4 ml-2" />
-                </motion.button>
-              </div>
-            </motion.div>
-            
-            {/* Image */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img 
-                  src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                  alt="School Building"
-                  className="w-full h-96 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-                
-                {/* Floating Stats */}
-                <div className="absolute bottom-6 left-6 right-6">
-                  <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4">
-                    <div className="grid grid-cols-3 gap-4 text-center">
-                      <div>
-                        <div className="text-2xl font-bold text-blue-600">25+</div>
-                        <div className="text-sm text-gray-600">Years</div>
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold text-green-600">500+</div>
-                        <div className="text-sm text-gray-600">Students</div>
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold text-purple-600">85</div>
-                        <div className="text-sm text-gray-600">Teachers</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Decorative Elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full opacity-20"></div>
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gradient-to-br from-green-400 to-blue-500 rounded-full opacity-20"></div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Principal's Message Section */}
-      <section className="py-16 bg-white relative overflow-hidden">
-        <AnimatedBackground pattern="dots" />
-        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
-          <div className="bg-white rounded-2xl shadow-xl border border-blue-100 p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 w-full">
-            <div className="w-32 h-32 rounded-full overflow-hidden flex-shrink-0 border-4 border-blue-100 shadow-md bg-white">
-              <img
-                src="/public/icons/logo.png"
-                alt="Principal Bhoj Bahadur Karki"
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="flex-1">
-              <h3 className="text-2xl md:text-3xl font-extrabold text-gray-800 mb-2 flex items-center">
-                Message from the Principal
-                <span className="ml-3 w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-400 rounded-full"></span>
-              </h3>
-              <p className="text-gray-600 mb-6 text-lg md:text-xl text-justify leading-relaxed">
-                Welcome to Durga Aawashiya English School! Our mission is to inspire every student to reach their highest potential through a nurturing, innovative, and inclusive environment. We believe in holistic education that fosters academic excellence, character, and lifelong learning. Thank you for being part of our vibrant community.
-              </p>
-              <div className="mt-4">
-                <span className="block text-xl font-bold text-blue-700" style={{ fontFamily: 'cursive' }}>
-                  Bhoj Bahadur Karki
-                </span>
-                <span className="block text-gray-500 text-sm mt-1">Principal</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* About Us Section */}
-      <section className="py-10  relative overflow-hidden">
         <AnimatedBackground pattern="dots" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
           <AboutPreview />
         </div>
       </section>
 
-      {/* Quick Stats Section */}
-      <section className="py-10  relative overflow-hidden">
+      {/* Quick Stats Section - REVISED FOR BETTER UI/BALANCE */}
+      <section className="py-16 bg-gradient-to-br from-indigo-50 to-blue-50 relative overflow-hidden"> {/* Consistent padding and background */}
         <AnimatedBackground pattern="dots" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
           {/* Section Header */}
@@ -507,13 +454,13 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16" // Consistent bottom margin
           >
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+            <h3 className="text-4xl md:text-5xl font-extrabold text-blue-900 mb-4"> {/* Larger, bolder heading */}
               Our Achievements at a Glance
             </h3>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Discover the numbers that reflect our commitment to excellence and student success
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto"> {/* Larger paragraph text */}
+              Discover the numbers that reflect our commitment to excellence and student success.
             </p>
           </motion.div>
           
@@ -523,25 +470,31 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6"
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 items-stretch" // Increased gap to 8, added items-stretch
           >
             {quickStats.map((stat, index) => (
               <motion.div 
                 key={index} 
-                className="text-center group"
+                // Removed overflow-hidden from here too, if it was causing issues for child animations
+                // Ensure ample padding, strong shadow, and flex-col for proper alignment
+                className="group relative flex flex-col items-center justify-center p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl hover:scale-105 transition-all duration-500"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -5, scale: 1.05 }}
               >
-                <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 group-hover:scale-105 relative overflow-hidden">
-                  {/* Hover Effect Background */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  
-                  <stat.icon className="w-8 h-8 text-blue-600 mx-auto mb-3 group-hover:scale-110 transition-transform relative z-10" />
-                  <div className="text-2xl font-bold text-gray-900 mb-1 relative z-10">{stat.value}</div>
-                  <div className="text-sm text-gray-600 relative z-10">{stat.label}</div>
+                {/* Background overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                
+                {/* Icon - Made significantly larger and centered */}
+                <stat.icon className="w-12 h-12 text-blue-600 mx-auto mb-4 group-hover:scale-110 transition-transform relative z-10" />
+                
+                {/* Value - Much larger and bolder */}
+                <div className="text-5xl font-extrabold text-blue-900 mb-2 relative z-10 text-center">{stat.value}</div>
+                
+                {/* Label - Larger and more prominent */}
+                <div className="text-lg font-semibold text-gray-700 relative z-10 text-center leading-tight">
+                    {stat.label}
                 </div>
               </motion.div>
             ))}
@@ -549,13 +502,12 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Interactive Learning Experience Section */}
-      <motion.section 
+      <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
-        className="py-10 bg-white relative overflow-hidden"
+        className="py-16 bg-white relative overflow-hidden" // Consistent padding from previous fixes
       >
         <AnimatedBackground pattern="grid" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
@@ -583,19 +535,19 @@ const Home = () => {
               {
                 icon: Globe,
                 title: "Global Connections",
-                description: "Connect with students worldwide through our international exchange programs",
+                description: "Connect with students worldwide through our international exchange programs and diverse cultural experiences.", // Expanded description slightly
                 color: "from-blue-500 to-cyan-500"
               },
               {
                 icon: Zap,
                 title: "Technology Integration",
-                description: "State-of-the-art technology in every classroom for enhanced learning",
+                description: "State-of-the-art technology in every classroom, including smart boards, dedicated computer labs, and AI-powered learning tools.", // Expanded description slightly
                 color: "from-purple-500 to-pink-500"
               },
               {
                 icon: Heart,
                 title: "Wellness Programs",
-                description: "Comprehensive health and wellness initiatives for student development",
+                description: "Comprehensive health and wellness initiatives, including counseling services, nutritious meals, and physical fitness programs for holistic development.", // Expanded description slightly
                 color: "from-green-500 to-teal-500"
               }
             ].map((feature, index) => (
@@ -605,25 +557,26 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -10, scale: 1.05 }}
-                className="group"
+                whileHover={{ y: -8, scale: 1.03 }} // Adjusted hover scale for consistency
+                // Removed 'overflow-hidden' from the card itself.
+                // The issue was primarily due to content being constrained by a fixed height or a parent 'overflow-hidden'
+                // that was not meant for the content itself but perhaps for a different visual effect.
+                // By making the card a flex column and letting the <p> grow, we ensure it adapts.
+                className="group relative p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl transition-all duration-500 flex flex-col h-full"
               >
-                <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 p-8 h-full relative overflow-hidden">
-                  {/* Animated Background */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
-                  
-                  <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <feature.icon className="w-8 h-8 text-white" />
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
-                    {feature.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 leading-relaxed">
-                    {feature.description}
-                  </p>
+                <div className={`w-20 h-20 bg-gradient-to-br ${feature.color} rounded-full flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300`}>
+                  <feature.icon className="w-10 h-10 text-white" />
                 </div>
+                
+                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
+                  {feature.title}
+                </h3>
+                
+                {/* Apply flex-grow to the paragraph to allow it to take up available height */}
+                <p className="text-gray-700 leading-relaxed text-base flex-grow"> 
+                  {feature.description}
+                </p>
+                {/* No other elements below the description that might push it up, so flex-grow should work */}
               </motion.div>
             ))}
           </div>
@@ -668,33 +621,27 @@ const Home = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -10, scale: 1.05 }}
-                className="group"
+                className="group relative rounded-2xl shadow-lg bg-white hover:shadow-2xl hover:scale-105 transition-all duration-500 overflow-hidden"
               >
-                <div className="relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 p-8 h-full overflow-hidden group-hover:scale-105">
-                  {/* Background Gradient */}
+                <div className="relative overflow-hidden">
                   <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
                   
-                  {/* Icon */}
                   <div className={`w-16 h-16 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
                     <stat.icon className="w-8 h-8 text-white" />
                   </div>
                   
-                  {/* Main Number */}
                   <h3 className="text-4xl font-bold text-center mb-3 text-gray-900 group-hover:text-blue-600 transition-colors">
                     {stat.number}
                   </h3>
                   
-                  {/* Label */}
                   <p className="text-xl font-semibold text-center text-gray-800 mb-3">
                     {stat.label}
                   </p>
                   
-                  {/* Description */}
                   <p className="text-sm text-center text-gray-600 mb-4 leading-relaxed">
                     {stat.description}
                   </p>
                   
-                  {/* Achievement Badge */}
                   <div className="text-center">
                     <span className={`inline-flex items-center px-3 py-1 bg-gradient-to-r ${stat.color} text-white rounded-full text-xs font-semibold`}>
                       <Trophy className="w-3 h-3 mr-1" />
@@ -707,32 +654,6 @@ const Home = () => {
           </div>
         </div>
       </motion.section>
-
-      {/* Enhanced Virtual Tour Section */}
-      <section className="py-10  relative overflow-hidden">
-        <AnimatedBackground pattern="waves" />
-        <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <div className="inline-flex items-center px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-semibold mb-6">
-              <Camera className="w-4 h-4 mr-2" />
-              Explore Our Campus
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-              Take a Virtual Tour
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Experience our world-class facilities and vibrant campus life from anywhere in the world.
-            </p>
-          </motion.div>
-          <VirtualTour />
-        </div>
-      </section>
 
       {/* Enhanced News, Events & Calendar Section */}
       <section className="py-10 bg-white relative overflow-hidden">
@@ -842,11 +763,11 @@ const Home = () => {
                                 </span>
                               </div>
                               
-                              <h4 className="text-lg font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                              <h4 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
                                 {item.title}
                               </h4>
                               
-                              <p className="text-sm text-gray-600 mb-4 line-clamp-3 leading-relaxed">
+                              <p className="text-sm text-gray-600 mb-4 leading-relaxed">
                                 {('excerpt' in item) ? item.excerpt : item.description}
                               </p>
                               
@@ -909,7 +830,7 @@ const Home = () => {
       </section>
 
       {/* Enhanced Why Choose Us Section */}
-      <section className="py-10 bg-white relative overflow-hidden">
+      <section className="py-16 bg-gradient-to-br from-blue-50 to-indigo-50 relative overflow-hidden">
         <AnimatedBackground pattern="waves" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
           <motion.div
@@ -924,14 +845,14 @@ const Home = () => {
               What Sets Us Apart
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              What Sets Us Apart
+              Why Choose Durga Aawashiya?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Discover the unique advantages that make our educational approach transformative and our community exceptional.
             </p>
           </motion.div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch"> {/* Added items-stretch */}
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -939,41 +860,35 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="group"
+                whileHover={{ y: -8, scale: 1.03 }}
+                className="group relative p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl transition-all duration-500 flex flex-col h-full" // Added flex-col h-full
               >
-                <div className="relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 p-8 h-full overflow-hidden">
-                  {/* Background Gradient */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
-                  
-                  {/* Icon Container */}
-                  <div className="relative mb-6">
-                    <div className={`w-20 h-20 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mx-auto group-hover:scale-110 transition-transform duration-300`}>
-                      <img 
-                        src={feature.icon} 
-                        alt={feature.title}
-                        className="w-10 h-10 object-contain filter brightness-0 invert"
-                      />
+                <div className="relative mb-6 flex justify-center">
+                  <div className={`w-24 h-24 bg-gradient-to-br ${feature.color} rounded-full flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-md`}>
+                    <img
+                      src={feature.icon}
+                      alt={feature.title}
+                      className="w-12 h-12 object-contain filter brightness-0 invert"
+                    />
+                  </div>
+                </div>
+
+                <h3 className="text-2xl font-bold text-center mb-4 group-hover:text-blue-600 transition-colors">
+                  {feature.title}
+                </h3>
+
+                <p className="text-gray-700 text-center mb-6 leading-relaxed flex-grow min-h-[4rem]"> {/* Added flex-grow and min-h */}
+                  {feature.description}
+                </p>
+
+                {/* Highlights */}
+                <div className="space-y-3 mt-auto">
+                  {feature.highlights.map((highlight, idx) => (
+                    <div key={idx} className="flex items-center text-base text-gray-700">
+                      <div className={`w-3 h-3 bg-gradient-to-r ${feature.color} rounded-full mr-3 flex-shrink-0`}></div>
+                      {highlight}
                     </div>
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-center mb-4 group-hover:text-blue-600 transition-colors">
-                    {feature.title}
-                  </h3>
-                  
-                  <p className="text-gray-600 text-center mb-6 leading-relaxed">
-                    {feature.description}
-                  </p>
-                  
-                  {/* Highlights */}
-                  <div className="space-y-2">
-                    {feature.highlights.map((highlight, idx) => (
-                      <div key={idx} className="flex items-center text-sm text-gray-600">
-                        <div className={`w-2 h-2 bg-gradient-to-r ${feature.color} rounded-full mr-3 flex-shrink-0`}></div>
-                        {highlight}
-                      </div>
-                    ))}
-                  </div>
+                  ))}
                 </div>
               </motion.div>
             ))}
@@ -982,7 +897,7 @@ const Home = () => {
       </section>
 
       {/* Enhanced Student Life Section */}
-      <section className="py-10 bg-white relative overflow-hidden">
+      <section className="py-16 bg-gray-50 relative overflow-hidden"> {/* Adjusted padding */}
         <AnimatedBackground pattern="grid" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
           <motion.div
@@ -1004,7 +919,7 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch"> {/* Added items-stretch */}
             {studentLife.map((activity, index) => (
               <motion.div
                 key={index}
@@ -1013,44 +928,42 @@ const Home = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.02 }}
-                className="group"
+                className="group relative rounded-3xl shadow-2xl bg-white hover:shadow-3xl transition-all duration-500 overflow-hidden border border-gray-100 flex flex-col h-full" // Added flex-col h-full
               >
-                <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden">
-                  <div className="relative h-64 overflow-hidden">
-                    <img 
-                      src={activity.image} 
-                      alt={activity.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    <div className="absolute bottom-4 left-4 text-white">
-                      <div className="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-semibold">
-                        {activity.achievements}
-                      </div>
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                    src={activity.image}
+                    alt={activity.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <div className="absolute bottom-6 left-6 text-white">
+                    <div className="bg-white/30 backdrop-blur-sm px-4 py-2 rounded-full text-base font-semibold">
+                      {activity.achievements}
                     </div>
                   </div>
-                  
-                  <div className="p-8">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
-                      {activity.title}
-                    </h3>
-                    
-                    <p className="text-gray-600 mb-6 leading-relaxed">
-                      {activity.description}
-                    </p>
-                    
-                    <div className="space-y-3">
-                      <h4 className="font-semibold text-gray-800">Programs Available:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {activity.programs.map((program, idx) => (
-                          <span
-                            key={idx}
-                            className="inline-flex items-center px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors"
-                          >
-                            {program}
-                          </span>
-                        ))}
-                      </div>
+                </div>
+
+                <div className="p-8 flex flex-col flex-grow"> {/* Added flex-col flex-grow */}
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+                    {activity.title}
+                  </h3>
+
+                  <p className="text-gray-700 mb-6 leading-relaxed text-base flex-grow min-h-[3rem]"> {/* Added flex-grow and min-h */}
+                    {activity.description}
+                  </p>
+
+                  <div className="space-y-3 mt-auto">
+                    <h4 className="font-semibold text-gray-800 text-lg">Programs Available:</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {activity.programs.map((program, idx) => (
+                        <span
+                          key={idx}
+                          className="inline-flex items-center px-4 py-1.5 bg-blue-100 text-blue-800 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors"
+                        >
+                          {program}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -1061,7 +974,7 @@ const Home = () => {
       </section>
 
       {/* Enhanced Testimonials Section */}
-      <section className="py-10 bg-white relative overflow-hidden">
+      <section className="py-16 bg-gradient-to-br from-yellow-50 to-orange-50 relative overflow-hidden">
         <AnimatedBackground pattern="waves" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
           <motion.div
@@ -1076,25 +989,28 @@ const Home = () => {
               Voices of Success
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Voices of Success
+              What Our Community Says
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Hear from our community members about their transformative experiences and remarkable achievements.
             </p>
           </motion.div>
-          
+
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={32}
             slidesPerView={1}
             loop={true}
-            navigation
-            pagination={{ 
+            navigation={{
+              prevEl: '.swiper-button-prev-testimonial', // Custom class
+              nextEl: '.swiper-button-next-testimonial', // Custom class
+            }}
+            pagination={{
               clickable: true,
               bulletActiveClass: 'swiper-pagination-bullet-active !bg-blue-600',
               bulletClass: 'swiper-pagination-bullet !bg-gray-300 !w-3 !h-3 !mx-1 !opacity-100'
             }}
-            autoplay={{ 
+            autoplay={{
               delay: 5000,
               disableOnInteraction: false
             }}
@@ -1102,40 +1018,40 @@ const Home = () => {
               768: { slidesPerView: 2, spaceBetween: 24 },
               1024: { slidesPerView: 3, spaceBetween: 32 },
             }}
-            className="pb-16"
+            className="pb-16 relative"
           >
             {testimonials.map((testimonial, index) => (
               <SwiperSlide key={index}>
                 <motion.div
-                  whileHover={{ y: -10, scale: 1.02 }}
-                  className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 p-8 h-full group"
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  className="group relative p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col h-full" // Added flex-col h-full
                 >
                   {/* Rating Stars */}
                   <div className="flex items-center justify-center mb-6">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                      <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
                     ))}
                   </div>
-                  
+
                   {/* Quote */}
-                  <blockquote className="text-gray-700 mb-8 italic text-center leading-relaxed text-lg">
+                  <blockquote className="text-gray-700 mb-8 italic text-center leading-relaxed text-lg flex-grow min-h-[6rem]"> {/* Added flex-grow and min-h */}
                     "{testimonial.text}"
                   </blockquote>
-                  
+
                   {/* Author Info */}
-                  <div className="border-t border-gray-200 pt-6">
+                  <div className="border-t border-gray-200 pt-6 mt-auto">
                     <div className="flex items-center space-x-4">
-                      <img 
-                        src={testimonial.image} 
+                      <img
+                        src={testimonial.image}
                         alt={testimonial.name}
-                        className="w-16 h-16 rounded-full object-cover ring-4 ring-blue-100 group-hover:ring-blue-200 transition-all duration-300"
+                        className="w-16 h-16 rounded-full object-cover ring-4 ring-blue-200 group-hover:ring-blue-300 transition-all duration-300 shadow-md"
                       />
                       <div className="flex-1">
-                        <h4 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+                        <h4 className="font-bold text-gray-900 text-lg group-hover:text-blue-600 transition-colors">
                           {testimonial.name}
                         </h4>
                         <p className="text-sm text-gray-600 mb-2">{testimonial.role}</p>
-                        <div className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold">
+                        <div className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 px-3 py-1.5 rounded-full text-xs font-semibold">
                           {testimonial.achievement}
                         </div>
                       </div>
@@ -1144,9 +1060,30 @@ const Home = () => {
                 </motion.div>
               </SwiperSlide>
             ))}
+            {/* Custom Navigation Buttons for Testimonials */}
+            <button className="swiper-button-prev-testimonial absolute left-0 top-1/2 -translate-y-1/2 -ml-6 z-10 hidden lg:flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300">
+              <ChevronLeft className="w-7 h-7" />
+            </button>
+            <button className="swiper-button-next-testimonial absolute right-0 top-1/2 -translate-y-1/2 -mr-6 z-10 hidden lg:flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300">
+              <ChevronRight className="w-7 h-7" />
+            </button>
           </Swiper>
         </div>
       </section>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <motion.button
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 z-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="w-6 h-6" />
+        </motion.button>
+      )}
     </div>
   );
 };

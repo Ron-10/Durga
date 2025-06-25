@@ -209,6 +209,16 @@ const Academics = () => {
               >
                 {[
                   {
+                    title: 'Preprimary Level',
+                    grades: 'Nursery, LKG, UKG',
+                    image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=800&q=80',
+                    description: 'Our preprimary program provides a nurturing and stimulating environment for our youngest learners. Through play-based activities, music, art, and foundational skills, we foster curiosity, social development, and a love for learning.',
+                    subjects: ['Play & Exploration', 'Music & Movement', 'Art & Craft', 'Storytelling', 'Foundational Literacy', 'Foundational Numeracy'],
+                    gradient: 'from-yellow-400 to-pink-400',
+                    icon: Sparkles,
+                    stats: { students: '120', teachers: '8', ratio: '15:1' }
+                  },
+                  {
                     title: 'Primary Level',
                     grades: 'Grades 1-5',
                     image: 'https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=800&q=80',
@@ -242,9 +252,11 @@ const Academics = () => {
                   <motion.div 
                     key={index}
                     variants={fadeInUp}
-                    whileHover={{ scale: 1.03, y: -10, rotateY: 5 }}
-                    className="group backdrop-blur-xl bg-white/20 rounded-3xl shadow-2xl border border-white/30 hover:bg-white/30 transition-all duration-700 overflow-hidden transform-gpu perspective-1000"
+                    whileHover={{ scale: 1.05, y: -10, rotateY: 5 }}
+                    className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl hover:scale-105 transition-all duration-500 overflow-hidden transform-gpu perspective-1000"
                   >
+                    {/* Gradient overlay on hover */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${program.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none`}></div>
                     <div className="relative h-48 overflow-hidden">
                       <img src={program.image} alt={program.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>

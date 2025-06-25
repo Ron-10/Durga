@@ -97,7 +97,7 @@ const Contact = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="backdrop-blur-xl bg-white/20 rounded-3xl shadow-2xl border border-white/30 p-12 relative overflow-hidden"
+            className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl hover:scale-105 transition-all duration-500 overflow-hidden"
           >
             
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-xl"></div>
@@ -188,7 +188,7 @@ const Contact = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="backdrop-blur-xl bg-white/20 rounded-3xl shadow-2xl border border-white/30 p-12 relative overflow-hidden"
+              className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl hover:scale-105 transition-all duration-500 overflow-hidden"
             >
               <div className="absolute -top-10 -left-10 w-32 h-32 bg-gradient-to-br from-green-400/20 to-emerald-600/20 rounded-full blur-xl"></div>
               
@@ -264,7 +264,7 @@ const Contact = () => {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="backdrop-blur-xl bg-white/20 rounded-3xl shadow-2xl border border-white/30 overflow-hidden h-80 relative"
+              className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl hover:scale-105 transition-all duration-500 overflow-hidden h-80 relative"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-600/10 z-10 pointer-events-none"></div>
               <iframe
@@ -327,7 +327,7 @@ const Contact = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 whileHover={{ scale: 1.05, y: -10 }}
-                className="backdrop-blur-xl bg-white/20 p-10 rounded-3xl shadow-2xl border border-white/30 text-center hover:bg-white/30 transition-all duration-700 relative overflow-hidden group"
+                className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl hover:scale-105 transition-all duration-500 overflow-hidden"
               >
                 <div className={`absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br ${dept.gradient} opacity-10 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700`}></div>
                 
@@ -408,7 +408,7 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
-          <div className="backdrop-blur-xl bg-white/20 p-16 rounded-3xl shadow-2xl border border-white/30 relative overflow-hidden">
+          <div className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl hover:scale-105 transition-all duration-500 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-600/10"></div>
             <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl"></div>
             

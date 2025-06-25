@@ -14,13 +14,13 @@ interface StaffMember {
 
 const staff: StaffMember[] = [
   {
-    name: 'Dr. Evelyn Reed',
+    name: 'Mr. Bhoj Bahadur Karki',
     role: 'Principal',
     department: 'Administration',
     email: 'e.reed@school.edu',
     phone: '123-456-7890',
     image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2',
-    bio: 'With over 20 years of experience in educational leadership, Dr. Reed is dedicated to fostering an environment of academic excellence and holistic development. She believes in nurturing every student to their fullest potential.',
+    bio: 'With over 20 years of experience in educational leadership, Dr. Reed is dedicated to fostering an environment of academic excellence and holistic development. He believes in nurturing every student to their fullest potential.',
     qualifications: 'Ph.D. in Education, M.Ed. in School Administration'
   },
   {

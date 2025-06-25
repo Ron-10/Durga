@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BookOpen, Target, Award, Users, ChevronRight, Video, ShieldCheck, Sparkles, Heart, Globe, Lightbulb, Zap, Star, Crown, Rocket } from 'lucide-react';
+import { BookOpen, Target, Award, Users, ChevronRight, Video, ShieldCheck, Sparkles, Heart, Globe, Lightbulb, Zap, Star, Crown, Rocket, GraduationCap } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectCoverflow } from 'swiper/modules';
@@ -164,7 +164,7 @@ const About = () => {
           <motion.div 
             variants={fadeInUp}
             whileHover={{ scale: 1.02, y: -10, rotateY: 5 }}
-            className="group relative backdrop-blur-xl bg-white/10 p-10 rounded-3xl shadow-2xl border border-white/20 hover:bg-white/20 transition-all duration-700 overflow-hidden"
+            className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl hover:scale-105 transition-all duration-500 overflow-hidden transform-gpu perspective-1000"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
@@ -195,7 +195,7 @@ const About = () => {
           <motion.div 
             variants={fadeInUp}
             whileHover={{ scale: 1.02, y: -10, rotateY: -5 }}
-            className="group relative backdrop-blur-xl bg-white/10 p-10 rounded-3xl shadow-2xl border border-white/20 hover:bg-white/20 transition-all duration-700 overflow-hidden"
+            className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl hover:scale-105 transition-all duration-500 overflow-hidden transform-gpu perspective-1000"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-teal-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
             <div className="absolute -top-10 -left-10 w-32 h-32 bg-gradient-to-br from-green-400/20 to-teal-600/20 rounded-full blur-xl group-hover:scale-150 transition-transform duration-700"></div>
@@ -239,15 +239,15 @@ const About = () => {
             
             {[
               {
-                year: '1998',
+                year: '1994',
                 title: 'Foundation',
-                description: 'Established with 50 students and a vision for excellence in education',
+                description: 'Established with 20 students and a vision for excellence in education',
                 align: 'right',
                 color: 'from-blue-500 to-cyan-500',
                 icon: Rocket
               },
               {
-                year: '2005',
+                year: '2006',
                 title: 'Expansion',
                 description: 'Added new facilities and expanded academic programs to serve more students',
                 align: 'left',
@@ -272,11 +272,19 @@ const About = () => {
               },
               {
                 year: '2023',
-                title: 'Today',
-                description: 'Serving over 1,200 students with state-of-the-art facilities and world-class education',
+                title: 'Years of Academic Excellence',
+                description: 'Serving over 400+ students with state-of-the-art facilities and world-class education',
                 align: 'right',
                 color: 'from-indigo-500 to-purple-500',
                 icon: Zap
+              },
+              {
+                year: '2025',
+                title: 'Today and Beyond',
+                description: 'Continually building on our legacy of world-class education and state-of-the-art and expand our reach, integrate cutting-edge learning technologies, and nurture future leaders',
+                align: 'left',
+                color: 'from-indigo-500 to-purple-500',
+                icon: GraduationCap
               }
             ].map((milestone, index) => (
               <motion.div
@@ -367,7 +375,7 @@ const About = () => {
                   rotateY: 10,
                   rotateX: 5
                 }}
-                className="group relative overflow-hidden rounded-3xl shadow-2xl bg-white hover:shadow-3xl transition-all duration-700 transform-gpu perspective-1000"
+                className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl hover:scale-105 transition-all duration-500 overflow-hidden transform-gpu perspective-1000"
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${value.bgGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`}></div>
                 <div className="absolute inset-0 bg-gradient-to-br from-white/80 to-white/60 backdrop-blur-sm"></div>
@@ -513,7 +521,7 @@ const About = () => {
                 key={leader.name}
                 variants={fadeInUp}
                 whileHover={{ y: -15, scale: 1.03, rotateY: 5 }}
-                className="group relative overflow-hidden rounded-3xl shadow-2xl bg-white transform-gpu perspective-1000"
+                className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl hover:scale-105 transition-all duration-500 overflow-hidden transform-gpu perspective-1000"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-white/90 to-white/70 backdrop-blur-sm"></div>
                 <div className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-700 from-blue-500 to-purple-600"></div>
@@ -562,76 +570,6 @@ const About = () => {
           </div>
         </motion.div>
 
-        {/* Enhanced Virtual Tour CTA */}
-        <motion.div 
-          variants={fadeInUp}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-          className="mb-20"
-        >
-          <div className="relative overflow-hidden rounded-3xl shadow-2xl">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600"></div>
-            <div className="absolute inset-0 bg-black/30"></div>
-            
-            {/* Animated Background Elements */}
-            <div className="absolute inset-0">
-              {[...Array(30)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-2 h-2 bg-white/20 rounded-full"
-                  animate={{
-                    x: [0, 100, 0],
-                    y: [0, -50, 0],
-                    opacity: [0, 1, 0],
-                  }}
-                  transition={{
-                    duration: 5 + i * 0.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                  }}
-                />
-              ))}
-            </div>
-            
-            <div className="relative p-20 text-center text-white">
-              <motion.div
-                animate={{ 
-                  rotate: 360,
-                  scale: [1, 1.2, 1],
-                }}
-                transition={{ 
-                  rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                  scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-                }}
-                className="inline-block mb-8"
-              >
-                <Video className="w-24 h-24 text-white" />
-              </motion.div>
-              
-              <h2 className="text-5xl font-bold mb-8">Explore Our Campus from Anywhere</h2>
-              <p className="max-w-3xl mx-auto mb-12 text-xl text-blue-100 leading-relaxed">
-                Take a virtual tour to experience our state-of-the-art facilities, vibrant classrooms, and beautiful campus grounds. Immerse yourself in our learning environment.
-              </p>
-              
-              <motion.button 
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-blue-600 font-bold py-6 px-12 rounded-full hover:bg-gray-100 transition-all duration-300 shadow-2xl text-xl relative overflow-hidden group"
-              >
-                <span className="relative z-10">Start Virtual Tour</span>
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-10 transition-opacity duration-300"
-                />
-              </motion.button>
-            </div>
-          </div>
-        </motion.div>
-
         {/* Enhanced Achievements Carousel */}
         <motion.div 
           variants={fadeInUp}
@@ -661,12 +599,12 @@ const About = () => {
           >
             {[
               {
-                year: '2023',
-                title: 'Best School Award',
-                description: 'Recognized as the best school in the region for academic excellence and innovative teaching methodologies',
+                year: '2025',
+                title: 'Best School Award In Mechinagar',
+                description: 'Recognized as the best school in the region for academic excellence in the SEE examination and innovative teaching methodologies',
                 icon: '🏆',
                 gradient: 'from-yellow-400 to-orange-500',
-                stats: '98.5% Success Rate'
+                stats: '100% Success Rate'
               },
               {
                 year: '2022',
@@ -685,7 +623,7 @@ const About = () => {
                 stats: '50% Carbon Reduction'
               },
               {
-                year: '2020',
+                year: '2022',
                 title: 'Academic Excellence',
                 description: '100% success rate in board examinations with multiple distinctions and top rankings',
                 icon: '📚',

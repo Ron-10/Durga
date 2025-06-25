@@ -242,7 +242,7 @@ const Admissions = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ scale: 1.05, y: -10 }}
-                  className="relative text-center group"
+                  className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl hover:scale-105 transition-all duration-500 overflow-hidden"
                 >
                   <div className="backdrop-blur-xl bg-white/20 p-8 rounded-3xl shadow-2xl border border-white/30 hover:bg-white/30 transition-all duration-700 h-full">
                     <motion.div 
@@ -409,7 +409,7 @@ const Admissions = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
                 whileHover={{ scale: 1.02, y: -5 }}
-                className="backdrop-blur-xl bg-white/20 p-10 rounded-3xl shadow-2xl border border-white/30 hover:bg-white/30 transition-all duration-700 relative overflow-hidden"
+                className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl hover:scale-105 transition-all duration-500 overflow-hidden"
               >
                 <div className={`absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br ${testimonial.gradient} opacity-10 rounded-full blur-xl`}></div>
                 
