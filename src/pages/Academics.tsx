@@ -2,6 +2,45 @@ import React, { useState } from 'react';
 import { BookOpen, Award, Users, Clock, Calendar, GraduationCap, Atom, Palette, Music, Dribbble, Sparkles, ChevronRight, Star, Target, Zap, Brain, Microscope, Globe, Calculator } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Type definitions
+interface Program {
+  title: string;
+  grades: string;
+  image: string;
+  description: string;
+  subjects: string[];
+  gradient: string;
+  icon: React.ComponentType<{ className?: string }>;
+  stats: { teachers: string; ratio: string };
+}
+
+interface Activity {
+  title: string;
+  icon: React.ComponentType<{ className?: string }>;
+  gradient: string;
+  items: string[];
+  context: string;
+  events: number;
+}
+
+interface ImportantDate {
+  date: string;
+  event: string;
+  context: string;
+  type: 'exam' | 'notice' | 'event';
+}
+
+interface SchoolTiming {
+  day: string;
+  time: string;
+  type: 'regular' | 'extra' | 'facility' | 'half';
+}
+
+interface ProgramCardProps {
+  program: Program;
+  [key: string]: any;
+}
+
 const Academics = () => {
   const [activeTab, setActiveTab] = useState('programs');
 
@@ -19,6 +58,147 @@ const Academics = () => {
       }
     }
   };
+
+  // Data for academic programs
+  const programsData: Program[] = [
+    {
+      title: 'Preprimary Level',
+      grades: 'Nursery, LKG, UKG',
+      image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=800&q=80',
+      description: 'Our preprimary program provides a nurturing and stimulating environment for our youngest learners. Through play-based activities, music, art, and foundational skills, we foster curiosity, social development, and a love for learning.',
+      subjects: ['Play & Exploration', 'Music & Movement', 'Art & Craft', 'Storytelling', 'Foundational Literacy', 'Foundational Numeracy'],
+      gradient: 'from-yellow-400 to-pink-400',
+      icon: Sparkles,
+      stats: { teachers: '8', ratio: '15:1' }
+    },
+    {
+      title: 'Primary Level',
+      grades: 'Grades 1-5',
+      image: 'https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=800&q=80',
+      description: 'Our foundational years focus on nurturing curiosity and building core competencies in literacy and numeracy. We create a supportive environment for holistic development through play-based learning, storytelling, and creative arts.',
+      subjects: ['English', 'Mathematics', 'Science', 'Social Studies', 'Languages', 'Arts & Crafts'],
+      gradient: 'from-blue-500 to-cyan-500',
+      icon: BookOpen,
+      stats: { teachers: '18', ratio: '25:1' }
+    },
+    {
+      title: 'Middle Level',
+      grades: 'Grades 6-8',
+      image: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80',
+      description: 'We offer an intermediate education that encourages critical thinking and exploration, with a broader range of subjects and co-curricular activities to foster diverse interests and prepare students for advanced learning.',
+      subjects: ['Advanced Mathematics', 'Integrated Science', 'Computer Science', 'Literature', 'History', 'Geography'],
+      gradient: 'from-purple-500 to-pink-500',
+      icon: Target,
+      stats: { teachers: '15', ratio: '25:1' }
+    },
+    {
+      title: 'Secondary Level',
+      grades: 'Grades 9-10',
+      image: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80',
+      description: 'Our curriculum is designed for in-depth knowledge and preparation for board examinations, with specialized subject tracks to help students pursue their academic goals and career aspirations.',
+      subjects: ['Physics', 'Chemistry', 'Biology', 'Advanced Mathematics', 'Computer Science', 'Economics'],
+      gradient: 'from-green-500 to-emerald-500',
+      icon: GraduationCap,
+      stats: { teachers: '16', ratio: '20:1' }
+    },
+  ];
+
+  // Splitting the data for the specific layout
+  const mainPrograms = programsData.slice(0, 3);
+  const secondaryProgram = programsData[3];
+
+  // A reusable card component to avoid code repetition
+  const ProgramCard: React.FC<ProgramCardProps> = ({ program, ...props }) => (
+    <motion.div
+      variants={fadeInUp}
+      whileHover={{ scale: 1.05, y: -10, rotateY: 5 }}
+      className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl transition-all duration-500 overflow-hidden transform-gpu perspective-1000 h-full flex flex-col"
+      {...props}
+    >
+      <div className={`absolute inset-0 bg-gradient-to-br ${program.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none`}></div>
+      <div className="relative h-48 overflow-hidden">
+        <img src={program.image} alt={program.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        <div className={`absolute top-4 right-4 w-16 h-16 bg-gradient-to-r ${program.gradient} rounded-2xl flex items-center justify-center shadow-xl`}>
+          <program.icon className="w-8 h-8 text-white" />
+        </div>
+      </div>
+      
+      <div className="p-8 flex flex-col flex-grow">
+        <h3 className="text-3xl font-bold mb-2 text-gray-800">{program.title}</h3>
+        <p className={`text-xl font-semibold mb-6 bg-gradient-to-r ${program.gradient} bg-clip-text text-transparent`}>{program.grades}</p>
+        <p className="text-gray-600 mb-8 leading-relaxed flex-grow">{program.description}</p>
+        
+        <div className="grid grid-cols-2 gap-4 mb-8">
+          <div className="text-center p-3 bg-white/50 rounded-xl">
+            <div className="text-2xl font-bold text-gray-800">{program.stats.teachers}</div>
+            <div className="text-xs text-gray-600">Teachers</div>
+          </div>
+          <div className="text-center p-3 bg-white/50 rounded-xl">
+            <div className="text-2xl font-bold text-gray-800">{program.stats.ratio}</div>
+            <div className="text-xs text-gray-600">Ratio</div>
+          </div>
+        </div>
+        
+        <div className="mt-auto">
+            <h4 className="font-bold mb-4 text-gray-800 text-lg">Key Subjects:</h4>
+            <div className="grid grid-cols-2 gap-3">
+              {program.subjects.map((subject: string, idx: number) => (
+                <motion.div 
+                  key={idx} 
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 * idx }}
+                  className="flex items-center text-gray-700 p-2 bg-white/30 rounded-lg"
+                >
+                  <Star className="w-4 h-4 text-yellow-500 mr-2 flex-shrink-0" />
+                  <span className="text-sm font-medium">{subject}</span>
+                </motion.div>
+              ))}
+            </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+
+  // UPDATED: Data for the 'Activities' tab
+  const activitiesData: Activity[] = [
+    {
+      title: 'Sports',
+      icon: Dribbble,
+      gradient: 'from-green-500 to-emerald-500',
+      items: ['Football', 'Basketball', 'Athletics', 'Swimming', 'Table Tennis'],
+      context: 'Sports programs focus on teamwork, discipline, and sportsmanship while promoting physical fitness and healthy competition.',
+      events: 18
+    },
+    {
+      title: 'Music & Dance',
+      icon: Music,
+      gradient: 'from-orange-500 to-red-500',
+      items: ['Drama', 'Vocal Training', 'Modern Dance', 'Folk Dance', 'Instrumental Music'],
+      context: 'Our performing arts program nurtures creativity, builds confidence, and provides platforms for artistic expression and cultural appreciation.',
+      events: 15
+    },
+  ];
+
+  // UPDATED: Data for the 'Calendar' tab
+  const importantDates: ImportantDate[] = [
+    { date: '2025-06-15', event: 'Unit Test Starts', context: 'The first unit tests of the new session will commence.', type: 'exam' },
+    { date: '2025-06-24', event: 'First Terminal Exam Routine Published', context: 'The detailed schedule for the first terminal exams is now available.', type: 'notice' },
+    { date: '2025-06-29', event: 'First Terminal Exam Starts', context: 'The main terminal examinations begin. Best of luck to all students.', type: 'exam' },
+  ];
+
+  const adToBsMap: Record<string, string> = {
+    '2025-06-15': '१ असार २०८२',
+    '2025-06-24': '१० असार २०८२',
+    '2025-06-29': '१५ असार २०८२',
+  };
+
+  const schoolTimings: SchoolTiming[] = [
+      { day: 'Sunday - Friday', time: '8:00 AM - 3:00 PM', type: 'regular' },
+      { day: 'Extra Classes', time: '3:00 PM - 4:30 PM', type: 'extra' },
+      { day: 'Library Hours', time: '8:00 AM - 4:00 PM', type: 'facility' },
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden">
@@ -47,7 +227,7 @@ const Academics = () => {
         ))}
       </div>
 
-      {/* Hero Section with Advanced Parallax */}
+      {/* Hero Section */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -64,7 +244,6 @@ const Academics = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
         </div>
         
-        {/* Animated Academic Icons */}
         <div className="absolute inset-0">
           {[BookOpen, Brain, Microscope, Globe, Calculator].map((Icon, i) => (
             <motion.div
@@ -141,7 +320,7 @@ const Academics = () => {
       </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Enhanced Navigation Tabs */}
+        {/* Navigation Tabs */}
         <motion.div 
           variants={fadeInUp}
           initial="initial"
@@ -152,7 +331,6 @@ const Academics = () => {
             {[
               { id: 'programs', label: 'Academic Programs', icon: BookOpen, gradient: 'from-blue-500 to-cyan-500' },
               { id: 'curriculum', label: 'Curriculum', icon: Target, gradient: 'from-green-500 to-emerald-500' },
-              { id: 'departments', label: 'Departments', icon: Users, gradient: 'from-purple-500 to-pink-500' },
               { id: 'activities', label: 'Activities', icon: Zap, gradient: 'from-orange-500 to-red-500' },
               { id: 'calendar', label: 'Calendar', icon: Calendar, gradient: 'from-indigo-500 to-purple-500' }
             ].map((tab) => (
@@ -182,7 +360,7 @@ const Academics = () => {
         </motion.div>
 
         <AnimatePresence mode="wait">
-          {/* Academic Programs */}
+          {/* Academic Programs Tab */}
           {activeTab === 'programs' && (
             <motion.div 
               key="programs"
@@ -205,380 +383,152 @@ const Academics = () => {
                 variants={staggerContainer}
                 initial="initial"
                 animate="animate"
-                className="grid grid-cols-1 lg:grid-cols-3 gap-10"
               >
-                {[
-                  {
-                    title: 'Preprimary Level',
-                    grades: 'Nursery, LKG, UKG',
-                    image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&w=800&q=80',
-                    description: 'Our preprimary program provides a nurturing and stimulating environment for our youngest learners. Through play-based activities, music, art, and foundational skills, we foster curiosity, social development, and a love for learning.',
-                    subjects: ['Play & Exploration', 'Music & Movement', 'Art & Craft', 'Storytelling', 'Foundational Literacy', 'Foundational Numeracy'],
-                    gradient: 'from-yellow-400 to-pink-400',
-                    icon: Sparkles,
-                    stats: { students: '120', teachers: '8', ratio: '15:1' }
-                  },
-                  {
-                    title: 'Primary Level',
-                    grades: 'Grades 1-5',
-                    image: 'https://images.unsplash.com/photo-1503676382389-4809596d5290?auto=format&fit=crop&w=800&q=80',
-                    description: 'Our foundational years focus on nurturing curiosity and building core competencies in literacy and numeracy. We create a supportive environment for holistic development through play-based learning, storytelling, and creative arts.',
-                    subjects: ['English', 'Mathematics', 'Science', 'Social Studies', 'Languages', 'Arts & Crafts'],
-                    gradient: 'from-blue-500 to-cyan-500',
-                    icon: BookOpen,
-                    stats: { students: '450', teachers: '18', ratio: '25:1' }
-                  },
-                  {
-                    title: 'Middle Level',
-                    grades: 'Grades 6-8',
-                    image: 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=800&q=80',
-                    description: 'We offer an intermediate education that encourages critical thinking and exploration, with a broader range of subjects and co-curricular activities to foster diverse interests and prepare students for advanced learning.',
-                    subjects: ['Advanced Mathematics', 'Integrated Science', 'Computer Science', 'Literature', 'History', 'Geography'],
-                    gradient: 'from-purple-500 to-pink-500',
-                    icon: Target,
-                    stats: { students: '380', teachers: '15', ratio: '25:1' }
-                  },
-                  {
-                    title: 'Secondary Level',
-                    grades: 'Grades 9-10',
-                    image: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=800&q=80',
-                    description: 'Our curriculum is designed for in-depth knowledge and preparation for board examinations, with specialized subject tracks to help students pursue their academic goals and career aspirations.',
-                    subjects: ['Physics', 'Chemistry', 'Biology', 'Advanced Mathematics', 'Computer Science', 'Economics'],
-                    gradient: 'from-green-500 to-emerald-500',
-                    icon: GraduationCap,
-                    stats: { students: '320', teachers: '16', ratio: '20:1' }
-                  },
-                ].map((program, index) => (
-                  <motion.div 
-                    key={index}
-                    variants={fadeInUp}
-                    whileHover={{ scale: 1.05, y: -10, rotateY: 5 }}
-                    className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl hover:scale-105 transition-all duration-500 overflow-hidden transform-gpu perspective-1000"
-                  >
-                    {/* Gradient overlay on hover */}
-                    <div className={`absolute inset-0 bg-gradient-to-br ${program.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none`}></div>
-                    <div className="relative h-48 overflow-hidden">
-                      <img src={program.image} alt={program.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                      <div className={`absolute top-4 right-4 w-16 h-16 bg-gradient-to-r ${program.gradient} rounded-2xl flex items-center justify-center shadow-xl`}>
-                        <program.icon className="w-8 h-8 text-white" />
-                      </div>
-                    </div>
-                    
-                    <div className="p-8">
-                      <h3 className="text-3xl font-bold mb-2 text-gray-800">{program.title}</h3>
-                      <p className={`text-xl font-semibold mb-6 bg-gradient-to-r ${program.gradient} bg-clip-text text-transparent`}>{program.grades}</p>
-                      
-                      <p className="text-gray-600 mb-8 leading-relaxed">{program.description}</p>
-                      
-                      {/* Stats */}
-                      <div className="grid grid-cols-3 gap-4 mb-8">
-                        <div className="text-center p-3 bg-white/50 rounded-xl">
-                          <div className="text-2xl font-bold text-gray-800">{program.stats.students}</div>
-                          <div className="text-xs text-gray-600">Students</div>
-                        </div>
-                        <div className="text-center p-3 bg-white/50 rounded-xl">
-                          <div className="text-2xl font-bold text-gray-800">{program.stats.teachers}</div>
-                          <div className="text-xs text-gray-600">Teachers</div>
-                        </div>
-                        <div className="text-center p-3 bg-white/50 rounded-xl">
-                          <div className="text-2xl font-bold text-gray-800">{program.stats.ratio}</div>
-                          <div className="text-xs text-gray-600">Ratio</div>
-                        </div>
-                      </div>
-                      
-                      <h4 className="font-bold mb-4 text-gray-800 text-lg">Key Subjects:</h4>
-                      <div className="grid grid-cols-2 gap-3">
-                        {program.subjects.map((subject, idx) => (
-                          <motion.div 
-                            key={idx} 
-                            initial={{ opacity: 0, x: -20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.1 * idx }}
-                            className="flex items-center text-gray-700 p-2 bg-white/30 rounded-lg"
-                          >
-                            <Star className="w-4 h-4 text-yellow-500 mr-2 flex-shrink-0" />
-                            <span className="text-sm font-medium">{subject}</span>
-                          </motion.div>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
+                {/* Main Programs Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                  {mainPrograms.map((program) => (
+                    <ProgramCard key={program.title} program={program} />
+                  ))}
+                </div>
+
+                {/* Centered Secondary Program */}
+                <div className="mt-16 flex justify-center">
+                   <div className="w-full lg:w-2/5">
+                      <ProgramCard program={secondaryProgram} />
+                   </div>
+                </div>
               </motion.div>
             </motion.div>
           )}
 
-          {/* Curriculum Highlights */}
+          {/* Curriculum Tab */}
           {activeTab === 'curriculum' && (
-            <motion.div 
-              key="curriculum"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -50 }}
-              transition={{ duration: 0.8 }}
-              className="mb-20"
-            >
-              <motion.h2 
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                className="text-5xl font-bold text-center mb-20 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent"
-              >
-                Curriculum & Pedagogy
-              </motion.h2>
-              
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <motion.div 
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  whileHover={{ scale: 1.02, y: -5, rotateY: 5 }}
-                  className="backdrop-blur-xl bg-white/20 p-10 rounded-3xl shadow-2xl border border-white/30 hover:bg-white/30 transition-all duration-700 relative overflow-hidden"
-                >
-                  <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-xl"></div>
-                  
-                  <div className="relative z-10">
-                    <div className="flex items-center mb-8">
-                      <motion.div 
-                        whileHover={{ rotate: 360, scale: 1.1 }}
-                        transition={{ duration: 0.6 }}
-                        className="p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mr-6 shadow-lg"
-                      >
-                        <BookOpen className="w-10 h-10 text-white" />
-                      </motion.div>
-                      <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Our Teaching Methodology</h3>
-                    </div>
-                    
-                    <div className="space-y-6">
-                      {[
-                        {
-                          title: 'Student-Centric Learning',
-                          description: 'Interactive classrooms designed to foster discussion, curiosity, and active participation with real-life examples.',
-                          icon: '🎯'
-                        },
-                        {
-                          title: 'Project-Based Learning',
-                          description: 'Students engage in science experiments, art projects, and group presentations with annual exhibitions.',
-                          icon: '🔬'
-                        },
-                        {
-                          title: 'Continuous Assessment',
-                          description: 'Comprehensive evaluation through quizzes, assignments, and peer reviews with constructive feedback.',
-                          icon: '📊'
-                        },
-                        {
-                          title: 'Personalized Attention',
-                          description: 'Small class sizes and regular one-on-one sessions ensure every student receives individual guidance.',
-                          icon: '👥'
-                        },
-                        {
-                          title: 'Technology Integration',
-                          description: 'Interactive whiteboards, educational apps, and coding from early age for digital literacy.',
-                          icon: '💻'
-                        },
-                      ].map((method, index) => (
-                        <motion.div 
-                          key={index}
-                          initial={{ opacity: 0, x: -30 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                          whileHover={{ scale: 1.02, x: 10 }}
-                          className="flex items-start p-4 bg-white/30 rounded-2xl hover:bg-white/50 transition-all duration-300"
-                        >
-                          <div className="text-3xl mr-4 flex-shrink-0">{method.icon}</div>
-                          <div>
-                            <h4 className="font-bold text-gray-800 mb-2">{method.title}</h4>
-                            <p className="text-gray-600 text-sm leading-relaxed">{method.description}</p>
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
+             <motion.div 
+               key="curriculum"
+               initial={{ opacity: 0, y: 50 }}
+               animate={{ opacity: 1, y: 0 }}
+               exit={{ opacity: 0, y: -50 }}
+               transition={{ duration: 0.8 }}
+               className="mb-20"
+             >
+               <motion.h2 
+                 initial={{ opacity: 0, scale: 0.8 }}
+                 animate={{ opacity: 1, scale: 1 }}
+                 transition={{ delay: 0.2, duration: 0.6 }}
+                 className="text-5xl font-bold text-center mb-20 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent"
+               >
+                 Curriculum & Pedagogy
+               </motion.h2>
+               
+               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                 <motion.div 
+                   initial={{ opacity: 0, x: -50 }}
+                   animate={{ opacity: 1, x: 0 }}
+                   transition={{ duration: 0.8, delay: 0.2 }}
+                   whileHover={{ scale: 1.02, y: -5, rotateY: 5 }}
+                   className="backdrop-blur-xl bg-white/20 p-10 rounded-3xl shadow-2xl border border-white/30 hover:bg-white/30 transition-all duration-700 relative overflow-hidden"
+                 >
+                   <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-xl"></div>
+                   
+                   <div className="relative z-10">
+                     <div className="flex items-center mb-8">
+                       <motion.div 
+                         whileHover={{ rotate: 360, scale: 1.1 }}
+                         transition={{ duration: 0.6 }}
+                         className="p-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mr-6 shadow-lg"
+                       >
+                         <BookOpen className="w-10 h-10 text-white" />
+                       </motion.div>
+                       <h3 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Our Teaching Methodology</h3>
+                     </div>
+                     
+                     <div className="space-y-6">
+                       {[
+                         { title: 'Student-Centric Learning', description: 'Interactive classrooms designed to foster discussion, curiosity, and active participation with real-life examples.', icon: '🎯' },
+                         { title: 'Project-Based Learning', description: 'Students engage in science experiments, art projects, and group presentations with annual exhibitions.', icon: '🔬' },
+                         { title: 'Continuous Assessment', description: 'Comprehensive evaluation through quizzes, assignments, and peer reviews with constructive feedback.', icon: '📊' },
+                         { title: 'Personalized Attention', description: 'Small class sizes and regular one-on-one sessions ensure every student receives individual guidance.', icon: '👥' },
+                         { title: 'Technology Integration', description: 'Interactive whiteboards, educational apps, and coding from early age for digital literacy.', icon: '💻' }
+                       ].map((method, index) => (
+                         <motion.div 
+                           key={index}
+                           initial={{ opacity: 0, x: -30 }}
+                           animate={{ opacity: 1, x: 0 }}
+                           transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
+                           whileHover={{ scale: 1.02, x: 10 }}
+                           className="flex items-start p-4 bg-white/30 rounded-2xl hover:bg-white/50 transition-all duration-300"
+                         >
+                           <div className="text-3xl mr-4 flex-shrink-0">{method.icon}</div>
+                           <div>
+                             <h4 className="font-bold text-gray-800 mb-2">{method.title}</h4>
+                             <p className="text-gray-600 text-sm leading-relaxed">{method.description}</p>
+                           </div>
+                         </motion.div>
+                       ))}
+                     </div>
+                   </div>
+                 </motion.div>
 
-                <motion.div 
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                  whileHover={{ scale: 1.02, y: -5, rotateY: -5 }}
-                  className="backdrop-blur-xl bg-white/20 p-10 rounded-3xl shadow-2xl border border-white/30 hover:bg-white/30 transition-all duration-700 relative overflow-hidden"
-                >
-                  <div className="absolute -top-10 -left-10 w-32 h-32 bg-gradient-to-br from-green-400/20 to-emerald-600/20 rounded-full blur-xl"></div>
-                  
-                  <div className="relative z-10">
-                    <div className="flex items-center mb-8">
-                      <motion.div 
-                        whileHover={{ rotate: 360, scale: 1.1 }}
-                        transition={{ duration: 0.6 }}
-                        className="p-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl mr-6 shadow-lg"
-                      >
-                        <Award className="w-10 h-10 text-white" />
-                      </motion.div>
-                      <h3 className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Assessment & Evaluation</h3>
-                    </div>
-                    
-                    <div className="space-y-6">
-                      {[
-                        {
-                          title: 'Continuous Evaluation (CCE)',
-                          description: 'Comprehensive assessment process throughout the academic year',
-                          percentage: 90
-                        },
-                        {
-                          title: 'Formative Assessments',
-                          description: 'Regular quizzes, assignments, and interactive evaluations',
-                          percentage: 85
-                        },
-                        {
-                          title: 'Summative Assessments',
-                          description: 'Term-end examinations and comprehensive evaluations',
-                          percentage: 95
-                        },
-                        {
-                          title: 'Practical Evaluations',
-                          description: 'Hands-on project work and laboratory assessments',
-                          percentage: 88
-                        },
-                        {
-                          title: 'Parent-Teacher Meetings',
-                          description: 'Regular discussions about student progress and development',
-                          percentage: 92
-                        },
-                      ].map((item, index) => (
-                        <motion.div 
-                          key={index}
-                          initial={{ opacity: 0, x: 30 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                          className="p-4 bg-white/30 rounded-2xl hover:bg-white/50 transition-all duration-300"
-                        >
-                          <div className="flex justify-between items-center mb-2">
-                            <h4 className="font-bold text-gray-800">{item.title}</h4>
-                            <span className="text-green-600 font-bold">{item.percentage}%</span>
-                          </div>
-                          <p className="text-gray-600 text-sm mb-3">{item.description}</p>
-                          <div className="w-full bg-gray-200 rounded-full h-2">
-                            <motion.div 
-                              initial={{ width: 0 }}
-                              animate={{ width: `${item.percentage}%` }}
-                              transition={{ duration: 1, delay: 0.8 + index * 0.1 }}
-                              className="bg-gradient-to-r from-green-500 to-emerald-600 h-2 rounded-full"
-                            />
-                          </div>
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-          )}
+                 <motion.div 
+                   initial={{ opacity: 0, x: 50 }}
+                   animate={{ opacity: 1, x: 0 }}
+                   transition={{ duration: 0.8, delay: 0.4 }}
+                   whileHover={{ scale: 1.02, y: -5, rotateY: -5 }}
+                   className="backdrop-blur-xl bg-white/20 p-10 rounded-3xl shadow-2xl border border-white/30 hover:bg-white/30 transition-all duration-700 relative overflow-hidden"
+                 >
+                   <div className="absolute -top-10 -left-10 w-32 h-32 bg-gradient-to-br from-green-400/20 to-emerald-600/20 rounded-full blur-xl"></div>
+                   
+                   <div className="relative z-10">
+                     <div className="flex items-center mb-8">
+                       <motion.div 
+                         whileHover={{ rotate: 360, scale: 1.1 }}
+                         transition={{ duration: 0.6 }}
+                         className="p-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl mr-6 shadow-lg"
+                       >
+                         <Award className="w-10 h-10 text-white" />
+                       </motion.div>
+                       <h3 className="text-3xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Assessment & Evaluation</h3>
+                     </div>
+                     
+                     <div className="space-y-6">
+                       {[
+                         { title: 'Continuous Evaluation (CCE)', description: 'Comprehensive assessment process throughout the academic year', percentage: 90 },
+                         { title: 'Formative Assessments', description: 'Regular quizzes, assignments, and interactive evaluations', percentage: 85 },
+                         { title: 'Summative Assessments', description: 'Term-end examinations and comprehensive evaluations', percentage: 95 },
+                         { title: 'Practical Evaluations', description: 'Hands-on project work and laboratory assessments', percentage: 88 },
+                         { title: 'Parent-Teacher Meetings', description: 'Regular discussions about student progress and development', percentage: 92 }
+                       ].map((item, index) => (
+                         <motion.div 
+                           key={index}
+                           initial={{ opacity: 0, x: 30 }}
+                           animate={{ opacity: 1, x: 0 }}
+                           transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                           className="p-4 bg-white/30 rounded-2xl hover:bg-white/50 transition-all duration-300"
+                         >
+                           <div className="flex justify-between items-center mb-2">
+                             <h4 className="font-bold text-gray-800">{item.title}</h4>
+                             <span className="text-green-600 font-bold">{item.percentage}%</span>
+                           </div>
+                           <p className="text-gray-600 text-sm mb-3">{item.description}</p>
+                           <div className="w-full bg-gray-200 rounded-full h-2">
+                             <motion.div 
+                               initial={{ width: 0 }}
+                               animate={{ width: `${item.percentage}%` }}
+                               transition={{ duration: 1, delay: 0.8 + index * 0.1 }}
+                               className="bg-gradient-to-r from-green-500 to-emerald-600 h-2 rounded-full"
+                             />
+                           </div>
+                         </motion.div>
+                       ))}
+                     </div>
+                   </div>
+                 </motion.div>
+               </div>
+             </motion.div>
+           )}
 
-          {/* Academic Departments */}
-          {activeTab === 'departments' && (
-            <motion.div 
-              key="departments"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -50 }}
-              transition={{ duration: 0.8 }}
-              className="mb-20"
-            >
-              <motion.h2 
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                className="text-5xl font-bold text-center mb-20 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent"
-              >
-                Our Academic Departments
-              </motion.h2>
-              
-              <motion.div 
-                variants={staggerContainer}
-                initial="initial"
-                animate="animate"
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
-              >
-                {[
-                  { 
-                    name: 'Science', 
-                    icon: Atom, 
-                    gradient: 'from-blue-500 to-cyan-500', 
-                    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80', 
-                    description: 'Exploring the wonders of the natural world through experiments, research, and discovery.',
-                    faculty: 8,
-                    labs: 3
-                  },
-                  { 
-                    name: 'Mathematics', 
-                    icon: Calculator, 
-                    gradient: 'from-green-500 to-emerald-500', 
-                    image: 'https://images.unsplash.com/photo-1465101178521-c1a9136a3c8b?auto=format&fit=crop&w=800&q=80', 
-                    description: 'Building logical thinking and problem-solving skills through innovative teaching methods.',
-                    faculty: 6,
-                    labs: 2
-                  },
-                  { 
-                    name: 'Humanities', 
-                    icon: Globe, 
-                    gradient: 'from-purple-500 to-pink-500', 
-                    image: 'https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=800&q=80', 
-                    description: 'Understanding human culture, society, and history through comprehensive study.',
-                    faculty: 7,
-                    labs: 1
-                  },
-                  { 
-                    name: 'Arts & Music', 
-                    icon: Palette, 
-                    gradient: 'from-orange-500 to-red-500', 
-                    image: 'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?auto=format&fit=crop&w=800&q=80', 
-                    description: 'Fostering creativity and artistic expression through various mediums and performances.',
-                    faculty: 5,
-                    labs: 4
-                  },
-                ].map((dept, index) => (
-                  <motion.div 
-                    key={dept.name}
-                    variants={fadeInUp}
-                    whileHover={{ scale: 1.05, y: -15, rotateY: 10 }}
-                    className="group backdrop-blur-xl bg-white/20 rounded-3xl shadow-2xl border border-white/30 text-center hover:bg-white/30 transition-all duration-700 overflow-hidden transform-gpu perspective-1000"
-                  >
-                    <div className="relative h-40 overflow-hidden">
-                      <img src={dept.image} alt={dept.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                    </div>
-                    
-                    <div className="p-8">
-                      <motion.div
-                        whileHover={{ scale: 1.1, rotate: 360 }}
-                        transition={{ duration: 0.6 }}
-                        className={`w-20 h-20 bg-gradient-to-r ${dept.gradient} rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl -mt-16 relative z-10`}
-                      >
-                        <dept.icon className="w-10 h-10 text-white" />
-                      </motion.div>
-                      
-                      <h3 className="text-2xl font-bold mb-4 text-gray-800">{dept.name}</h3>
-                      <p className="text-gray-600 text-sm mb-6 leading-relaxed">{dept.description}</p>
-                      
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="p-3 bg-white/50 rounded-xl">
-                          <div className="text-xl font-bold text-gray-800">{dept.faculty}</div>
-                          <div className="text-xs text-gray-600">Faculty</div>
-                        </div>
-                        <div className="p-3 bg-white/50 rounded-xl">
-                          <div className="text-xl font-bold text-gray-800">{dept.labs}</div>
-                          <div className="text-xs text-gray-600">Labs</div>
-                        </div>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
-          )}
 
-          {/* Extracurricular Activities */}
+          {/* UPDATED: Activities Tab */}
           {activeTab === 'activities' && (
             <motion.div 
               key="activities"
@@ -601,37 +551,9 @@ const Academics = () => {
                 variants={staggerContainer}
                 initial="initial"
                 animate="animate"
-                className="grid grid-cols-1 md:grid-cols-3 gap-10"
+                className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto"
               >
-                {[
-                  {
-                    title: 'Clubs & Societies',
-                    icon: Users,
-                    gradient: 'from-blue-500 to-purple-500',
-                    items: ['Debate Club', 'Science Club', 'Literary Society', 'Math Club', 'Environmental Club'],
-                    context: 'Our clubs provide platforms for students to pursue passions, develop leadership skills, and engage in meaningful community service projects.',
-                    members: 450,
-                    events: 24
-                  },
-                  {
-                    title: 'Sports',
-                    icon: Dribbble,
-                    gradient: 'from-green-500 to-emerald-500',
-                    items: ['Football', 'Basketball', 'Athletics', 'Swimming', 'Table Tennis'],
-                    context: 'Sports programs focus on teamwork, discipline, and sportsmanship while promoting physical fitness and healthy competition.',
-                    members: 380,
-                    events: 18
-                  },
-                  {
-                    title: 'Performing Arts',
-                    icon: Music,
-                    gradient: 'from-orange-500 to-red-500',
-                    items: ['Drama', 'Music', 'Dance', 'Choir', 'Orchestra'],
-                    context: 'Our performing arts program nurtures creativity, builds confidence, and provides platforms for artistic expression and cultural appreciation.',
-                    members: 320,
-                    events: 15
-                  },
-                ].map((activity, index) => (
+                {activitiesData.map((activity) => (
                   <motion.div 
                     key={activity.title}
                     variants={fadeInUp}
@@ -649,15 +571,9 @@ const Academics = () => {
                       
                       <h3 className="text-2xl font-bold mb-6 text-gray-800 text-center">{activity.title}</h3>
                       
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        <div className="text-center p-3 bg-white/50 rounded-xl">
-                          <div className="text-2xl font-bold text-gray-800">{activity.members}</div>
-                          <div className="text-xs text-gray-600">Members</div>
-                        </div>
-                        <div className="text-center p-3 bg-white/50 rounded-xl">
-                          <div className="text-2xl font-bold text-gray-800">{activity.events}</div>
+                      <div className="text-center p-3 bg-white/50 rounded-xl mb-6">
+                          <div className="text-2xl font-bold text-gray-800">{activity.events}+</div>
                           <div className="text-xs text-gray-600">Events/Year</div>
-                        </div>
                       </div>
                       
                       <div className="space-y-3 mb-6">
@@ -683,7 +599,7 @@ const Academics = () => {
             </motion.div>
           )}
 
-          {/* Academic Calendar */}
+          {/* UPDATED: Calendar Tab */}
           {activeTab === 'calendar' && (
             <motion.div 
               key="calendar"
@@ -710,34 +626,9 @@ const Academics = () => {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.8, delay: 0.2 }}
                     >
-                      <h3 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Important Dates</h3>
+                      <h3 className="text-3xl font-bold mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Important Dates for 2081/82</h3>
                       <div className="space-y-6">
-                        {[
-                          { 
-                            date: 'April 1, 2024', 
-                            event: 'New Academic Session Begins', 
-                            context: 'Welcome assembly, orientation for new students, and introduction to clubs and activities.',
-                            type: 'session'
-                          },
-                          { 
-                            date: 'July 15, 2024', 
-                            event: 'First Term Examinations', 
-                            context: 'Students are assessed on their progress. Study workshops and counseling sessions are available.',
-                            type: 'exam'
-                          },
-                          { 
-                            date: 'December 1, 2024', 
-                            event: 'Final Term Examinations', 
-                            context: 'End-of-year exams followed by parent-teacher meetings and feedback sessions.',
-                            type: 'exam'
-                          },
-                          { 
-                            date: 'March 15, 2025', 
-                            event: 'Annual Day Celebration', 
-                            context: 'A grand event with performances, awards, and exhibitions showcasing student achievements.',
-                            type: 'event'
-                          },
-                        ].map((item, index) => (
+                        {importantDates.map((item, index) => (
                           <motion.div 
                             key={index}
                             initial={{ opacity: 0, x: -30 }}
@@ -754,12 +645,15 @@ const Academics = () => {
                                   <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
                                     item.type === 'exam' ? 'bg-red-100 text-red-800' :
                                     item.type === 'event' ? 'bg-green-100 text-green-800' :
+                                    item.type === 'notice' ? 'bg-yellow-100 text-yellow-800' :
                                     'bg-blue-100 text-blue-800'
                                   }`}>
                                     {item.type.toUpperCase()}
                                   </span>
                                 </div>
-                                <div className="text-blue-600 font-medium mb-2">{item.date}</div>
+                                <div className="text-blue-600 font-medium mb-2">
+                                  {new Date(item.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} ({adToBsMap[item.date]})
+                                </div>
                                 <p className="text-gray-600 text-sm leading-relaxed">{item.context}</p>
                               </div>
                             </div>
@@ -775,12 +669,7 @@ const Academics = () => {
                     >
                       <h3 className="text-3xl font-bold mb-8 bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">School Timings</h3>
                       <div className="space-y-6">
-                        {[
-                          { day: 'Monday - Friday', time: '8:00 AM - 3:00 PM', type: 'regular' },
-                          { day: 'Saturday', time: '8:00 AM - 12:00 PM', type: 'half' },
-                          { day: 'Extra Classes', time: '3:00 PM - 4:30 PM', type: 'extra' },
-                          { day: 'Library Hours', time: '8:00 AM - 4:00 PM', type: 'facility' },
-                        ].map((item, index) => (
+                        {schoolTimings.map((item, index) => (
                           <motion.div 
                             key={index}
                             initial={{ opacity: 0, x: 30 }}
@@ -815,6 +704,7 @@ const Academics = () => {
               </div>
             </motion.div>
           )}
+
         </AnimatePresence>
       </div>
     </div>

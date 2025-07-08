@@ -2,38 +2,54 @@ import React, { useEffect, useRef } from 'react';
 import { Calendar as CalendarIcon, Clock, MapPin } from 'lucide-react';
 
 const upcomingEvents = [
-  {
-    id: 1,
-    title: 'Admission Open for 2024-25',
-    date: '2024-04-15',
-    time: '9:00 AM',
-    location: 'School Campus',
-    type: 'admission'
-  },
-  {
-    id: 2,
-    title: 'Annual Sports Day',
-    date: '2024-04-20',
-    time: '8:00 AM',
-    location: 'School Ground',
-    type: 'sports'
-  },
-  {
-    id: 3,
-    title: 'Parent-Teacher Meeting',
-    date: '2024-04-25',
-    time: '10:00 AM',
-    location: 'School Auditorium',
-    type: 'academic'
-  },
-  {
-    id: 4,
-    title: 'Science Exhibition',
-    date: '2024-05-05',
-    time: '11:00 AM',
-    location: 'School Labs',
-    type: 'academic'
-  }
+    {
+      "id": 1,
+      "title": "New Academic Session 2082 Begins",
+      "date": "2025-04-20",
+      "time": "9:00 AM",
+      "location": "School Premises",
+      "type": "academic"
+    },
+    {
+      "id": 2,
+      "title": "ECA Program Launch",
+      "date": "2025-05-24",
+      "time": "11:00 AM - 1:00 PM",
+      "location": "Auditorium",
+      "type": "activities"
+    },
+    {
+      "id": 3,
+      "title": "Inter-House Quiz Competition",
+      "date": "2025-06-01",
+      "time": "1:00 PM",
+      "location": "Assembly Hall",
+      "type": "competition"
+    },
+    {
+      "id": 4,
+      "title": "Parents Meeting",
+      "date": "2025-06-04",
+      "time": "10:00 AM - 12:00 PM",
+      "location": "Auditorium",
+      "type": "meeting"
+    },
+    {
+      "id": 5,
+      "title": "Unit Test Starts",
+      "date": "2025-06-15",
+      "time": "During school hours",
+      "location": "School Premises",
+      "type": "exams"
+    },
+    {
+      "id": 6,
+      "title": "First Terminal Exam Starts",
+      "date": "2025-06-29",
+      "time": "As per routine",
+      "location": "Examination Hall",
+      "type": "exams"
+    }
 ];
 
 const typeColors = {
@@ -75,7 +91,7 @@ const CalendarWidget = () => {
   const displayEvents = [...upcomingEvents, ...upcomingEvents];
 
   return (
-    <div className="bg-white rounded-xl shadow-lg">
+    <div className="bg-white rounded-xl shadow-lg h-full min-h-[540px] flex flex-col">
       <div className="flex items-center justify-between p-4 border-b">
         <h2 className="text-2xl font-bold text-gray-800">Upcoming Events</h2>
         <button className="text-sm text-[#007BFF] hover:text-blue-700 font-medium flex items-center">
@@ -84,10 +100,10 @@ const CalendarWidget = () => {
         </button>
       </div>
 
-      <div className="relative overflow-hidden" style={{ height: '240px' }}>
+      <div className="relative overflow-hidden flex-grow">
         <div 
           ref={containerRef}
-          className="absolute inset-0 overflow-y-hidden"
+          className="absolute inset-0 overflow-y-hidden h-full"
         >
           <div className="space-y-2 p-4">
             {displayEvents.map((event, index) => (
@@ -136,7 +152,7 @@ const CalendarWidget = () => {
 
       <div className="p-4 border-t border-gray-100">
         <button className="w-full flex items-center justify-center px-4 py-2 border border-[#007BFF] text-[#007BFF] rounded-lg hover:bg-blue-50 transition-all duration-300 text-sm">
-          <CalendarIcon size={16} className="mr-2" />
+          <CalendarIcon size={18} className="mr-2" />
           <span className="font-medium">Add to Calendar</span>
         </button>
       </div>

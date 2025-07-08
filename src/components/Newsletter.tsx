@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
 import { Send } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 const Newsletter = () => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Add your newsletter subscription logic here
-    setStatus('success');
-    setEmail('');
-    setTimeout(() => setStatus('idle'), 3000);
+    setStatus('idle');
+    try {
+      await emailjs.send(
+        'service_ty02s7h',
+        'template_lv2ho2g',
+        { user_email: email },
+        'y7LSSUXkFTIwMPWPS'
+      );
+      setStatus('success');
+      setEmail('');
+      setTimeout(() => setStatus('idle'), 3000);
+    } catch (error) {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 3000);
+    }
   };
 
   return (
@@ -53,6 +65,16 @@ const Newsletter = () => {
                   className="absolute -bottom-8 left-0 right-0 text-sm text-blue-100"
                 >
                   Thank you for subscribing! 🎉
+                </motion.p>
+              )}
+              {status === 'error' && (
+                <motion.p
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute -bottom-8 left-0 right-0 text-sm text-red-200"
+                >
+                  There was an error. Please try again.
                 </motion.p>
               )}
             </AnimatePresence>

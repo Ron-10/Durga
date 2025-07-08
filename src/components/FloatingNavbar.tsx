@@ -45,13 +45,8 @@ const FloatingNavbar = () => {
     { name: 'About', href: '/about', icon: Info },
     { 
       name: 'Academics',
-      href: '#',
+      href: '/academics',
       icon: School,
-      dropdown: [
-        { name: 'Academic Programs', href: '/academics', icon: GraduationCap },
-        { name: 'Results', href: '/results', icon: Trophy },
-        { name: 'Staff', href: '/staff', icon: Users }
-      ]
     },
     { 
       name: 'Admissions', 

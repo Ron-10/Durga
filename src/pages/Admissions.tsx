@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { GraduationCap, FileText, DollarSign, Calendar, Users, ChevronDown, Download, Star, Sparkles, CheckCircle, Clock, Award, Heart, Shield, Zap, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 
 interface FAQItemProps {
   question: string;
@@ -64,12 +65,46 @@ const Admissions = () => {
     email: '',
     message: ''
   });
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('idle');
+    try {
+      await emailjs.send(
+        'service_ty02s7h',
+        'template_lv2ho2g',
+        {
+          studentName: formData.studentName,
+          grade: formData.grade,
+          parentName: formData.parentName,
+          contact: formData.contact,
+          email: formData.email,
+          message: formData.message,
+        },
+        'y7LSSUXkFTIwMPWPS'
+      );
+      setStatus('success');
+      setFormData({
+        studentName: '',
+        grade: '',
+        parentName: '',
+        contact: '',
+        email: '',
+        message: ''
+      });
+      setTimeout(() => setStatus('idle'), 4000);
+    } catch (error) {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 4000);
+    }
   };
 
   return (
@@ -193,6 +228,179 @@ const Admissions = () => {
       </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* === ADMISSION FORM MOVED HERE (FIRST PHASE) === */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-20"
+        >
+          <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent  md:leading-snug">Start Your Journey: Admission Inquiry</h2>
+          
+          <div className="backdrop-blur-xl bg-white/20 p-12 rounded-3xl shadow-2xl border border-white/30 relative overflow-hidden">
+            <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-br from-blue-400/10 to-purple-600/10 rounded-full blur-3xl"></div>
+            <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-gradient-to-br from-green-400/10 to-emerald-600/10 rounded-full blur-3xl"></div>
+            
+            <div className="relative z-10">
+              <form className="space-y-8" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <motion.div
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 }}
+                  >
+                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                      Student's Name *
+                    </label>
+                    <input
+                      type="text"
+                      name="studentName"
+                      value={formData.studentName}
+                      onChange={handleInputChange}
+                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
+                      placeholder="Enter student's full name"
+                      required
+                    />
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, x: 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 }}
+                  >
+                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                      Grade Applying For *
+                    </label>
+                    <select 
+                      name="grade"
+                      value={formData.grade}
+                      onChange={handleInputChange}
+                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
+                      required
+                    >
+                      <option value="">Select Grade</option>
+                      <option value="1">Grade 1</option>
+                      <option value="2">Grade 2</option>
+                      <option value="3">Grade 3</option>
+                      <option value="4">Grade 4</option>
+                      <option value="5">Grade 5</option>
+                      <option value="6">Grade 6</option>
+                      <option value="7">Grade 7</option>
+                      <option value="8">Grade 8</option>
+                      <option value="9">Grade 9</option>
+                      <option value="10">Grade 10</option>
+                    </select>
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, x: -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                      Parent's Name *
+                    </label>
+                    <input
+                      type="text"
+                      name="parentName"
+                      value={formData.parentName}
+                      onChange={handleInputChange}
+                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
+                      placeholder="Enter parent's full name"
+                      required
+                    />
+                  </motion.div>
+                  
+                  <motion.div
+                    initial={{ opacity: 0, x: 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                      Contact Number *
+                    </label>
+                    <input
+                      type="tel"
+                      name="contact"
+                      value={formData.contact}
+                      onChange={handleInputChange}
+                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
+                      placeholder="Enter contact number"
+                      required
+                    />
+                  </motion.div>
+                  
+                  <motion.div 
+                    className="md:col-span-2"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                  >
+                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
+                      placeholder="Enter email address"
+                      required
+                    />
+                  </motion.div>
+                  
+                  <motion.div 
+                    className="md:col-span-2"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
+                  >
+                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                      Message
+                    </label>
+                    <textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      rows={6}
+                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm resize-none"
+                      placeholder="Tell us more about your inquiry, any specific questions, or additional information you'd like to share..."
+                    ></textarea>
+                  </motion.div>
+                </div>
+                
+                <motion.div 
+                  className="flex justify-center"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.7 }}
+                >
+                  <motion.button
+                    whileHover={{ scale: 1.05, y: -3 }}
+                    whileTap={{ scale: 0.95 }}
+                    type="submit"
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-16 py-6 rounded-full font-bold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-2xl text-xl relative overflow-hidden group"
+                  >
+                    <span className="relative z-10">Submit Inquiry</span>
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                  </motion.button>
+                </motion.div>
+              </form>
+              {status === 'success' && (
+                <div className="text-green-600 text-center font-semibold">Your inquiry has been sent successfully!</div>
+              )}
+              {status === 'error' && (
+                <div className="text-red-600 text-center font-semibold">There was an error sending your inquiry. Please try again.</div>
+              )}
+            </div>
+          </div>
+        </motion.div>
+
         {/* Enhanced Admission Timeline */}
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
@@ -383,112 +591,64 @@ const Admissions = () => {
         >
           <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">What Parents Say</h2>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             {[
               {
-                quote: "The admission process was incredibly smooth and transparent. The staff was helpful and guided us at every step. We are thrilled to be a part of this school community and couldn't be happier with our decision.",
-                name: 'Anjali Sharma',
-                relation: "Parent of a Grade 5 Student",
-                image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=150&q=80',
-                rating: 5,
-                gradient: 'from-blue-500 to-cyan-500'
+                quote: "The admission process was seamless and the staff were incredibly supportive. Our daughter loves the creative and engaging learning environment. We are proud to be part of this school community.",
+                name: 'Sunita Rai',
+                relation: "Parent of a Grade 3 Student",
+                image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80',
+                gradient: 'from-teal-400 to-blue-500'
               },
               {
-                quote: "A wonderful school with a focus on holistic development. My child is thriving here academically and socially. The teachers are caring, the facilities are top-notch, and the environment is nurturing. Highly recommended!",
-                name: 'Vikram Patel',
-                relation: "Parent of a Grade 8 Student",
-                image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=150&q=80',
-                rating: 5,
-                gradient: 'from-purple-500 to-pink-500'
+                quote: "A fantastic school with a strong focus on holistic development. My son is excelling both academically and in extracurricular activities. The teachers are dedicated and the facilities are excellent.",
+                name: 'Rajesh Thapa',
+                relation: "Parent of a Grade 7 Student",
+                image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80',
+                gradient: 'from-purple-500 to-indigo-600'
+              },
+              {
+                quote: "We were looking for a school that values both education and character development. We found it here. The sense of community is wonderful, and our children are happy and motivated to learn.",
+                name: 'Prakash and Aarati Shrestha',
+                relation: "Parents of Grade 4 & 6 Students",
+                image: 'https://images.unsplash.com/photo-1544717297-fa95b6ee9643?auto=format&fit=crop&w=150&q=80',
+                gradient: 'from-pink-500 to-orange-400'
               }
             ].map((testimonial, index) => (
-              <motion.div 
+              <div 
                 key={testimonial.name} 
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                whileHover={{ scale: 1.02, y: -5 }}
-                className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl hover:scale-105 transition-all duration-500 overflow-hidden"
+                className="bg-white rounded-2xl shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 ease-in-out"
               >
-                <div className={`absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br ${testimonial.gradient} opacity-10 rounded-full blur-xl`}></div>
+                <div className={`h-2 bg-gradient-to-r ${testimonial.gradient}`}></div>
                 
-                <div className="relative z-10">
-                  <div className="flex text-yellow-400 mb-6">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, scale: 0 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.1 * i, duration: 0.3 }}
-                      >
-                        <Star fill="currentColor" className="w-6 h-6" />
-                      </motion.div>
+                <div className="p-8">
+                  <div className="flex text-yellow-400 mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.955a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.955c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.176 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.955a1 1 0 00-.364-1.118L2.45 9.382c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69L9.049 2.927z" />
+                      </svg>
                     ))}
                   </div>
                   
-                  <p className="text-gray-700 italic mb-8 text-lg leading-relaxed">"{testimonial.quote}"</p>
+                  <p className="text-gray-600 italic mb-6">"{testimonial.quote}"</p>
                   
                   <div className="flex items-center">
                     <img 
                       src={testimonial.image} 
                       alt={testimonial.name}
-                      className="w-16 h-16 rounded-full object-cover mr-4 ring-4 ring-white shadow-lg"
+                      className="w-14 h-14 rounded-full object-cover mr-4 border-2 border-white shadow-md"
                     />
-                    <div className={`bg-gradient-to-r ${testimonial.gradient} p-4 rounded-2xl text-white flex-1`}>
-                      <div className="font-bold text-lg">{testimonial.name}</div>
-                      <div className="text-white/90">{testimonial.relation}</div>
+                    <div>
+                      <div className={`font-bold text-lg text-gray-800`}>{testimonial.name}</div>
+                      <div className="text-gray-500 text-sm">{testimonial.relation}</div>
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </motion.div>
 
-        {/* Enhanced Download Prospectus */}
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-20 text-center"
-        >
-          <div className="backdrop-blur-xl bg-white/20 p-16 rounded-3xl shadow-2xl border border-white/30 inline-block relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-600/10"></div>
-            <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl"></div>
-            
-            <div className="relative z-10">
-              <motion.div
-                animate={{ 
-                  rotate: 360,
-                  scale: [1, 1.2, 1]
-                }}
-                transition={{ 
-                  rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                  scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-                }}
-                className="inline-block mb-8"
-              >
-                <Download className="w-20 h-20 text-blue-600" />
-              </motion.div>
-              
-              <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">Download Our Prospectus</h2>
-              <p className="text-gray-700 mb-10 text-xl max-w-2xl mx-auto leading-relaxed">
-                Get comprehensive information about our curriculum, facilities, school culture, and admission procedures in our detailed prospectus.
-              </p>
-              
-              <motion.button 
-                whileHover={{ scale: 1.05, y: -3 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold py-6 px-12 rounded-full hover:from-green-600 hover:to-emerald-700 transition-all duration-300 shadow-2xl text-xl flex items-center mx-auto group"
-              >
-                <Download className="w-6 h-6 mr-3 group-hover:animate-bounce" />
-                Download Prospectus
-              </motion.button>
-            </div>
-          </div>
-        </motion.div>
 
         {/* Enhanced FAQ Section */}
         <motion.div 
@@ -509,188 +669,23 @@ const Admissions = () => {
               />
               <FAQItem
                 question="What are the school timings?"
-                answer="School timings are from 8:00 AM to 3:00 PM, Monday to Friday. Saturday classes run from 8:00 AM to 12:00 PM. Optional extracurricular activities and additional support classes are held after regular school hours."
+                answer="School timings are from 8:00 AM to 3:00 PM, Sunday to Friday.  Optional extracurricular activities and additional support classes are held after regular school hours."
                 icon={Clock}
               />
               <FAQItem
                 question="Do you provide transportation?"
-                answer="Yes, we have a fleet of GPS-enabled school buses covering all major routes in the city. Our buses are equipped with safety features and trained attendants. Please contact our transport department for route details and fees."
+                answer="Yes, we have a fleet of buses covering all major routes in the city. Our buses are equipped with safety features and trained attendants. Please contact our transport department for route details and fees."
                 icon={Shield}
               />
               <FAQItem
                 question="What extracurricular activities are available?"
-                answer="We offer a wide range of activities including sports (football, basketball, swimming), performing arts (music, dance, drama), academic clubs (science, math, debate), and community service programs. Students are encouraged to participate in multiple activities."
+                answer="We offer a wide range of activities including sports (football, cricket, table tennis, swimming, karate, volleyball), performing arts (music, dance, drama), academic clubs (science, math, debate), and community service programs. Students are encouraged to participate in multiple activities."
                 icon={Zap}
               />
             </div>
           </div>
         </motion.div>
 
-        {/* Enhanced Admission Form */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <h2 className="text-5xl font-bold text-center mb-16 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent">Admission Inquiry</h2>
-          
-          <div className="backdrop-blur-xl bg-white/20 p-12 rounded-3xl shadow-2xl border border-white/30 relative overflow-hidden">
-            <div className="absolute -top-20 -left-20 w-40 h-40 bg-gradient-to-br from-blue-400/10 to-purple-600/10 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-gradient-to-br from-green-400/10 to-emerald-600/10 rounded-full blur-3xl"></div>
-            
-            <div className="relative z-10">
-              <form className="space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <motion.div
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 }}
-                  >
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      Student's Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="studentName"
-                      value={formData.studentName}
-                      onChange={handleInputChange}
-                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
-                      placeholder="Enter student's full name"
-                      required
-                    />
-                  </motion.div>
-                  
-                  <motion.div
-                    initial={{ opacity: 0, x: 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2 }}
-                  >
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      Grade Applying For *
-                    </label>
-                    <select 
-                      name="grade"
-                      value={formData.grade}
-                      onChange={handleInputChange}
-                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
-                      required
-                    >
-                      <option value="">Select Grade</option>
-                      <option value="1">Grade 1</option>
-                      <option value="2">Grade 2</option>
-                      <option value="3">Grade 3</option>
-                      <option value="4">Grade 4</option>
-                      <option value="5">Grade 5</option>
-                      <option value="6">Grade 6</option>
-                      <option value="7">Grade 7</option>
-                      <option value="8">Grade 8</option>
-                      <option value="9">Grade 9</option>
-                      <option value="10">Grade 10</option>
-                    </select>
-                  </motion.div>
-                  
-                  <motion.div
-                    initial={{ opacity: 0, x: -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      Parent's Name *
-                    </label>
-                    <input
-                      type="text"
-                      name="parentName"
-                      value={formData.parentName}
-                      onChange={handleInputChange}
-                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
-                      placeholder="Enter parent's full name"
-                      required
-                    />
-                  </motion.div>
-                  
-                  <motion.div
-                    initial={{ opacity: 0, x: 30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      Contact Number *
-                    </label>
-                    <input
-                      type="tel"
-                      name="contact"
-                      value={formData.contact}
-                      onChange={handleInputChange}
-                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
-                      placeholder="Enter contact number"
-                      required
-                    />
-                  </motion.div>
-                  
-                  <motion.div 
-                    className="md:col-span-2"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                  >
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
-                      placeholder="Enter email address"
-                      required
-                    />
-                  </motion.div>
-                  
-                  <motion.div 
-                    className="md:col-span-2"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.6 }}
-                  >
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      Message
-                    </label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      rows={6}
-                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm resize-none"
-                      placeholder="Tell us more about your inquiry, any specific questions, or additional information you'd like to share..."
-                    ></textarea>
-                  </motion.div>
-                </div>
-                
-                <motion.div 
-                  className="flex justify-center"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.7 }}
-                >
-                  <motion.button
-                    whileHover={{ scale: 1.05, y: -3 }}
-                    whileTap={{ scale: 0.95 }}
-                    type="submit"
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-16 py-6 rounded-full font-bold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-2xl text-xl relative overflow-hidden group"
-                  >
-                    <span className="relative z-10">Submit Inquiry</span>
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    />
-                  </motion.button>
-                </motion.div>
-              </form>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </div>
   );

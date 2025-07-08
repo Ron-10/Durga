@@ -67,13 +67,14 @@ const Home = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Original stats array (reverted)
   const stats = [
     { 
-      number: '25+', 
+      number: '31+', 
       label: 'Years of Excellence', 
       icon: Award,
       description: 'Providing transformative education since 1994',
-      achievement: 'Consistently ranked in top 5% nationally',
+      achievement: 'Achieving 100% success rate in S.E.E. examinations annually',
       color: 'from-blue-500 to-blue-600'
     },
     { 
@@ -85,19 +86,19 @@ const Home = () => {
       color: 'from-green-500 to-green-600'
     },
     { 
-      number: '85', 
+      number: '35', 
       label: 'Expert Educators', 
       icon: BookOpen,
-      description: 'PhD holders and industry professionals',
-      achievement: '12:1 student-teacher ratio',
+      description: 'Years of experience industry professionals',
+      achievement: '25:1 student-teacher ratio',
       color: 'from-purple-500 to-purple-600'
     },
     { 
-      number: '99.2%', 
+      number: '100%', 
       label: 'Success Rate', 
       icon: TrendingUp,
       description: 'Graduates achieving their goals',
-      achievement: '95% college acceptance rate',
+      achievement: '100% college acceptance rate',
       color: 'from-orange-500 to-orange-600'
     }
   ];
@@ -106,7 +107,7 @@ const Home = () => {
     {
       icon: '/icons/graduation-cap.svg',
       title: 'Innovative Curriculum',
-      description: 'Cutting-edge programs integrating STEAM, critical thinking, and local perspectives',
+      description: 'Cutting-edge programs integrating STEM, critical thinking, and local perspectives',
       highlights: ['Project-based learning', 'Real-world applications', 'Industry partnerships'],
       color: 'from-blue-500 to-cyan-500'
     },
@@ -200,86 +201,76 @@ const Home = () => {
     }
   ];
 
-  const upcomingEvents = [
+  // ***** UPDATED NEWS AND EVENTS DATA *****
+  const newsItems = [
     {
-      date: 'May 15, 2024',
-      title: 'Annual Sports Championship',
-      description: 'Inter-house competition featuring athletics, swimming, and team sports with national standards',
-      time: '9:00 AM - 5:00 PM',
-      location: 'Sports Complex',
-      category: 'Sports',
-      featured: true,
-      registrationOpen: true
-    },
-    {
-      date: 'June 5, 2024',
-      title: 'Innovation & Science Expo',
-      description: 'Student-led research presentations, robotics demonstrations, and STEM career fair',
-      time: '10:00 AM - 4:00 PM',
-      location: 'Science & Technology Center',
+      title: 'Final Academic Result 2081',
+      date: '2025-04-10', // Represents Chaitra 28, 2081
+      excerpt: 'The final results for the academic year 2081 have been published. We congratulate all students on their hard work and success.',
       category: 'Academic',
-      featured: true,
-      registrationOpen: true
+      readTime: '1 min read',
     },
     {
-      date: 'June 20, 2024',
-      title: 'Annual Cultural Festival',
-      description: 'Celebrating our diverse community with performances, cuisine, and cultural exhibitions',
-      time: '6:00 PM - 10:00 PM',
-      location: 'Main Campus',
-      category: 'Cultural',
-      featured: false,
-      registrationOpen: false
-    },
-    {
-      date: 'July 10, 2024',
-      title: 'Parent-Teacher Conference',
-      description: 'Comprehensive progress discussions and academic planning sessions',
-      time: '2:00 PM - 6:00 PM',
-      location: 'Academic Building',
-      category: 'Academic',
-      featured: false,
-      registrationOpen: true
+      title: 'First Terminal Exam Routine Published',
+      date: '2025-06-24', // Represents 10th Ashad 2082
+      excerpt: 'The routine for the first terminal examination is now available. Students are advised to prepare accordingly.',
+      category: 'Exams',
+      readTime: '2 min read',
     }
   ];
 
-  const newsItems = [
+  const upcomingEvents = [
     {
-      title: 'School Achieves National Accreditation Excellence',
-      date: 'April 10, 2024',
-      excerpt: 'Our institution has been recognized with the highest education standards, ranking #1 in the district for the third consecutive year.',
-      category: 'Achievement',
-      readTime: '3 min read',
+      date: '2025-04-20', // Represents 7th Baishakh 2082
+      title: 'New Academic Session 2082 Begins',
+      description: 'We are thrilled to welcome all our students to the new academic session of 2082. A fresh start full of learning and opportunities.',
+      time: '9:00 AM',
+      location: 'School Premises',
+      category: 'Academic',
       featured: true,
-      image: 'https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop'
     },
     {
-      title: 'Revolutionary AI Learning Lab Opens',
-      date: 'March 25, 2024',
-      excerpt: 'State-of-the-art artificial intelligence and machine learning laboratory inaugurated, featuring cutting-edge technology and industry partnerships.',
-      category: 'Technology',
-      readTime: '4 min read',
-      featured: true,
-      image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop'
+      date: '2025-05-24', // Represents 10th Jestha 2082
+      title: 'ECA Program Launch',
+      description: 'Join us for the launch of this year\'s Extra-Curricular Activities (ECA) program. Discover a wide range of clubs and activities.',
+      time: '11:00 AM - 1:00 PM',
+      location: 'Auditorium',
+      category: 'Activities',
+      registrationOpen: true
     },
     {
-      title: 'Comprehensive Scholarship Program Launched',
-      date: 'March 15, 2024',
-      excerpt: 'New merit and need-based scholarship initiative supporting exceptional students from diverse backgrounds, investing $2M annually.',
-      category: 'Community',
-      readTime: '2 min read',
-      featured: false,
-      image: 'https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop'
+      date: '2025-06-01', // Represents 18th Jestha 2082
+      title: 'Inter-House Quiz Competition',
+      description: 'A battle of brains! Don\'t miss the exciting inter-house quiz competition. All are welcome to cheer for their houses.',
+      time: '1:00 PM',
+      location: 'Assembly Hall',
+      category: 'Competition'
     },
     {
-      title: 'Students Win National Robotics Championship',
-      date: 'February 28, 2024',
-      excerpt: 'Our robotics team secured first place at the National Youth Robotics Competition, competing against 200+ teams nationwide.',
-      category: 'Achievement',
-      readTime: '3 min read',
-      featured: false,
-      image: 'https://images.pexels.com/photos/8566526/pexels-photo-8566526.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop'
-    }
+      date: '2025-06-04', // Represents 21st Jestha 2082
+      title: 'Parents Meeting',
+      description: 'An important meeting for parents and guardians to discuss student progress and upcoming school plans.',
+      time: '10:00 AM - 12:00 PM',
+      location: 'Respective Classrooms',
+      category: 'Meeting'
+    },
+    {
+      date: '2025-06-15', // Represents 1st Ashad 2082
+      title: 'Unit Test Starts',
+      description: 'The first unit tests of the new session will commence. We wish all our students the very best.',
+      time: 'During school hours',
+      location: 'School Premises',
+      category: 'Exams'
+    },
+    {
+      date: '2025-06-29', // Represents 15th Ashad 2082
+      title: 'First Terminal Exam Starts',
+      description: 'The First Terminal Examinations are beginning today. Please see the published routine for the detailed schedule.',
+      time: 'As per routine',
+      location: 'Examination Hall',
+      category: 'Exams',
+      featured: true
+    },
   ];
 
   const studentLife = [
@@ -313,12 +304,25 @@ const Home = () => {
     }
   ];
 
+  // Original quickStats array (reverted)
   const quickStats = [
-    { label: 'Academic Excellence', value: '95%', icon: Award },
-    { label: 'Sports Championships', value: '15+', icon: Trophy },
+    { label: 'Academic Excellence', value: '100%', icon: Award },
+    { label: 'Sports Championships', value: '20+', icon: Trophy },
     { label: 'Arts Recognition', value: '10+', icon: Star },
-    { label: 'Community Service', value: '20+', icon: Heart }
+    { label: 'Excellent Years', value: '31+', icon: Heart }
   ];
+
+  // 1. Add a mapping of AD to BS dates for news and events
+  const adToBsMap = {
+    '2025-04-10': '२८ चैत २०८१', // Final Academic Result 2081
+    '2025-04-20': '७ बैशाख २०८२', // New Academic Session 2082 Begins
+    '2025-05-24': '१० जेठ २०८२', // ECA Program Launch
+    '2025-06-01': '१८ जेठ २०८२', // Inter-House Quiz Competition
+    '2025-06-04': '२१ जेठ २०८२', // Parents Meeting
+    '2025-06-15': '१ असार २०८२', // Unit Test Starts
+    '2025-06-24': '१० असार २०८२', // First Terminal Exam Routine Published
+    '2025-06-29': '१५ असार २०८२', // First Terminal Exam Starts
+  };
 
   return (
     <div className="min-h-screen">
@@ -411,26 +415,6 @@ const Home = () => {
                 <p className="text-gray-700">Our experienced teachers and staff create a nurturing space where every child is valued, supported, and encouraged to grow.</p>
               </div>
             </motion.div>
-            {/* Affordable, Quality Education */}
-            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-indigo-400 hover:shadow-2xl transition-all duration-300">
-              <Users className="w-8 h-8 text-indigo-500 mt-1" />
-              <div>
-                <h4 className="font-bold text-lg text-indigo-900 mb-1">Affordable, Quality Education</h4>
-                <p className="text-gray-700">We are committed to offering the best possible education at reasonable fees, making quality learning accessible to families in our community.</p>
-              </div>
-            </motion.div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-center mt-10"
-          >
-            <div className="inline-block px-8 py-5 rounded-2xl bg-gradient-to-r from-green-400 to-blue-500 text-white text-xl font-bold shadow-2xl border-4 border-white/80">
-              🌱 Our Motto<br />
-              <span className="block text-base font-medium mt-2">"Empowering Knowledge, Shaping Character, Inspiring Humanity — Through Education, Sports, Music, and the Arts."</span>
-            </div>
           </motion.div>
         </div>
       </section>
@@ -474,24 +458,18 @@ const Home = () => {
             {quickStats.map((stat, index) => (
               <motion.div 
                 key={index} 
-                // Removed overflow-hidden from here too, if it was causing issues for child animations
-                // Ensure ample padding, strong shadow, and flex-col for proper alignment
                 className="group relative flex flex-col items-center justify-center p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl hover:scale-105 transition-all duration-500"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                {/* Background overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
-                {/* Icon - Made significantly larger and centered */}
                 <stat.icon className="w-12 h-12 text-blue-600 mx-auto mb-4 group-hover:scale-110 transition-transform relative z-10" />
                 
-                {/* Value - Much larger and bolder */}
                 <div className="text-5xl font-extrabold text-blue-900 mb-2 relative z-10 text-center">{stat.value}</div>
                 
-                {/* Label - Larger and more prominent */}
                 <div className="text-lg font-semibold text-gray-700 relative z-10 text-center leading-tight">
                     {stat.label}
                 </div>
@@ -501,13 +479,8 @@ const Home = () => {
         </div>
       </section>
 
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-        className="py-16 bg-white relative overflow-hidden" // Consistent padding from previous fixes
-      >
+      {/* START: New SEE Results Section */}
+      <section className="py-16 bg-white relative overflow-hidden">
         <AnimatedBackground pattern="grid" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
           <motion.div
@@ -517,73 +490,57 @@ const Home = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold mb-6">
-              <Zap className="w-4 h-4 mr-2" />
-              Innovative Learning
+            <div className="inline-flex items-center px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm font-semibold mb-6">
+              <GraduationCap className="w-4 h-4 mr-2" />
+              A Legacy of SEE Success
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Interactive Learning Experience
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent md:leading-snug">
+              Celebrating Consistent Excellence
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Discover our cutting-edge facilities and innovative programs that make learning engaging and effective.
+              Our students' performance in the Secondary Education Examination (SEE) is a cornerstone of our academic pride. We are committed to fostering an environment where every student can achieve their best.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Globe,
-                title: "Global Connections",
-                description: "Connect with students worldwide through our international exchange programs and diverse cultural experiences.", // Expanded description slightly
-                color: "from-blue-500 to-cyan-500"
-              },
-              {
-                icon: Zap,
-                title: "Technology Integration",
-                description: "State-of-the-art technology in every classroom, including smart boards, dedicated computer labs, and AI-powered learning tools.", // Expanded description slightly
-                color: "from-purple-500 to-pink-500"
-              },
-              {
-                icon: Heart,
-                title: "Wellness Programs",
-                description: "Comprehensive health and wellness initiatives, including counseling services, nutritious meals, and physical fitness programs for holistic development.", // Expanded description slightly
-                color: "from-green-500 to-teal-500"
-              }
-            ].map((feature, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+            {/* 100% Pass Rate Card */}
               <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -8, scale: 1.03 }} // Adjusted hover scale for consistency
-                // Removed 'overflow-hidden' from the card itself.
-                // The issue was primarily due to content being constrained by a fixed height or a parent 'overflow-hidden'
-                // that was not meant for the content itself but perhaps for a different visual effect.
-                // By making the card a flex column and letting the <p> grow, we ensure it adapts.
-                className="group relative p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl transition-all duration-500 flex flex-col h-full"
+              className="group relative flex flex-col items-center text-center p-8 rounded-3xl shadow-2xl bg-gradient-to-br from-blue-500 to-blue-700 text-white hover:shadow-blue-400/50 transition-all duration-300"
+            >
+              <ShieldCheck className="w-20 h-20 mb-4 opacity-20 absolute -top-4 -left-4" />
+              <h3 className="text-2xl font-bold mb-2 z-10">Unbroken Record of Success</h3>
+              <div className="text-8xl font-black my-4 z-10">100%</div>
+              <p className="text-2xl font-semibold mb-4 z-10">SEE Pass Rate</p>
+              <p className="text-blue-100 leading-relaxed max-w-sm z-10">
+                Since our very first SEE batch, we have maintained a perfect pass rate, a testament to our dedicated faculty, rigorous curriculum, and the hard work of our students.
+              </p>
+            </motion.div>
+
+            {/* Latest Results Card */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="group relative flex flex-col items-center text-center p-8 rounded-3xl shadow-2xl bg-white border border-gray-100 hover:shadow-xl transition-all duration-300"
               >
-                <div className={`w-20 h-20 bg-gradient-to-br ${feature.color} rounded-full flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300`}>
-                  <feature.icon className="w-10 h-10 text-white" />
-                </div>
-                
-                <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-                  {feature.title}
-                </h3>
-                
-                {/* Apply flex-grow to the paragraph to allow it to take up available height */}
-                <p className="text-gray-700 leading-relaxed text-base flex-grow"> 
-                  {feature.description}
-                </p>
-                {/* No other elements below the description that might push it up, so flex-grow should work */}
+              <Trophy className="w-20 h-20 mb-4 text-gray-100 absolute -top-4 -right-4" />
+              <h3 className="text-2xl font-bold text-gray-800 mb-2 z-10">Latest SEE Achievements</h3>
+              <div className="text-8xl font-black my-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500 z-10">3.91</div>
+              <p className="text-2xl font-semibold text-gray-800 mb-4 z-10">Highest GPA Achieved</p>
+              <p className="text-gray-600 leading-relaxed max-w-sm z-10">
+                Our students continue to set new benchmarks. In the 2081 SEE results, we celebrated a top GPA of 3.91, with over 95% of students securing A or A+ grades.
+              </p>
               </motion.div>
-            ))}
           </div>
         </div>
-      </motion.section>
+      </section>
+      {/* END: New SEE Results Section */}
 
-    
-        {/* Enhanced School at a Glance Section */}
       <motion.section
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -604,7 +561,7 @@ const Home = () => {
               <Trophy className="w-4 h-4 mr-2" />
               Excellence in Numbers
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent md:leading-snug">
               Our Journey of Excellence
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -654,7 +611,7 @@ const Home = () => {
       </motion.section>
 
       {/* Enhanced News, Events & Calendar Section */}
-      <section className="py-10 bg-white relative overflow-hidden">
+      <section className="py-10 bg-gray-50 relative overflow-hidden">
         <AnimatedBackground pattern="dots" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
           <motion.div
@@ -676,10 +633,11 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch"> {/* Added items-stretch */}
-            {/* Enhanced News & Events Slider */}
-            <div className="lg:col-span-8 flex flex-col h-full">
-              <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 h-full min-h-[540px] flex flex-col"> {/* Set min-h and h-full */}
+         
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
+            {/* News & Events Slider */}
+            <div className="lg:col-span-8 flex flex-col h-full min-h-[540px]">
+              <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 h-full flex flex-col">
                 <div className="flex items-center justify-between p-8 border-b bg-gradient-to-r from-blue-50 to-purple-50">
                   <div>
                     <h3 className="text-2xl font-bold text-gray-800 mb-2">Latest News & Events</h3>
@@ -687,15 +645,15 @@ const Home = () => {
                   </div>
                 </div>
 
-                <div className="relative p-8">
+                <div className="relative p-8 flex-grow h-full">
                   <Swiper
                     modules={[Navigation, Pagination, Autoplay]}
                     spaceBetween={20}
                     slidesPerView={1}
                     loop={true}
                     navigation={{
-                      prevEl: '.swiper-button-prev',
-                      nextEl: '.swiper-button-next',
+                      prevEl: '.swiper-button-prev-custom',
+                      nextEl: '.swiper-button-next-custom',
                     }}
                     pagination={{ 
                       clickable: true,
@@ -711,25 +669,22 @@ const Home = () => {
                       640: { slidesPerView: 1 },
                       768: { slidesPerView: 2, spaceBetween: 24 },
                     }}
-                    className="!pb-16 !overflow-hidden"
+                    className="!pb-16 h-full"
                   >
                     {[...newsItems, ...upcomingEvents]
                       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
                       .map((item, index) => (
-                        <SwiperSlide key={index}>
+                        <SwiperSlide key={index} className="h-full">
                           <motion.div
                             whileHover={{ y: -5 }}
-                            className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl overflow-hidden h-full hover:shadow-lg transition-all duration-300 cursor-pointer group"
+                            className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl overflow-hidden h-full hover:shadow-lg transition-all duration-300 cursor-pointer group flex flex-col h-full"
                           >
-                            
-                            <div className="p-6">
+                            <div className="p-6 flex flex-col flex-grow">
                               <div className="flex items-center justify-between mb-4">
-                                <span className="text-blue-600 text-sm font-medium">
-                                  {new Date(item.date).toLocaleDateString('en-US', { 
-                                    month: 'short',
-                                    day: 'numeric',
-                                    year: 'numeric'
-                                  })}
+                                {/* --- UPDATED DATE SPAN --- */}
+                                <span className="text-blue-600 text-sm font-medium flex items-baseline gap-2">
+                                  {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                                  <span className="text-xs text-gray-500 font-normal">({adToBsMap[item.date] || ''})</span>
                                 </span>
                                 <span className={`text-xs font-semibold px-3 py-1 rounded-full ${
                                   ('excerpt' in item) 
@@ -746,11 +701,11 @@ const Home = () => {
                                 {item.title}
                               </h4>
                               
-                              <p className="text-sm text-gray-600 mb-4 leading-relaxed">
+                              <p className="text-sm text-gray-600 mb-4 leading-relaxed flex-grow">
                                 {('excerpt' in item) ? item.excerpt : item.description}
                               </p>
                               
-                              {/* Additional info for events */}
+                              <div className="mt-auto">
                               {('time' in item) && (
                                 <div className="space-y-2 mb-4 text-xs text-gray-500">
                                   <div className="flex items-center">
@@ -764,7 +719,6 @@ const Home = () => {
                                 </div>
                               )}
                               
-                              {/* Read time for news */}
                               {('readTime' in item) && (
                                 <div className="text-xs text-gray-500 mb-4">
                                   {item.readTime}
@@ -772,16 +726,17 @@ const Home = () => {
                               )}
                               
                               <div className="flex items-center justify-between">
-                                <div className="flex items-center text-blue-600 text-sm font-medium hover:underline group-hover:text-blue-700">
+                                  <a href="#" className="flex items-center text-blue-600 text-sm font-medium hover:underline group-hover:text-blue-700">
                                   {('excerpt' in item) ? 'Read More' : 'Learn More'}
                                   <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                                </div>
+                                  </a>
                                 
                                 {('registrationOpen' in item) && item.registrationOpen && (
                                   <button className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold hover:bg-green-200 transition-colors">
                                     Register
                                   </button>
                                 )}
+                                </div>
                               </div>
                             </div>
                           </motion.div>
@@ -789,23 +744,21 @@ const Home = () => {
                       ))}
                   </Swiper>
 
-                  {/* Enhanced Navigation Buttons */}
-                  <button className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 z-10 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-lg hover:shadow-xl text-blue-600 transition-all duration-300 hover:scale-110 swiper-button-prev after:hidden group">
+                  {/* --- UPDATED SLIDER BUTTONS --- */}
+                  <button className="swiper-button-prev-custom absolute left-2 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-lg hover:shadow-xl text-blue-600 transition-all duration-300 hover:scale-110 group after:hidden">
                     <ChevronLeft className="w-6 h-6 group-hover:scale-110 transition-transform" />
                   </button>
-                  <button className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 z-10 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-lg hover:shadow-xl text-blue-600 transition-all duration-300 hover:scale-110 swiper-button-next after:hidden group">
+                  <button className="swiper-button-next-custom absolute right-2 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-lg hover:shadow-xl text-blue-600 transition-all duration-300 hover:scale-110 group after:hidden">
                     <ChevronRight className="w-6 h-6 group-hover:scale-110 transition-transform" />
                   </button>
                 </div>
               </div>
             </div>
 
-            {/* Enhanced Calendar Widget */}
-            <div className="lg:col-span-4 flex flex-col h-full">
-              <div className="h-full min-h-[540px] flex flex-col">
-                <div className="h-full flex flex-col"> {/* Ensure CalendarWidget fills height */}
-                  <CalendarWidget />
-                </div>
+            {/* Calendar Widget */}
+            <div className="lg:col-span-4 flex flex-col h-full min-h-[540px]">
+              <div className="h-full flex flex-col">
+                <CalendarWidget events={[...newsItems, ...upcomingEvents]} adToBsMap={adToBsMap} />
               </div>
             </div>
           </div>
@@ -827,7 +780,7 @@ const Home = () => {
               <Star className="w-4 h-4 mr-2" />
               What Sets Us Apart
             </div>
-            <h2 className="text-5xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h2 className="text-5xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent md:leading-snug">
               Why Choose Durga Aawashiya?
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -835,7 +788,7 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch"> {/* Added items-stretch */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 items-stretch">
             {features.map((feature, index) => (
               <motion.div
                 key={index}
@@ -844,7 +797,7 @@ const Home = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ y: -8, scale: 1.03 }}
-                className="group relative p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl transition-all duration-500 flex flex-col h-full" // Added flex-col h-full
+                className="group relative p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl transition-all duration-500 flex flex-col h-full"
               >
                 <div className="relative mb-6 flex justify-center">
                   <div className={`w-24 h-24 bg-gradient-to-br ${feature.color} rounded-full flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-md`}>
@@ -860,11 +813,10 @@ const Home = () => {
                   {feature.title}
                 </h3>
 
-                <p className="text-gray-700 text-center mb-6 leading-relaxed flex-grow min-h-[4rem]"> {/* Added flex-grow and min-h */}
+                <p className="text-gray-700 text-center mb-6 leading-relaxed flex-grow min-h-[4rem]">
                   {feature.description}
                 </p>
 
-                {/* Highlights */}
                 <div className="space-y-3 mt-auto">
                   {feature.highlights.map((highlight, idx) => (
                     <div key={idx} className="flex items-center text-base text-gray-700">
@@ -880,7 +832,7 @@ const Home = () => {
       </section>
 
       {/* Enhanced Student Life Section */}
-      <section className="py-16 bg-gray-50 relative overflow-hidden"> {/* Adjusted padding */}
+      <section className="py-16 bg-gray-50 relative overflow-hidden">
         <AnimatedBackground pattern="grid" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
           <motion.div
@@ -902,7 +854,7 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch"> {/* Added items-stretch */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
             {studentLife.map((activity, index) => (
               <motion.div
                 key={index}
@@ -911,7 +863,7 @@ const Home = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.02 }}
-                className="group relative rounded-3xl shadow-2xl bg-white hover:shadow-3xl transition-all duration-500 overflow-hidden border border-gray-100 flex flex-col h-full" // Added flex-col h-full
+                className="group relative rounded-3xl shadow-2xl bg-white hover:shadow-3xl transition-all duration-500 overflow-hidden border border-gray-100 flex flex-col h-full"
               >
                 <div className="relative h-64 overflow-hidden">
                   <img
@@ -927,12 +879,12 @@ const Home = () => {
                   </div>
                 </div>
 
-                <div className="p-8 flex flex-col flex-grow"> {/* Added flex-col flex-grow */}
+                <div className="p-8 flex flex-col flex-grow">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
                     {activity.title}
                   </h3>
 
-                  <p className="text-gray-700 mb-6 leading-relaxed text-base flex-grow min-h-[3rem]"> {/* Added flex-grow and min-h */}
+                  <p className="text-gray-700 mb-6 leading-relaxed text-base flex-grow min-h-[3rem]">
                     {activity.description}
                   </p>
 
@@ -971,7 +923,7 @@ const Home = () => {
               <Star className="w-4 h-4 mr-2" />
               Voices of Success
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent md:leading-snug">
               What Our Community Says
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
@@ -1007,21 +959,18 @@ const Home = () => {
               <SwiperSlide key={index}>
                 <motion.div
                   whileHover={{ y: -8, scale: 1.02 }}
-                  className="group relative p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col h-full" // Added flex-col h-full
+                  className="group relative p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col h-full"
                 >
-                  {/* Rating Stars */}
                   <div className="flex items-center justify-center mb-6">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
                     ))}
                   </div>
 
-                  {/* Quote */}
-                  <blockquote className="text-gray-700 mb-8 italic text-center leading-relaxed text-lg flex-grow min-h-[6rem]"> {/* Added flex-grow and min-h */}
+                  <blockquote className="text-gray-700 mb-8 italic text-center leading-relaxed text-lg flex-grow min-h-[6rem]">
                     "{testimonial.text}"
                   </blockquote>
 
-                  {/* Author Info */}
                   <div className="border-t border-gray-200 pt-6 mt-auto">
                     <div className="flex items-center space-x-4">
                       <img
@@ -1043,7 +992,6 @@ const Home = () => {
                 </motion.div>
               </SwiperSlide>
             ))}
-            {/* Custom Navigation Buttons for Testimonials */}
             <button className="swiper-button-prev-testimonial absolute left-0 top-1/2 -translate-y-1/2 -ml-6 z-10 hidden lg:flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300">
               <ChevronLeft className="w-7 h-7" />
             </button>

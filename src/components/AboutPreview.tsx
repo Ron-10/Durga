@@ -37,7 +37,7 @@ const AboutPreview = () => {
             </p>
             <div className="space-y-4 mb-8">
               {[
-                'Established in 1998',
+                'Established in 1994',
                 'Recognized for academic excellence',
                 'Strong focus on holistic development',
                 'State-of-the-art infrastructure',

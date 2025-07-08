@@ -54,13 +54,8 @@ const Navbar = () => {
     { name: 'About', href: '/about', icon: Info },
     { 
       name: 'Academics',
-      href: '#',
-      icon: School,
-      dropdown: [
-        { name: 'Academic Programs', href: '/academics', icon: GraduationCap },
-        { name: 'Results', href: '/results', icon: Trophy },
-        { name: 'Staff', href: '/staff', icon: Users }
-      ]
+      href: '/academics',
+      icon: School
     },
     { 
       name: 'Admissions', 
@@ -78,15 +73,6 @@ const Navbar = () => {
       ]
     },
     { name: 'Notices', href: '/notices', icon: FileText },
-    { 
-      name: 'Portals', 
-      href: '#',
-      icon: LogIn,
-      dropdown: [
-        { name: 'Student Portal', href: '/student-portal', icon: LogIn },
-        { name: 'Parent Portal', href: '/parent-portal', icon: LogIn }
-      ]
-    },
     { name: 'Contact', href: '/contact', icon: Contact },
   ];
 

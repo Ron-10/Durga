@@ -13,9 +13,7 @@ const Admissions = lazy(() => import('./pages/Admissions'));
 const Notices = lazy(() => import('./pages/Notices'));
 const Gallery = lazy(() => import('./pages/Gallery'));
 const Contact = lazy(() => import('./pages/Contact'));
-const Staff = lazy(() => import('./pages/Staff'));
 const Events = lazy(() => import('./pages/Events'));
-const Results = lazy(() => import('./pages/Results'));
 const Facilities = lazy(() => import('./pages/Facilities'));
 const Academics = lazy(() => import('./pages/Academics'));
 
@@ -41,9 +39,7 @@ function App() {
               <Route path="/notices" element={<Notices />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/staff" element={<Staff />} />
               <Route path="/events" element={<Events />} />
-              <Route path="/results" element={<Results />} />
               <Route path="/facilities" element={<Facilities />} />
               <Route path="/academics" element={<Academics />} />
               
