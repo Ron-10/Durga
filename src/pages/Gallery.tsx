@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Camera, Filter, Sparkles, Search, Grid, List, Download, Heart, Share2, Eye } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useFloatingHoverEffect } from '../hooks/useFloatingHoverEffect';
+import { useSpring } from 'framer-motion';
 
 const images = [
   {
@@ -156,6 +158,8 @@ const Gallery = () => {
   const [viewMode, setViewMode] = useState('grid');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const scale = useSpring(hoveredIndex !== null ? 1.14 : 1, { stiffness: 300, damping: 20, mass: 0.2 });
 
   const categories = ['All', 'Academic', 'Sports', 'Cultural', 'Events', 'Art'];
   
@@ -316,14 +320,13 @@ const Gallery = () => {
                 : "space-y-6"
               }
             >
-              {filteredImages.map((image, index) => (
+              {filteredImages.map((image, idx) => (
                 <motion.div
                   key={image.id}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ scale: 1.02, y: -5 }}
-                  className="group relative overflow-hidden rounded-2xl shadow-2xl cursor-pointer bg-white hover:shadow-3xl hover:scale-105 transition-all duration-500"
+                  style={{ scale: hoveredIndex === idx ? scale : 1 }}
+                  onMouseEnter={() => setHoveredIndex(idx)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  className="will-change-transform group relative overflow-hidden rounded-2xl shadow-2xl cursor-pointer bg-white hover:shadow-3xl hover:scale-105 transition-all duration-500"
                   onClick={() => setSelectedImage(image)}
                 >
                   <div className={viewMode === 'list' ? 'w-48 h-32 flex-shrink-0' : 'aspect-square'}>

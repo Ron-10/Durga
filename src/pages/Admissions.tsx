@@ -21,7 +21,7 @@ const FAQItem = ({ question, answer, icon: Icon }: FAQItemProps) => {
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.01 }}
-        className="w-full flex justify-between items-center text-left py-6 hover:bg-white/30 rounded-2xl px-6 transition-all duration-300"
+        className="w-full flex justify-between items-center text-left py-6 hover:bg-white/30 rounded-2xl px-6 transition-colors duration-300"
       >
         <div className="flex items-center">
           <div className="p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl mr-4">
@@ -43,7 +43,7 @@ const FAQItem = ({ question, answer, icon: Icon }: FAQItemProps) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
             <div className="pb-6 px-6">
@@ -109,7 +109,6 @@ const Admissions = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden">
-      {/* Floating Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(30)].map((_, i) => (
           <motion.div
@@ -134,7 +133,6 @@ const Admissions = () => {
         ))}
       </div>
 
-      {/* Hero Section */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -151,7 +149,6 @@ const Admissions = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
         </div>
         
-        {/* Animated Education Icons */}
         <div className="absolute inset-0">
           {[GraduationCap, FileText, Users, Award, Heart].map((Icon, i) => (
             <motion.div
@@ -229,7 +226,6 @@ const Admissions = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* === ADMISSION FORM MOVED HERE (FIRST PHASE) === */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -259,7 +255,7 @@ const Admissions = () => {
                       name="studentName"
                       value={formData.studentName}
                       onChange={handleInputChange}
-                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
+                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-[border-color,box-shadow] duration-300 bg-white/50 backdrop-blur-sm"
                       placeholder="Enter student's full name"
                       required
                     />
@@ -277,10 +273,13 @@ const Admissions = () => {
                       name="grade"
                       value={formData.grade}
                       onChange={handleInputChange}
-                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
+                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-[border-color,box-shadow] duration-300 bg-white/50 backdrop-blur-sm"
                       required
                     >
                       <option value="">Select Grade</option>
+                      <option value="Nursery">Nursery</option>
+                      <option value="LKG">LKG</option>
+                      <option value="UKG">UKG</option>
                       <option value="1">Grade 1</option>
                       <option value="2">Grade 2</option>
                       <option value="3">Grade 3</option>
@@ -290,7 +289,6 @@ const Admissions = () => {
                       <option value="7">Grade 7</option>
                       <option value="8">Grade 8</option>
                       <option value="9">Grade 9</option>
-                      <option value="10">Grade 10</option>
                     </select>
                   </motion.div>
                   
@@ -307,7 +305,7 @@ const Admissions = () => {
                       name="parentName"
                       value={formData.parentName}
                       onChange={handleInputChange}
-                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
+                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-[border-color,box-shadow] duration-300 bg-white/50 backdrop-blur-sm"
                       placeholder="Enter parent's full name"
                       required
                     />
@@ -326,7 +324,7 @@ const Admissions = () => {
                       name="contact"
                       value={formData.contact}
                       onChange={handleInputChange}
-                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
+                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-[border-color,box-shadow] duration-300 bg-white/50 backdrop-blur-sm"
                       placeholder="Enter contact number"
                       required
                     />
@@ -346,7 +344,7 @@ const Admissions = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm"
+                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-[border-color,box-shadow] duration-300 bg-white/50 backdrop-blur-sm"
                       placeholder="Enter email address"
                       required
                     />
@@ -366,7 +364,7 @@ const Admissions = () => {
                       value={formData.message}
                       onChange={handleInputChange}
                       rows={6}
-                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-all duration-300 bg-white/50 backdrop-blur-sm resize-none"
+                      className="w-full px-6 py-4 border border-gray-300 rounded-2xl focus:ring-4 focus:ring-blue-500/20 focus:border-blue-500 transition-[border-color,box-shadow] duration-300 bg-white/50 backdrop-blur-sm resize-none"
                       placeholder="Tell us more about your inquiry, any specific questions, or additional information you'd like to share..."
                     ></textarea>
                   </motion.div>
@@ -382,7 +380,7 @@ const Admissions = () => {
                     whileHover={{ scale: 1.05, y: -3 }}
                     whileTap={{ scale: 0.95 }}
                     type="submit"
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-16 py-6 rounded-full font-bold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-2xl text-xl relative overflow-hidden group"
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-16 py-6 rounded-full font-bold hover:from-blue-700 hover:to-purple-700 transition-colors duration-300 shadow-2xl text-xl relative overflow-hidden group"
                   >
                     <span className="relative z-10">Submit Inquiry</span>
                     <motion.div
@@ -392,16 +390,15 @@ const Admissions = () => {
                 </motion.div>
               </form>
               {status === 'success' && (
-                <div className="text-green-600 text-center font-semibold">Your inquiry has been sent successfully!</div>
+                <div className="mt-4 text-green-600 text-center font-semibold">Your inquiry has been sent successfully! We will get back to you shortly.</div>
               )}
               {status === 'error' && (
-                <div className="text-red-600 text-center font-semibold">There was an error sending your inquiry. Please try again.</div>
+                <div className="mt-4 text-red-600 text-center font-semibold">There was an error sending your inquiry. Please try again.</div>
               )}
             </div>
           </div>
         </motion.div>
 
-        {/* Enhanced Admission Timeline */}
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -450,22 +447,24 @@ const Admissions = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ scale: 1.05, y: -10 }}
-                  className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl hover:scale-105 transition-all duration-500 overflow-hidden"
+                  className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl transition-shadow duration-300 overflow-hidden"
                 >
-                  <div className="backdrop-blur-xl bg-white/20 p-8 rounded-3xl shadow-2xl border border-white/30 hover:bg-white/30 transition-all duration-700 h-full">
+                  <div className="backdrop-blur-xl bg-white/20 p-8 rounded-3xl shadow-2xl border border-white/30 hover:bg-white/30 transition-colors duration-300 h-full flex flex-col">
                     <motion.div 
-                      whileHover={{ scale: 1.1, rotate: 360 }}
-                      transition={{ duration: 0.6 }}
+                      whileHover={{ scale: 1.1, rotate: 15 }}
+                      transition={{ type: 'spring', stiffness: 300 }}
                       className={`w-20 h-20 mx-auto mb-6 rounded-3xl bg-gradient-to-r ${step.gradient} flex items-center justify-center shadow-2xl`}
                     >
                       <step.icon className="w-10 h-10 text-white" />
                     </motion.div>
                     
-                    <h3 className="text-xl font-bold mb-4 text-gray-800">{step.title}</h3>
-                    <p className="text-gray-600 leading-relaxed mb-4">{step.description}</p>
+                    <h3 className="text-xl font-bold mb-4 text-gray-800 text-center">{step.title}</h3>
+                    <p className="text-gray-600 leading-relaxed mb-4 flex-grow text-center">{step.description}</p>
                     
-                    <div className={`inline-block px-4 py-2 rounded-full bg-gradient-to-r ${step.gradient} text-white text-sm font-semibold`}>
-                      Duration: {step.duration}
+                    <div className="text-center mt-auto">
+                      <div className={`inline-block px-4 py-2 rounded-full bg-gradient-to-r ${step.gradient} text-white text-sm font-semibold`}>
+                        Duration: {step.duration}
+                      </div>
                     </div>
                   </div>
                   
@@ -474,7 +473,7 @@ const Admissions = () => {
                       initial={{ scale: 0 }}
                       whileInView={{ scale: 1 }}
                       transition={{ delay: 0.5 + index * 0.1 }}
-                      className="hidden lg:block absolute top-1/2 -right-4 w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center z-10"
+                      className="hidden lg:block absolute top-1/2 -right-4 w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center z-10 shadow-lg"
                     >
                       <ChevronRight className="w-4 h-4 text-white" />
                     </motion.div>
@@ -485,7 +484,6 @@ const Admissions = () => {
           </div>
         </motion.div>
 
-        {/* Enhanced Key Admission Dates */}
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -499,10 +497,10 @@ const Admissions = () => {
             <div className="p-10">
               <div className="space-y-6">
                 {[
-                  { event: 'Application Period Opens', date: 'November 1, 2023', status: 'Open', description: 'Online application portal goes live with all forms and guidelines', color: 'green' },
-                  { event: 'Application Deadline', date: 'January 31, 2024', status: 'Upcoming', description: 'Last date to submit completed applications with all documents', color: 'yellow' },
-                  { event: 'Entrance Test Dates', date: 'February 10-12, 2024', status: 'Upcoming', description: 'Three-day assessment period for all eligible candidates', color: 'blue' },
-                  { event: 'Results Announcement', date: 'February 28, 2024', status: 'Upcoming', description: 'Admission results published on school website and portal', color: 'purple' },
+                  { event: 'Application Period Opens', date: 'November 1, 2024', status: 'Upcoming', description: 'Online application portal goes live with all forms and guidelines', color: 'blue' },
+                  { event: 'Application Deadline', date: 'January 31, 2025', status: 'Upcoming', description: 'Last date to submit completed applications with all documents', color: 'yellow' },
+                  { event: 'Entrance Test Dates', date: 'February 10-12, 2025', status: 'Upcoming', description: 'Three-day assessment period for all eligible candidates', color: 'yellow' },
+                  { event: 'Results Announcement', date: 'February 28, 2025', status: 'Upcoming', description: 'Admission results published on school website and portal', color: 'purple' },
                 ].map((item, index) => (
                   <motion.div 
                     key={index}
@@ -511,7 +509,7 @@ const Admissions = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: index * 0.1 }}
                     whileHover={{ scale: 1.02, x: 10 }}
-                    className="p-8 bg-white/50 rounded-3xl hover:bg-white/70 transition-all duration-500 border-l-4 border-blue-500"
+                    className="p-8 bg-white/50 rounded-3xl hover:bg-white/70 transition-colors duration-300 border-l-4 border-blue-500"
                   >
                     <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
                       <div className="flex items-start lg:items-center mb-4 lg:mb-0">
@@ -522,7 +520,7 @@ const Admissions = () => {
                         </div>
                       </div>
                       
-                      <div className="text-right">
+                      <div className="text-left lg:text-right mt-4 lg:mt-0">
                         <div className="text-gray-800 font-bold text-lg mb-2">{item.date}</div>
                         <div className={`inline-block px-4 py-2 rounded-full text-sm font-semibold ${
                           item.status === 'Open' ? 'bg-green-100 text-green-800' : 
@@ -540,7 +538,6 @@ const Admissions = () => {
           </div>
         </motion.div>
 
-        {/* Enhanced Required Documents */}
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -567,7 +564,7 @@ const Admissions = () => {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ scale: 1.05, y: -5 }}
-                  className="p-6 bg-white/50 rounded-2xl hover:bg-white/70 transition-all duration-500 text-center group"
+                  className="p-6 bg-white/50 rounded-2xl hover:bg-white/70 transition-colors duration-300 text-center group"
                 >
                   <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
                   <div className="flex items-center justify-center mb-3">
@@ -581,7 +578,6 @@ const Admissions = () => {
           </div>
         </motion.div>
 
-        {/* Enhanced Testimonials */}
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -624,9 +620,7 @@ const Admissions = () => {
                 <div className="p-8">
                   <div className="flex text-yellow-400 mb-4">
                     {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.955a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.955c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.176 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.955a1 1 0 00-.364-1.118L2.45 9.382c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69L9.049 2.927z" />
-                      </svg>
+                      <Star key={i} className="w-5 h-5" fill="currentColor" />
                     ))}
                   </div>
                   
@@ -650,7 +644,6 @@ const Admissions = () => {
         </motion.div>
 
 
-        {/* Enhanced FAQ Section */}
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}

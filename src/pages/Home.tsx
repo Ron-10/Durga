@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useInView } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
-import { 
-  ArrowRight, 
-  TrendingUp, 
-  Users, 
-  Award, 
+import {
+  ArrowRight,
+  TrendingUp,
+  Users,
+  Award,
   BookOpen,
   Calendar,
   Download,
@@ -46,6 +46,9 @@ import CalendarWidget from '../components/CalendarWidget';
 import EmergencyBanner from '../components/EmergencyBanner';
 import AnimatedBackground from '../components/AnimatedBackground';
 
+// NOTE: The hoverEffects and mobileStyles objects from your other file are assumed to be available
+// or their principles are applied directly to the classNames below for optimization.
+
 const Home = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -54,7 +57,7 @@ const Home = () => {
 
   useEffect(() => {
     setIsVisible(true);
-    
+
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 400);
     };
@@ -67,35 +70,34 @@ const Home = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Original stats array (reverted)
   const stats = [
-    { 
-      number: '31+', 
-      label: 'Years of Excellence', 
+    {
+      number: '31+',
+      label: 'Years of Excellence',
       icon: Award,
       description: 'Providing transformative education since 1994',
       achievement: 'Achieving 100% success rate in S.E.E. examinations annually',
       color: 'from-blue-500 to-blue-600'
     },
-    { 
-      number: '500+', 
-      label: 'Students', 
+    {
+      number: '500+',
+      label: 'Students',
       icon: Users,
       description: 'Nurturing young minds for academic success',
       achievement: '98% student satisfaction rate',
       color: 'from-green-500 to-green-600'
     },
-    { 
-      number: '35', 
-      label: 'Expert Educators', 
+    {
+      number: '35',
+      label: 'Expert Educators',
       icon: BookOpen,
       description: 'Years of experience industry professionals',
       achievement: '25:1 student-teacher ratio',
       color: 'from-purple-500 to-purple-600'
     },
-    { 
-      number: '100%', 
-      label: 'Success Rate', 
+    {
+      number: '100%',
+      label: 'Success Rate',
       icon: TrendingUp,
       description: 'Graduates achieving their goals',
       achievement: '100% college acceptance rate',
@@ -201,7 +203,6 @@ const Home = () => {
     }
   ];
 
-  // ***** UPDATED NEWS AND EVENTS DATA *****
   const newsItems = [
     {
       title: 'Final Academic Result 2081',
@@ -304,7 +305,6 @@ const Home = () => {
     }
   ];
 
-  // Original quickStats array (reverted)
   const quickStats = [
     { label: 'Academic Excellence', value: '100%', icon: Award },
     { label: 'Sports Championships', value: '20+', icon: Trophy },
@@ -312,7 +312,6 @@ const Home = () => {
     { label: 'Excellent Years', value: '31+', icon: Heart }
   ];
 
-  // 1. Add a mapping of AD to BS dates for news and events
   const adToBsMap = {
     '2025-04-10': '२८ चैत २०८१', // Final Academic Result 2081
     '2025-04-20': '७ बैशाख २०८२', // New Academic Session 2082 Begins
@@ -326,14 +325,10 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      
-
-      {/* Enhanced Hero Section */}
       <div className="relative">
         <Hero />
       </div>
 
-      {/* New Welcome and 'What Makes Us Special' Section */}
       <section className="relative py-16 bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100 overflow-hidden">
         <AnimatedBackground pattern="waves" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-5xl relative z-10">
@@ -367,48 +362,43 @@ const Home = () => {
             variants={{ visible: { transition: { staggerChildren: 0.18 } }, hidden: {} }}
             className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12"
           >
-            {/* Academic Excellence */}
-            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-400 hover:shadow-2xl transition-all duration-300">
+            {/* OPTIMIZED: Replaced 'transition-all duration-50' with specific, smoother transitions. Added a subtle scale effect on hover. */}
+            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-400 hover:shadow-2xl hover:scale-[1.03] will-change-transform transition-[box-shadow,transform] duration-300 ease-out">
               <Award className="w-8 h-8 text-blue-500 mt-1" />
               <div>
                 <h4 className="font-bold text-lg text-blue-900 mb-1">Academic Excellence</h4>
                 <p className="text-gray-700">We provide a strong foundation in English-medium education, science, mathematics, and technology, helping students build the knowledge and skills they need for the future.</p>
               </div>
             </motion.div>
-            {/* Character & Humanism */}
-            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-green-400 hover:shadow-2xl transition-all duration-300">
+            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-green-400 hover:shadow-2xl hover:scale-[1.03] will-change-transform transition-[box-shadow,transform] duration-300 ease-out">
               <Heart className="w-8 h-8 text-green-500 mt-1" />
               <div>
                 <h4 className="font-bold text-lg text-green-900 mb-1">Character & Humanism</h4>
                 <p className="text-gray-700">Our focus goes beyond academics — we instill honesty, respect, responsibility, and compassion, preparing students to contribute positively to society.</p>
               </div>
             </motion.div>
-            {/* Sports & Physical Education */}
-            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-yellow-400 hover:shadow-2xl transition-all duration-300">
+            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-yellow-400 hover:shadow-2xl hover:scale-[1.03] will-change-transform transition-[box-shadow,transform] duration-300 ease-out">
               <Trophy className="w-8 h-8 text-yellow-500 mt-1" />
               <div>
                 <h4 className="font-bold text-lg text-yellow-900 mb-1">Sports & Physical Education</h4>
                 <p className="text-gray-700">From football and cricket to athletics and indoor games, we encourage every child to develop sportsmanship, teamwork, and a healthy lifestyle.</p>
               </div>
             </motion.div>
-            {/* Music, Dance, and the Arts */}
-            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-pink-400 hover:shadow-2xl transition-all duration-300">
+            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-pink-400 hover:shadow-2xl hover:scale-[1.03] will-change-transform transition-[box-shadow,transform] duration-300 ease-out">
               <Music className="w-8 h-8 text-pink-500 mt-1" />
               <div>
                 <h4 className="font-bold text-lg text-pink-900 mb-1">Music, Dance, and the Arts</h4>
                 <p className="text-gray-700">Our school promotes creativity through regular music classes, dance workshops, and art competitions, helping students express themselves confidently.</p>
               </div>
             </motion.div>
-            {/* Co-Curricular & Extra-Curricular Activities */}
-            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-purple-400 hover:shadow-2xl transition-all duration-300">
+            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-purple-400 hover:shadow-2xl hover:scale-[1.03] will-change-transform transition-[box-shadow,transform] duration-300 ease-out">
               <Star className="w-8 h-8 text-purple-500 mt-1" />
               <div>
                 <h4 className="font-bold text-lg text-purple-900 mb-1">Co-Curricular & Extra-Curricular Activities</h4>
                 <p className="text-gray-700">We organize debates, quizzes, exhibitions, educational tours, and social service programs that broaden horizons and build leadership skills.</p>
               </div>
             </motion.div>
-            {/* Safe and Supportive Environment */}
-            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-cyan-400 hover:shadow-2xl transition-all duration-300">
+            <motion.div variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0 } }} className="flex items-start gap-4 bg-white rounded-2xl shadow-lg p-6 border-l-4 border-cyan-400 hover:shadow-2xl hover:scale-[1.03] will-change-transform transition-[box-shadow,transform] duration-300 ease-out">
               <ShieldCheck className="w-8 h-8 text-cyan-500 mt-1" />
               <div>
                 <h4 className="font-bold text-lg text-cyan-900 mb-1">Safe and Supportive Environment</h4>
@@ -419,59 +409,54 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Welcome to Durga Aawashiya English School Section */}
-      <section className="py-10  relative overflow-hidden">
+      <section className="py-10 relative overflow-hidden">
         <AnimatedBackground pattern="dots" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
           <AboutPreview />
         </div>
       </section>
 
-      {/* Quick Stats Section - REVISED FOR BETTER UI/BALANCE */}
-      <section className="py-16 bg-gradient-to-br from-indigo-50 to-blue-50 relative overflow-hidden"> {/* Consistent padding and background */}
+      <section className="py-16 bg-gradient-to-br from-indigo-50 to-blue-50 relative overflow-hidden">
         <AnimatedBackground pattern="dots" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
-          {/* Section Header */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="text-center mb-16" // Consistent bottom margin
+            className="text-center mb-16"
           >
-            <h3 className="text-4xl md:text-5xl font-extrabold text-blue-900 mb-4"> {/* Larger, bolder heading */}
+            <h3 className="text-4xl md:text-5xl font-extrabold text-blue-900 mb-4">
               Our Achievements at a Glance
             </h3>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto"> {/* Larger paragraph text */}
+            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
               Discover the numbers that reflect our commitment to excellence and student success.
             </p>
           </motion.div>
-          
-          {/* Quick Stats */}
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-8 items-stretch" // Increased gap to 8, added items-stretch
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 items-stretch"
           >
             {quickStats.map((stat, index) => (
-              <motion.div 
-                key={index} 
-                className="group relative flex flex-col items-center justify-center p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl hover:scale-105 transition-all duration-500"
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.14, y: -18, rotateZ: 1.5 }}
+                transition={{ type: 'spring', stiffness: 900, damping: 14, mass: 0.7 }}
+                // OPTIMIZED: Replaced 'transition-all' with specific properties for smoother fallback transitions.
+                className="group relative flex flex-col items-center justify-center p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-[0_8px_32px_0_rgba(37,99,235,0.25)] hover:ring-4 hover:ring-blue-400/40 hover:bg-gradient-to-br hover:from-blue-100 hover:to-purple-100 transition-[box-shadow,ring-color,background-color] duration-300 ease-in-out"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
-                <stat.icon className="w-12 h-12 text-blue-600 mx-auto mb-4 group-hover:scale-110 transition-transform relative z-10" />
-                
+                <stat.icon className="w-12 h-12 text-blue-600 mx-auto mb-4 group-hover:rotate-6 group-hover:scale-125 transition-transform duration-300" />
                 <div className="text-5xl font-extrabold text-blue-900 mb-2 relative z-10 text-center">{stat.value}</div>
-                
                 <div className="text-lg font-semibold text-gray-700 relative z-10 text-center leading-tight">
-                    {stat.label}
+                  {stat.label}
                 </div>
               </motion.div>
             ))}
@@ -479,7 +464,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* START: New SEE Results Section */}
       <section className="py-16 bg-white relative overflow-hidden">
         <AnimatedBackground pattern="grid" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
@@ -503,13 +487,13 @@ const Home = () => {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-            {/* 100% Pass Rate Card */}
-              <motion.div
+            <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-                viewport={{ once: true }}
-              className="group relative flex flex-col items-center text-center p-8 rounded-3xl shadow-2xl bg-gradient-to-br from-blue-500 to-blue-700 text-white hover:shadow-blue-400/50 transition-all duration-300"
+              viewport={{ once: true }}
+              // OPTIMIZED: Replaced 'transition-all' with a specific property.
+              className="group relative flex flex-col items-center text-center p-8 rounded-3xl shadow-2xl bg-gradient-to-br from-blue-500 to-blue-700 text-white hover:shadow-blue-400/50 transition-shadow duration-300"
             >
               <ShieldCheck className="w-20 h-20 mb-4 opacity-20 absolute -top-4 -left-4" />
               <h3 className="text-2xl font-bold mb-2 z-10">Unbroken Record of Success</h3>
@@ -520,14 +504,14 @@ const Home = () => {
               </p>
             </motion.div>
 
-            {/* Latest Results Card */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
               viewport={{ once: true }}
-              className="group relative flex flex-col items-center text-center p-8 rounded-3xl shadow-2xl bg-white border border-gray-100 hover:shadow-xl transition-all duration-300"
-              >
+              // OPTIMIZED: Replaced 'transition-all' with a specific property.
+              className="group relative flex flex-col items-center text-center p-8 rounded-3xl shadow-2xl bg-white border border-gray-100 hover:shadow-xl transition-shadow duration-300"
+            >
               <Trophy className="w-20 h-20 mb-4 text-gray-100 absolute -top-4 -right-4" />
               <h3 className="text-2xl font-bold text-gray-800 mb-2 z-10">Latest SEE Achievements</h3>
               <div className="text-8xl font-black my-4 text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-orange-500 z-10">3.91</div>
@@ -535,11 +519,10 @@ const Home = () => {
               <p className="text-gray-600 leading-relaxed max-w-sm z-10">
                 Our students continue to set new benchmarks. In the 2081 SEE results, we celebrated a top GPA of 3.91, with over 95% of students securing A or A+ grades.
               </p>
-              </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
-      {/* END: New SEE Results Section */}
 
       <motion.section
         initial={{ opacity: 0 }}
@@ -577,27 +560,23 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -8, scale: 1.03 }}
-                className="group relative p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col h-full"
+                whileHover={{ y: -16, scale: 1.12 }}
+                // OPTIMIZED: Replaced 'transition-all' with specific properties.
+                className="group relative p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl transition-shadow duration-300 overflow-hidden flex flex-col h-full"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}></div>
-
+                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
                 <div className={`w-20 h-20 bg-gradient-to-br ${stat.color} rounded-full flex items-center justify-center mb-6 group-hover:scale-105 transition-transform duration-300`}>
                   <stat.icon className="w-10 h-10 text-white" />
                 </div>
-
                 <h3 className="text-5xl font-extrabold text-blue-900 mb-2 group-hover:text-purple-700 transition-colors">
                   {stat.number}
                 </h3>
-
                 <p className="text-xl font-semibold text-gray-800 mb-3 flex-grow leading-tight">
                   {stat.label}
                 </p>
-
                 <p className="text-sm text-gray-600 mb-4 leading-relaxed">
                   {stat.description}
                 </p>
-
                 <div className="text-center mt-auto">
                   <span className={`inline-flex items-center px-4 py-2 bg-gradient-to-r ${stat.color} text-white rounded-full text-xs font-semibold`}>
                     <Trophy className="w-3 h-3 mr-2" />
@@ -610,7 +589,6 @@ const Home = () => {
         </div>
       </motion.section>
 
-      {/* Enhanced News, Events & Calendar Section */}
       <section className="py-10 bg-gray-50 relative overflow-hidden">
         <AnimatedBackground pattern="dots" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
@@ -633,9 +611,7 @@ const Home = () => {
             </p>
           </motion.div>
 
-         
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
-            {/* News & Events Slider */}
             <div className="lg:col-span-8 flex flex-col h-full min-h-[540px]">
               <div className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-100 h-full flex flex-col">
                 <div className="flex items-center justify-between p-8 border-b bg-gradient-to-r from-blue-50 to-purple-50">
@@ -655,12 +631,12 @@ const Home = () => {
                       prevEl: '.swiper-button-prev-custom',
                       nextEl: '.swiper-button-next-custom',
                     }}
-                    pagination={{ 
+                    pagination={{
                       clickable: true,
                       bulletActiveClass: 'swiper-pagination-bullet-active !bg-blue-600',
                       bulletClass: 'swiper-pagination-bullet !bg-gray-300 !w-3 !h-3 !mx-1 !opacity-100'
                     }}
-                    autoplay={{ 
+                    autoplay={{
                       delay: 4000,
                       disableOnInteraction: false
                     }}
@@ -677,65 +653,66 @@ const Home = () => {
                         <SwiperSlide key={index} className="h-full">
                           <motion.div
                             whileHover={{ y: -5 }}
-                            className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl overflow-hidden h-full hover:shadow-lg transition-all duration-300 cursor-pointer group flex flex-col h-full"
+                            // OPTIMIZED: Replaced 'transition-all' with a specific property.
+                            className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl overflow-hidden h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer group flex flex-col h-full"
                           >
                             <div className="p-6 flex flex-col flex-grow">
                               <div className="flex items-center justify-between mb-4">
-                                {/* --- UPDATED DATE SPAN --- */}
                                 <span className="text-blue-600 text-sm font-medium flex items-baseline gap-2">
                                   {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                                   <span className="text-xs text-gray-500 font-normal">({adToBsMap[item.date] || ''})</span>
                                 </span>
-                                <span className={`text-xs font-semibold px-3 py-1 rounded-full ${
-                                  ('excerpt' in item) 
-                                    ? 'bg-blue-100 text-blue-800' 
-                                    : item.featured 
+                                <span className={`text-xs font-semibold px-3 py-1 rounded-full ${('excerpt' in item)
+                                    ? 'bg-blue-100 text-blue-800'
+                                    : item.featured
                                       ? 'bg-yellow-100 text-yellow-800'
                                       : 'bg-green-100 text-green-800'
-                                }`}>
+                                  }`}>
                                   {('excerpt' in item) ? 'NEWS' : item.featured ? 'FEATURED' : 'EVENT'}
                                 </span>
                               </div>
-                              
+
                               <h4 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
                                 {item.title}
                               </h4>
-                              
+
                               <p className="text-sm text-gray-600 mb-4 leading-relaxed flex-grow">
                                 {('excerpt' in item) ? item.excerpt : item.description}
                               </p>
-                              
+
                               <div className="mt-auto">
-                              {('time' in item) && (
-                                <div className="space-y-2 mb-4 text-xs text-gray-500">
-                                  <div className="flex items-center">
-                                    <Clock className="w-3 h-3 mr-2" />
-                                    {item.time}
+                                {('time' in item) && (
+                                  <div className="space-y-2 mb-4 text-xs text-gray-500">
+                                    <div className="flex items-center">
+                                      <Clock className="w-3 h-3 mr-2" />
+                                      {item.time}
+                                    </div>
+                                    <div className="flex items-center">
+                                      <MapPin className="w-3 h-3 mr-2" />
+                                      {item.location}
+                                    </div>
                                   </div>
-                                  <div className="flex items-center">
-                                    <MapPin className="w-3 h-3 mr-2" />
-                                    {item.location}
-                                  </div>
-                                </div>
-                              )}
-                              
-                              {('readTime' in item) && (
-                                <div className="text-xs text-gray-500 mb-4">
-                                  {item.readTime}
-                                </div>
-                              )}
-                              
-                              <div className="flex items-center justify-between">
-                                  <a href="#" className="flex items-center text-blue-600 text-sm font-medium hover:underline group-hover:text-blue-700">
-                                  {('excerpt' in item) ? 'Read More' : 'Learn More'}
-                                  <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                                  </a>
-                                
-                                {('registrationOpen' in item) && item.registrationOpen && (
-                                  <button className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold hover:bg-green-200 transition-colors">
-                                    Register
-                                  </button>
                                 )}
+
+                                {('readTime' in item) && (
+                                  <div className="text-xs text-gray-500 mb-4">
+                                    {item.readTime}
+                                  </div>
+                                )}
+
+                                <div className="flex items-center justify-between">
+                                  {/* OPTIMIZED: Replaced 'transition-all' with specific properties. */}
+                                  <a href="#" className="flex items-center text-blue-600 text-sm font-medium hover:underline group-hover:text-blue-700 hover:bg-blue-600 hover:text-white hover:scale-105 will-change-transform transition-[color,background-color,transform] duration-200 ease-in-out">
+                                    {('excerpt' in item) ? 'Read More' : 'Learn More'}
+                                    <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                                  </a>
+
+                                  {('registrationOpen' in item) && item.registrationOpen && (
+                                    // OPTIMIZED: Replaced 'transition-all' with specific properties.
+                                    <button className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold hover:bg-green-600 hover:text-white hover:scale-105 will-change-transform transition-[color,background-color,transform] duration-200 ease-in-out">
+                                      Register
+                                    </button>
+                                  )}
                                 </div>
                               </div>
                             </div>
@@ -744,18 +721,17 @@ const Home = () => {
                       ))}
                   </Swiper>
 
-                  {/* --- UPDATED SLIDER BUTTONS --- */}
-                  <button className="swiper-button-prev-custom absolute left-2 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-lg hover:shadow-xl text-blue-600 transition-all duration-300 hover:scale-110 group after:hidden">
+                  {/* OPTIMIZED: Replaced 'transition-all' with specific properties. */}
+                  <button className="swiper-button-prev-custom absolute left-2 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-lg hover:shadow-xl text-blue-600 will-change-transform transition-[transform,box-shadow] duration-200 ease-out hover:scale-110 group after:hidden">
                     <ChevronLeft className="w-6 h-6 group-hover:scale-110 transition-transform" />
                   </button>
-                  <button className="swiper-button-next-custom absolute right-2 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-lg hover:shadow-xl text-blue-600 transition-all duration-300 hover:scale-110 group after:hidden">
+                  <button className="swiper-button-next-custom absolute right-2 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-lg hover:shadow-xl text-blue-600 will-change-transform transition-[transform,box-shadow] duration-200 ease-out hover:scale-110 group after:hidden">
                     <ChevronRight className="w-6 h-6 group-hover:scale-110 transition-transform" />
                   </button>
                 </div>
               </div>
             </div>
 
-            {/* Calendar Widget */}
             <div className="lg:col-span-4 flex flex-col h-full min-h-[540px]">
               <div className="h-full flex flex-col">
                 <CalendarWidget events={[...newsItems, ...upcomingEvents]} adToBsMap={adToBsMap} />
@@ -765,7 +741,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Enhanced Why Choose Us Section */}
       <section className="py-16 bg-gradient-to-br from-blue-50 to-indigo-50 relative overflow-hidden">
         <AnimatedBackground pattern="waves" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
@@ -796,8 +771,9 @@ const Home = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{ y: -8, scale: 1.03 }}
-                className="group relative p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl transition-all duration-500 flex flex-col h-full"
+                whileHover={{ y: -12, scale: 1.07 }}
+                // OPTIMIZED: Replaced 'transition-all' with a specific property.
+                className="group relative p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl transition-shadow duration-300 flex flex-col h-full"
               >
                 <div className="relative mb-6 flex justify-center">
                   <div className={`w-24 h-24 bg-gradient-to-br ${feature.color} rounded-full flex items-center justify-center group-hover:scale-105 transition-transform duration-300 shadow-md`}>
@@ -808,15 +784,12 @@ const Home = () => {
                     />
                   </div>
                 </div>
-
                 <h3 className="text-2xl font-bold text-center mb-4 group-hover:text-blue-600 transition-colors">
                   {feature.title}
                 </h3>
-
                 <p className="text-gray-700 text-center mb-6 leading-relaxed flex-grow min-h-[4rem]">
                   {feature.description}
                 </p>
-
                 <div className="space-y-3 mt-auto">
                   {feature.highlights.map((highlight, idx) => (
                     <div key={idx} className="flex items-center text-base text-gray-700">
@@ -831,7 +804,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Enhanced Student Life Section */}
       <section className="py-16 bg-gray-50 relative overflow-hidden">
         <AnimatedBackground pattern="grid" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
@@ -863,13 +835,14 @@ const Home = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 whileHover={{ scale: 1.02 }}
-                className="group relative rounded-3xl shadow-2xl bg-white hover:shadow-3xl transition-all duration-500 overflow-hidden border border-gray-100 flex flex-col h-full"
+                // OPTIMIZED: Replaced 'transition-all' with a specific property.
+                className="group relative rounded-3xl shadow-2xl bg-white hover:shadow-3xl transition-shadow duration-300 overflow-hidden border border-gray-100 flex flex-col h-full"
               >
                 <div className="relative h-64 overflow-hidden">
                   <img
                     src={activity.image}
                     alt={activity.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   <div className="absolute bottom-6 left-6 text-white">
@@ -878,16 +851,13 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-
                 <div className="p-8 flex flex-col flex-grow">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
                     {activity.title}
                   </h3>
-
                   <p className="text-gray-700 mb-6 leading-relaxed text-base flex-grow min-h-[3rem]">
                     {activity.description}
                   </p>
-
                   <div className="space-y-3 mt-auto">
                     <h4 className="font-semibold text-gray-800 text-lg">Programs Available:</h4>
                     <div className="flex flex-wrap gap-2">
@@ -908,7 +878,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Enhanced Testimonials Section */}
       <section className="py-16 bg-gradient-to-br from-yellow-50 to-orange-50 relative overflow-hidden">
         <AnimatedBackground pattern="waves" />
         <div className="container mx-auto px-4 md:px-6 lg:max-w-7xl relative z-10">
@@ -937,8 +906,8 @@ const Home = () => {
             slidesPerView={1}
             loop={true}
             navigation={{
-              prevEl: '.swiper-button-prev-testimonial', // Custom class
-              nextEl: '.swiper-button-next-testimonial', // Custom class
+              prevEl: '.swiper-button-prev-testimonial',
+              nextEl: '.swiper-button-next-testimonial',
             }}
             pagination={{
               clickable: true,
@@ -959,24 +928,24 @@ const Home = () => {
               <SwiperSlide key={index}>
                 <motion.div
                   whileHover={{ y: -8, scale: 1.02 }}
-                  className="group relative p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl transition-all duration-500 overflow-hidden flex flex-col h-full"
+                  // OPTIMIZED: Replaced 'transition-all' with a specific property.
+                  className="group relative p-8 rounded-2xl shadow-xl bg-white border border-gray-100 hover:shadow-2xl transition-shadow duration-300 overflow-hidden flex flex-col h-full"
                 >
                   <div className="flex items-center justify-center mb-6">
                     {[...Array(testimonial.rating)].map((_, i) => (
                       <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
                     ))}
                   </div>
-
                   <blockquote className="text-gray-700 mb-8 italic text-center leading-relaxed text-lg flex-grow min-h-[6rem]">
                     "{testimonial.text}"
                   </blockquote>
-
                   <div className="border-t border-gray-200 pt-6 mt-auto">
                     <div className="flex items-center space-x-4">
                       <img
                         src={testimonial.image}
                         alt={testimonial.name}
-                        className="w-16 h-16 rounded-full object-cover ring-4 ring-blue-200 group-hover:ring-blue-300 transition-all duration-300 shadow-md"
+                        // OPTIMIZED: Replaced 'transition-all' with a specific property.
+                        className="w-16 h-16 rounded-full object-cover ring-4 ring-blue-200 group-hover:ring-blue-300 transition-shadow duration-300 shadow-md"
                       />
                       <div className="flex-1">
                         <h4 className="font-bold text-gray-900 text-lg group-hover:text-blue-600 transition-colors">
@@ -992,17 +961,16 @@ const Home = () => {
                 </motion.div>
               </SwiperSlide>
             ))}
-            <button className="swiper-button-prev-testimonial absolute left-0 top-1/2 -translate-y-1/2 -ml-6 z-10 hidden lg:flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300">
+            {/* OPTIMIZED: Replaced 'transition-all' with specific properties. */}
+            <button className="swiper-button-prev-testimonial absolute left-0 top-1/2 -translate-y-1/2 -ml-6 z-10 hidden lg:flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-110 will-change-transform transition-[transform,box-shadow] duration-200 ease-out">
               <ChevronLeft className="w-7 h-7" />
             </button>
-            <button className="swiper-button-next-testimonial absolute right-0 top-1/2 -translate-y-1/2 -mr-6 z-10 hidden lg:flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300">
+            <button className="swiper-button-next-testimonial absolute right-0 top-1/2 -translate-y-1/2 -mr-6 z-10 hidden lg:flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-110 will-change-transform transition-[transform,box-shadow] duration-200 ease-out">
               <ChevronRight className="w-7 h-7" />
             </button>
           </Swiper>
         </div>
       </section>
-
-      
     </div>
   );
 };

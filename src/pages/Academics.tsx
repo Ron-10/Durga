@@ -103,16 +103,15 @@ const Academics = () => {
     },
   ];
 
-  // Splitting the data for the specific layout
   const mainPrograms = programsData.slice(0, 3);
   const secondaryProgram = programsData[3];
 
-  // A reusable card component to avoid code repetition
   const ProgramCard: React.FC<ProgramCardProps> = ({ program, ...props }) => (
     <motion.div
       variants={fadeInUp}
       whileHover={{ scale: 1.05, y: -10, rotateY: 5 }}
-      className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl transition-all duration-500 overflow-hidden transform-gpu perspective-1000 h-full flex flex-col"
+      // OPTIMIZED: Replaced 'transition-all' with specific properties for smoother fallback transitions.
+      className="group relative rounded-3xl shadow-2xl border border-white/30 bg-white/80 hover:shadow-3xl transition-[box-shadow] duration-300 overflow-hidden transform-gpu perspective-1000 h-full flex flex-col"
       {...props}
     >
       <div className={`absolute inset-0 bg-gradient-to-br ${program.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 pointer-events-none`}></div>
@@ -161,7 +160,6 @@ const Academics = () => {
     </motion.div>
   );
 
-  // UPDATED: Data for the 'Activities' tab
   const activitiesData: Activity[] = [
     {
       title: 'Sports',
@@ -181,7 +179,6 @@ const Academics = () => {
     },
   ];
 
-  // UPDATED: Data for the 'Calendar' tab
   const importantDates: ImportantDate[] = [
     { date: '2025-06-15', event: 'Unit Test Starts', context: 'The first unit tests of the new session will commence.', type: 'exam' },
     { date: '2025-06-24', event: 'First Terminal Exam Routine Published', context: 'The detailed schedule for the first terminal exams is now available.', type: 'notice' },
@@ -202,7 +199,6 @@ const Academics = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden">
-      {/* Floating Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(25)].map((_, i) => (
           <motion.div
@@ -227,7 +223,6 @@ const Academics = () => {
         ))}
       </div>
 
-      {/* Hero Section */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -320,7 +315,6 @@ const Academics = () => {
       </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Navigation Tabs */}
         <motion.div 
           variants={fadeInUp}
           initial="initial"
@@ -339,7 +333,8 @@ const Academics = () => {
                 whileHover={{ scale: 1.05, y: -3 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center px-8 py-4 rounded-2xl font-semibold transition-all duration-500 relative overflow-hidden ${
+                // OPTIMIZED: Replaced 'transition-all' with specific properties.
+                className={`flex items-center px-8 py-4 rounded-2xl font-semibold transition-[background-color,color,box-shadow] duration-300 relative overflow-hidden ${
                   activeTab === tab.id
                     ? `bg-gradient-to-r ${tab.gradient} text-white shadow-2xl`
                     : 'bg-white/50 backdrop-blur-sm text-gray-700 hover:bg-white/70 border border-white/30'
@@ -360,7 +355,6 @@ const Academics = () => {
         </motion.div>
 
         <AnimatePresence mode="wait">
-          {/* Academic Programs Tab */}
           {activeTab === 'programs' && (
             <motion.div 
               key="programs"
@@ -384,24 +378,21 @@ const Academics = () => {
                 initial="initial"
                 animate="animate"
               >
-                {/* Main Programs Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
                   {mainPrograms.map((program) => (
                     <ProgramCard key={program.title} program={program} />
                   ))}
                 </div>
 
-                {/* Centered Secondary Program */}
                 <div className="mt-16 flex justify-center">
-                   <div className="w-full lg:w-2/5">
+                    <div className="w-full lg:w-2/5">
                       <ProgramCard program={secondaryProgram} />
-                   </div>
+                    </div>
                 </div>
               </motion.div>
             </motion.div>
           )}
 
-          {/* Curriculum Tab */}
           {activeTab === 'curriculum' && (
              <motion.div 
                key="curriculum"
@@ -426,7 +417,8 @@ const Academics = () => {
                    animate={{ opacity: 1, x: 0 }}
                    transition={{ duration: 0.8, delay: 0.2 }}
                    whileHover={{ scale: 1.02, y: -5, rotateY: 5 }}
-                   className="backdrop-blur-xl bg-white/20 p-10 rounded-3xl shadow-2xl border border-white/30 hover:bg-white/30 transition-all duration-700 relative overflow-hidden"
+                   // OPTIMIZED: Replaced 'transition-all' with specific properties.
+                   className="backdrop-blur-xl bg-white/20 p-10 rounded-3xl shadow-2xl border border-white/30 hover:bg-white/30 transition-colors duration-300 relative overflow-hidden"
                  >
                    <div className="absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-xl"></div>
                    
@@ -456,7 +448,8 @@ const Academics = () => {
                            animate={{ opacity: 1, x: 0 }}
                            transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                            whileHover={{ scale: 1.02, x: 10 }}
-                           className="flex items-start p-4 bg-white/30 rounded-2xl hover:bg-white/50 transition-all duration-300"
+                           // OPTIMIZED: Replaced 'transition-all' with specific properties.
+                           className="flex items-start p-4 bg-white/30 rounded-2xl hover:bg-white/50 transition-colors duration-300"
                          >
                            <div className="text-3xl mr-4 flex-shrink-0">{method.icon}</div>
                            <div>
@@ -474,7 +467,8 @@ const Academics = () => {
                    animate={{ opacity: 1, x: 0 }}
                    transition={{ duration: 0.8, delay: 0.4 }}
                    whileHover={{ scale: 1.02, y: -5, rotateY: -5 }}
-                   className="backdrop-blur-xl bg-white/20 p-10 rounded-3xl shadow-2xl border border-white/30 hover:bg-white/30 transition-all duration-700 relative overflow-hidden"
+                   // OPTIMIZED: Replaced 'transition-all' with specific properties.
+                   className="backdrop-blur-xl bg-white/20 p-10 rounded-3xl shadow-2xl border border-white/30 hover:bg-white/30 transition-colors duration-300 relative overflow-hidden"
                  >
                    <div className="absolute -top-10 -left-10 w-32 h-32 bg-gradient-to-br from-green-400/20 to-emerald-600/20 rounded-full blur-xl"></div>
                    
@@ -503,7 +497,8 @@ const Academics = () => {
                            initial={{ opacity: 0, x: 30 }}
                            animate={{ opacity: 1, x: 0 }}
                            transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                           className="p-4 bg-white/30 rounded-2xl hover:bg-white/50 transition-all duration-300"
+                           // OPTIMIZED: Replaced 'transition-all' with specific properties.
+                           className="p-4 bg-white/30 rounded-2xl hover:bg-white/50 transition-colors duration-300"
                          >
                            <div className="flex justify-between items-center mb-2">
                              <h4 className="font-bold text-gray-800">{item.title}</h4>
@@ -525,10 +520,8 @@ const Academics = () => {
                  </motion.div>
                </div>
              </motion.div>
-           )}
+            )}
 
-
-          {/* UPDATED: Activities Tab */}
           {activeTab === 'activities' && (
             <motion.div 
               key="activities"
@@ -558,7 +551,8 @@ const Academics = () => {
                     key={activity.title}
                     variants={fadeInUp}
                     whileHover={{ scale: 1.03, y: -10, rotateY: 5 }}
-                    className="backdrop-blur-xl bg-white/20 rounded-3xl shadow-2xl border border-white/30 hover:bg-white/30 transition-all duration-700 overflow-hidden transform-gpu perspective-1000"
+                    // OPTIMIZED: Replaced 'transition-all' with specific properties.
+                    className="backdrop-blur-xl bg-white/20 rounded-3xl shadow-2xl border border-white/30 hover:bg-white/30 transition-colors duration-300 overflow-hidden transform-gpu perspective-1000"
                   >
                     <div className="p-10">
                       <motion.div
@@ -599,7 +593,6 @@ const Academics = () => {
             </motion.div>
           )}
 
-          {/* UPDATED: Calendar Tab */}
           {activeTab === 'calendar' && (
             <motion.div 
               key="calendar"
@@ -635,7 +628,8 @@ const Academics = () => {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
                             whileHover={{ scale: 1.02, x: 10 }}
-                            className="p-6 bg-white/50 rounded-2xl hover:bg-white/70 transition-all duration-300 border-l-4 border-blue-500"
+                            // OPTIMIZED: Replaced 'transition-all' with specific properties.
+                            className="p-6 bg-white/50 rounded-2xl hover:bg-white/70 transition-colors duration-300 border-l-4 border-blue-500"
                           >
                             <div className="flex items-start">
                               <Calendar className="w-6 h-6 text-blue-600 mr-4 mt-1 flex-shrink-0" />
@@ -676,7 +670,8 @@ const Academics = () => {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
                             whileHover={{ scale: 1.02, x: -10 }}
-                            className="p-6 bg-white/50 rounded-2xl hover:bg-white/70 transition-all duration-300 border-l-4 border-green-500"
+                            // OPTIMIZED: Replaced 'transition-all' with specific properties.
+                            className="p-6 bg-white/50 rounded-2xl hover:bg-white/70 transition-colors duration-300 border-l-4 border-green-500"
                           >
                             <div className="flex items-center">
                               <Clock className="w-6 h-6 text-green-600 mr-4 flex-shrink-0" />
@@ -704,7 +699,6 @@ const Academics = () => {
               </div>
             </motion.div>
           )}
-
         </AnimatePresence>
       </div>
     </div>
