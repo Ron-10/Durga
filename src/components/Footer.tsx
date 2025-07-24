@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube, Clock, Globe } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import Newsletter from './Newsletter';
 
 const Footer = () => {
   const socialLinks = [
@@ -9,6 +11,28 @@ const Footer = () => {
     { name: 'LinkedIn', icon: Linkedin, href: '#', color: 'hover:text-blue-600' },
     { name: 'YouTube', icon: Youtube, href: '#', color: 'hover:text-red-400' },
   ];
+
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('idle');
+    try {
+      await emailjs.send(
+        'service_ty02s7h',
+        'template_lv2ho2g',
+        { user_email: email },
+        'y7LSSUXkFTIwMPWPS'
+      );
+      setStatus('success');
+      setEmail('');
+      setTimeout(() => setStatus('idle'), 3000);
+    } catch (error) {
+      setStatus('error');
+      setTimeout(() => setStatus('idle'), 3000);
+    }
+  };
 
   return (
     <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
@@ -103,11 +127,14 @@ const Footer = () => {
             <p className="text-gray-300 mb-4">
               Subscribe to our newsletter for updates and news.
             </p>
-            <form className="flex justify-center">
+            <form className="flex justify-center" onSubmit={handleSubmit}>
               <input
                 type="email"
                 placeholder="Enter your email"
                 className="px-4 py-2 w-full rounded-l-md focus:outline-none text-gray-900 bg-white"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+                required
               />
               <button
                 type="submit"
@@ -116,6 +143,12 @@ const Footer = () => {
                 Subscribe
               </button>
             </form>
+            {status === 'success' && (
+              <p className="text-green-300 mt-2">Thank you for subscribing! 🎉</p>
+            )}
+            {status === 'error' && (
+              <p className="text-red-300 mt-2">There was an error. Please try again.</p>
+            )}
           </div>
         </div>
 
