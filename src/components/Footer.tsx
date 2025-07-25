@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Youtube, Clock, Globe } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import Newsletter from './Newsletter';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   const socialLinks = [
@@ -65,30 +66,30 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-6 text-blue-400">Quick Links</h3>
             <ul className="space-y-3">
-              <li><a href="/about" className="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
+              <li><Link to="/about" className="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
                 <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
                 About Us
-              </a></li>
-              <li><a href="/academics" className="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
+              </Link></li>
+              <li><Link to="/academics" className="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
                 <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
                 Academics
-              </a></li>
-              <li><a href="/admissions" className="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
+              </Link></li>
+              <li><Link to="/admissions" className="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
                 <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
                 Admissions
-              </a></li>
-              <li><a href="/facilities" className="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
+              </Link></li>
+              <li><Link to="/facilities" className="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
                 <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
                 Facilities
-              </a></li>
-              <li><a href="/events" className="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
+              </Link></li>
+              <li><Link to="/events" className="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
                 <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
                 Events
-              </a></li>
-              <li><a href="/gallery" className="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
+              </Link></li>
+              <li><Link to="/gallery" className="text-gray-300 hover:text-blue-400 transition-colors duration-300 flex items-center group">
                 <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 group-hover:scale-150 transition-transform"></span>
                 Gallery
-              </a></li>
+              </Link></li>
             </ul>
           </div>
 
